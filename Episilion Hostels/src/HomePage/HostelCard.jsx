@@ -3,6 +3,13 @@
 
 
 export function HostelCard({ hostel }) {
+
+   
+    function showHostelId(parameter){
+
+        console.log(parameter)
+    }
+
     return (
         <div className="hostel-card">
             <div className="image-container">
@@ -26,7 +33,7 @@ export function HostelCard({ hostel }) {
                     <td colSpan="3"><p id="hostel-perks">{hostel.hostelPerks}</p></td>
                 </tr>
             </table>
-            <p colSpan="3"><button className="view-more-details js-view-more-details" data-hostel-id={hostel.id}>View Details</button></p> 
+            <p><button className="view-more-details js-view-more-details" onClick={() => showHostelId(hostel.id)}>View Details</button></p> 
         </div>
     )
 }
