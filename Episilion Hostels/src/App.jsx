@@ -6,25 +6,24 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function App() {
-
-
-  const [hostelsCardData, sethostelsCardData] = useState([])
+  const [hostelsCardData, sethostelsCardData] = useState([]);
+  const [navlink, setNavLink] = useState(false);
 
   const loadHostelsCard = async () => {
     const response = await axios.get('/hostel_data/hostel_data.json')
     sethostelsCardData(response.data);
-
   }
   useEffect(() => {
     loadHostelsCard();
   }, []);
 
 
+
   return (
     <>
       <Routes>
         {/* <Route index element={<PageHeader/>}></Route> */}
-        <Route index element={<HomePage hostelsCardData={hostelsCardData} />}/>
+        <Route index element={<HomePage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} />}/>
         <Route path="moreDetails" element={<MoreDetailsPage hostelsCardData={hostelsCardData} />} />
       </Routes>
     </>

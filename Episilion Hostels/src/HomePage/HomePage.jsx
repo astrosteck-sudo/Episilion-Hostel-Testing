@@ -2,15 +2,17 @@ import { PageHeader } from "../PageHeader/PageHeader.jsx"
 import { HostelCard } from "./HostelCard.jsx";
 import './HomePage.css'
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
-import filterImage from '../assets/icons/sort.png'
-import searchButton from '../assets/icons/search.png'
+import filterImage from '../assets/icons/sort.png';
+import searchButton from '../assets/icons/search.png';
+import { Fragment } from "react";
 
-export function HomePage({ hostelsCardData }) {
 
+export function HomePage({ hostelsCardData, navlink, setNavLink }) {
 
+    
     return (
-        <>
-            <PageHeader />
+        <Fragment>
+            <PageHeader navlink={navlink} setNavLink={setNavLink} />
             <section>
                 <button className="filter-image js-filter-image">
                     <img src={filterImage}></img>
@@ -54,28 +56,24 @@ export function HomePage({ hostelsCardData }) {
 
             <section class="search-box-container">
                 <div class="search-box">
-                    <input type="text" name="search-box" id="search-box-text" placeholder="Search Hostel By Name"list="Hostels"></input>
-                        <img class="search-icon" src={searchButton}></img>
+                    <input type="text" name="search-box" id="search-box-text" placeholder="Search Hostel By Name" list="Hostels"></input>
+                    <img class="search-icon" src={searchButton}></img>
                     <div id="suggestions" class="suggestions-dropdown"></div>
                 </div>
             </section>
 
 
-                    <section className="hostels-section">
-                        <div className="hostels-cards js-hostel-cards">
-                            {hostelsCardData.map((hostel) => {
-                                return (
-                                    <HostelCard key={hostel.id} hostel={hostel} />
-                                )
-                            })}
-                        </div>
-                    </section>
+            <section className="hostels-section">
+                <div className="hostels-cards js-hostel-cards">
+                    {hostelsCardData.map((hostel) => {
+                        return (
+                            <HostelCard key={hostel.id} hostel={hostel} />
+                        )
+                    })}
+                </div>
+            </section>
+            <SiteFooter />
+        </Fragment>
 
-
-
-
-                    <SiteFooter />
-                </>
-
-                )
+    )
 }
