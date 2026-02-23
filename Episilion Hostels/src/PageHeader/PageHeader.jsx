@@ -13,6 +13,15 @@ export function PageHeader({ substituteLink, navlink, setNavLink }) {
         }
     }
 
+    //THIS WILL CHECK IF THE TARGET IS NOT THE HAMBURGER 
+    // BUTTON, NAVLINKS MENU, AND IF THE NAVLINKS IS OPEN, 
+    // IF THE CONDIOTIONS A TRUE , THE IF THE DOCUMENT IS 
+    // CLICKED THE NAVLINK MEMU IS REMOVED
+    document.addEventListener('click', (event) => {
+        if(navlink && !event.target.closest('.navigation-links') && !event.target.closest('.hamburger-button'))
+        setNavLink(false)
+    })
+
     return (
         <>
             <section className="header-section">

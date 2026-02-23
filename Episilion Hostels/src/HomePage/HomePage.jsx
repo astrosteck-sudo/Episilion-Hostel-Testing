@@ -4,14 +4,11 @@ import './HomePage.css'
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
 import filterImage from '../assets/icons/sort.png';
 import searchButton from '../assets/icons/search.png';
-import { Fragment } from "react";
 
 
 export function HomePage({ hostelsCardData, navlink, setNavLink }) {
-
-    
     return (
-        <Fragment>
+        <>
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
             <section>
                 <button className="filter-image js-filter-image">
@@ -73,7 +70,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink }) {
                 </div>
             </section>
             <SiteFooter />
-        </Fragment>
+        </>
 
     )
 }

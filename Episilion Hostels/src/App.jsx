@@ -24,7 +24,7 @@ function App() {
       <Routes>
         {/* <Route index element={<PageHeader/>}></Route> */}
         <Route index element={<HomePage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} />}/>
-        <Route path="moreDetails" element={<MoreDetailsPage hostelsCardData={hostelsCardData} />} />
+        <Route path="moreDetails" element={<MoreDetailsPage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} />} />
       </Routes>
     </>
   )

@@ -8,7 +8,7 @@ import Email from '../assets/icons/email-14.svg';
 import Manager from '../assets/icons/manager-avatar.svg';
 import Clock from '../assets/icons/clock.svg';
 
-export function MoreDetailsPage({ hostelsCardData }) {
+export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink }) {
 
     const params = new URLSearchParams(window.location.search);
 
@@ -18,7 +18,7 @@ export function MoreDetailsPage({ hostelsCardData }) {
     return (
         <>
             <title>View Details | Episilion Hostels</title>
-            <PageHeader substituteLink={<Link className="link" to="/">Home</Link>} />
+            <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
 
 
             <section className="more-details js-more-details">
