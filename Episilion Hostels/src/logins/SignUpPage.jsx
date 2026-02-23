@@ -3,17 +3,25 @@ import './logins.css';
 import closedEye from '../assets/icons/closed-eyes.png'
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 
-export function SignUpPage({ navlink, setNavLink}) {
+export function SignUpPage({ navlink, setNavLink }) {
 
-    
+    useEffect(() => {
+        document.body.classList.add("body-bg");
+        return () => {
+            document.body.classList.remove("body-bg");
+        };
+    }, []);
+
+
 
     return (
         <>
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
             <main>
-                 <div className="login-box">
+                <div className="login-box">
                     <form action="">
                         <h2>Sign Up</h2>
                         <div class="input-box">
@@ -43,9 +51,9 @@ export function SignUpPage({ navlink, setNavLink}) {
                         </div>
                         <p class="altenative-text">Already Have An Account <Link to="/login">Login</Link></p>
                     </form>
-                </div>   
+                </div>
             </main>
-            <SiteFooter/>
+            <SiteFooter />
         </>
     )
 }

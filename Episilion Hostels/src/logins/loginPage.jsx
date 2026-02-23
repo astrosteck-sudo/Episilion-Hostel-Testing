@@ -1,9 +1,16 @@
 import { PageHeader } from "../PageHeader/PageHeader"
 import { SiteFooter } from "../SiteFooter/SiteFooter"
 import { Link } from "react-router-dom"
+import { useEffect } from "react";
 
+export function LoginPage({ navlink, setNavLink }) {
 
-export function LoginPage( {navlink, setNavLink}) {
+    useEffect(() => {
+        document.body.classList.add("body-bg");
+        return () => {
+            document.body.classList.remove("body-bg");
+        };
+    }, []);
 
     return (
         <>
