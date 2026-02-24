@@ -12,11 +12,13 @@ import './App.css'
 
 function App() {
   const [hostelsCardData, sethostelsCardData] = useState([]);
+  const [originalHostelCardData, setOriginalHostelCardData] = useState([])
   const [navlink, setNavLink] = useState(false);
 
   const loadHostelsCard = async () => {
     const response = await axios.get('./hostel_data/hostel_data.json')
-    sethostelsCardData(response.data);
+    setOriginalHostelCardData(response.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
+    sethostelsCardData(response.data);//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
   }
   useEffect(() => {
     loadHostelsCard();
@@ -28,7 +30,9 @@ function App() {
     <>
       <Routes>
         {/* <Route index element={<PageHeader/>}></Route> */}
-        <Route index element={<HomePage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} />}/>
+        <Route index element={<HomePage hostelsCardData={hostelsCardData} sethostelsCardData={sethostelsCardData} 
+        navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} setOriginalHostelCardData={setOriginalHostelCardData}   />}/>
+
         <Route path="moreDetails" element={<MoreDetailsPage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} />} />
         <Route path="aboutus" element={<AboutUsPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path="signup" element={<SignUpPage navlink={navlink} setNavLink={setNavLink} />} />
