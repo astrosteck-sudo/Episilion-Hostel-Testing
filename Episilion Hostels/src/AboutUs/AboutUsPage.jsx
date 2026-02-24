@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { PageHeader } from '../PageHeader/PageHeader'
 import { SiteFooter } from '../SiteFooter/SiteFooter'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { TeamCards } from './TeamCards'
 import './AboutUsPage.css'
 
@@ -22,7 +23,7 @@ export function AboutUsPage({ navlink, setNavLink }) {
 
     return (
         <>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            <PageHeader navlink={navlink} setNavLink={setNavLink} substituteLink={<Link className="link" to="/">Home</Link>} />
 
             <main className='about-main'>
                 <section class="about-hero">
