@@ -84,6 +84,30 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     function userMaxPrice(event) {
         setMaxPrice(event.target.value)
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('.suggestions-dropdown') && !event.target.closest('.search-box')) {
+                if (suggestionsDiv.current) {
+                    console.log('Document apart from suggestion has been clicked')
+                    suggestionsDiv.current.style.display = 'none';
+                }
+            }
+        };
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, []);
+
+    //THIS FUNCTION TAKES THE HOSTEL NAME AS A PARAMETER, IT THE FILTERS THE HOSTEL IN THE originalHostelCardData
+    //TO SEE IF ANY HOSTEL NAME MATCH IF IT DOES THEN IT sethostelsCardData TO THAT HOSTEL OBJECT
+    function suggestionHostelClicked(parameter){
+        suggestionsDiv.current.style.display = 'none';
+        const filteredHostel = originalHostelCardData.filter(
+            (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === parameter.trim().replace(/\s+/g, " ").toLowerCase()
+        )
+        sethostelsCardData(filteredHostel);
+    }
+
     function searchHostelByName() {
         const filteredHostels = originalHostelCardData.filter(
             (hostel) => hostel.name.trim().replace(/\s+/g, " ").toLowerCase() === searchHostelName
@@ -213,12 +237,12 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                     >
                     </input>
                     <img className="search-icon" src={searchButton} onClick={searchHostelByName}></img>
-                    <div id="suggestions" class={`suggestions-dropdown`} ref={suggestionsDiv}>
+                    <div id="suggestions" className={`suggestions-dropdown`} ref={suggestionsDiv}>
                         {
                             filter ? filter.map((hostel) => {
                                 suggestionsDiv.current.style.display = `block`
                                 return (
-                                    <div className="suggestion-item">{hostel.name}</div>
+                                    <div className="suggestion-item" onClick={() => suggestionHostelClicked(hostel.name)}>{hostel.name}</div>
                                 )
                             }) : ''
                         }
