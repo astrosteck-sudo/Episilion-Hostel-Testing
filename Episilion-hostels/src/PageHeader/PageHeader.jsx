@@ -39,7 +39,7 @@ export function PageHeader({ substituteLink, navlink, setNavLink, originalHostel
                 <nav className={`navigation-links ${navlink ? 'active' : ''}`}>
                     {substituteLink}
                     <NavLink className="link about-us-link" to="/aboutus">About Us</NavLink>
-                    <Link className="link" to="/">Ask Episilion</Link>
+                    <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
                     {/* <div className="login-systems">
                         <Link to="/login">LOGIN</Link>
