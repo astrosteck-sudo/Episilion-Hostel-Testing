@@ -24,7 +24,7 @@ npm run dev        # development (auto-restart with nodemon)
 
 ```javascript
 // Fetch all users
-fetch("http://localhost:3000/api/users")
+fetch("http://localhost:5000/api/users")
   .then(res => res.json())
   .then(data => console.log(data));
 ```
