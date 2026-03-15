@@ -69,6 +69,7 @@
     "yearEstablished": 2012,
     "distance": "1.8 km From Campus",
     "hostelPerks": "Wifi • Cafeteria • Security",
+    "featured": "true",
     "location": {
       "distanceToCampusMinutes": 8,
       "directions": "Near the East Campus library, turn right at the junction",

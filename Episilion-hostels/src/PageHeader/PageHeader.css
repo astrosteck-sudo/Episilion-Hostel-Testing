@@ -76,6 +76,7 @@
   justify-content: space-evenly;
   /* border: solid red; */
   padding-left: 50px;
+  z-index: 1000;
 }
 .navigation-links .link{
   text-decoration: none;
