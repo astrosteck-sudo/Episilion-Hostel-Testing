@@ -9,6 +9,7 @@ import { AskEpisilionPage } from './AskEpisilionPage/AskEpisilionPage.jsx';
 import { AboutUsPage } from './AboutUs/AboutUsPage.jsx';
 import { MoreFromUsPage } from './MoreFromUs/MoreFromUsPage.jsx';
 import './App.css'
+import { CompareHostels } from './CompareHostelsPage/CompareHostels.jsx';
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
     <>
       <Routes>
         {/* <Route index element={<PageHeader/>}></Route> */}
-        <Route index element={<HomePage hostelsCardData={hostelsCardData} sethostelsCardData={sethostelsCardData} 
+        <Route index element={<HomePage sethostelsCardData={sethostelsCardData} 
         navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} setOriginalHostelCardData={setOriginalHostelCardData}   />}/>
 
         <Route path="moreDetails" element={<MoreDetailsPage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
@@ -42,6 +43,7 @@ function App() {
         <Route path="askepisilion" element={<AskEpisilionPage navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
         {/* <Route path="login" element={<LoginPage navlink={navlink} setNavLink={setNavLink} />} /> */}
         <Route path='morefromus' element={<MoreFromUsPage navlink={navlink} setNavLink={setNavLink} />}/>
+        <Route path='comparehostels' element={<CompareHostels navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />}/>
       </Routes>
     </>
   )

@@ -9,10 +9,11 @@ import Manager from '../assets/icons/manager-avatar.svg';
 import Clock from '../assets/icons/clock.svg';
 import closeMapImage from '../assets/icons/close.png';
 import websImage from '../assets/icons/web.png'
+import compareImage from '../assets/icons/compare.png'
 import { useState } from 'react';
 
 
-export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, originalHostelCardData }) {
+export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData }) {
     const [close, setClose] = useState(true);//THIS CONTROLS THE THE IFRAME, OPENING AND CLOSING IT
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
 
@@ -79,6 +80,10 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
         }
     }
 
+    function comapareHostels(parameter){
+        console.log(parameter)
+    }
+
     return (
         <>
             <title>View Details | Episilion Hostels</title>
@@ -88,7 +93,7 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
             <section className="more-details js-more-details">
                 <div className="more-details-container">
 
-                    {hostelsCardData.map((hostel) => {
+                    {originalHostelCardData.map((hostel) => {
                         if (hostel.id === hostelId) {
                             return (
                                 <>
@@ -101,7 +106,11 @@ export function MoreDetailsPage({ hostelsCardData, navlink, setNavLink, original
 
                                     <div className="hostel-information-contaniner">
                                         <div className="location-details">
-                                            <h2 className="font-header">Location</h2>
+                                            <div className='location-header-and-compare-hostel-button'>
+                                                <h2 className="font-header">Location</h2>
+                                                <button className='comapare-button' onClick={() => comapareHostels(hostel.id)}><img src={compareImage} alt="" /></button>
+                                            </div>
+                                            
                                             <p className="font-paragraph js-location-paragraph">
                                                 {hostel.location.directions}
                                                 <p className="font-paragraph js-distance-from-campus">{`Its about ${hostel.location.distanceToCampusMinutes} minute${hostel.location.distanceToCampusMinutes > 1 ? 's' : ''} walk from campus`}</p>
