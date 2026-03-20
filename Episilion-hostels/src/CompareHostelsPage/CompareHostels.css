@@ -1,0 +1,90 @@
+.hostel-comparison-container {
+    display: flex;
+    padding: 10px;
+    gap: 30px;
+}
+
+.compared-hostels {
+    width: 50%;
+}
+
+.compared-hostel-name {
+    text-align: center;
+    font-family: Playfair Display;
+}
+
+.compared-hostel-image {
+    width: 100%;
+    height: 350px;
+    border-radius: 5px;
+}
+
+.compared-hostel-titles {
+    font-size: clamp(15px, 2vw, 20px);
+    font-family: Playfair Display;
+    color: rgb(194, 8, 8);
+    font-weight: bolder;
+}
+
+.compared-hostel-diatance {
+    font-size: clamp(20px, 2vw, 30px);
+    font-family: lato;
+    /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); */
+    /* font-family: Sancreek; */
+}
+
+.compared-hostel-diatance-advantage {
+    color: green;
+    font-weight: lighter;
+    font-family: Hezba;
+}
+
+.compared-hostel-pricing {
+    font-size: clamp(15px, 2vw, 20px);
+    font-family: lato;
+}
+
+.compared-hostel-price-advantage {
+    color: green;
+    font-weight: lighter;
+    font-family: Hezba;
+    margin-left: 5px;
+}
+
+.compared-hostel-room-type-images-continer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.compared-hostel-room-type-images-continer .compared-hostel-room-type-image {
+    width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .hostel-comparison-container {
+        display: block;
+    }
+
+    .compared-hostels {
+        width: 100%;
+    }
+
+    .compared-hostel-image {
+        width: 100%;
+        height: 250px;
+        border-radius: 5px;
+    }
+
+    .compared-hostel-room-type-images-continer {
+        display: flex;
+        gap: 5px;
+    }
+
+    .compared-hostel-room-type-images-continer .compared-hostel-room-type-image {
+        width: 30%;
+        height: auto;
+    }
+}

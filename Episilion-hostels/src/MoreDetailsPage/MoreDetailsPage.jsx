@@ -11,6 +11,8 @@ import closeMapImage from '../assets/icons/close.png';
 import websImage from '../assets/icons/web.png'
 import compareImage from '../assets/icons/compare.png'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 
 export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData }) {
@@ -80,8 +82,10 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         }
     }
 
+    const navigate = useNavigate();
     function comapareHostels(parameter){
         console.log(parameter)
+        navigate(`/comparehostels?hostelId=${parameter}`);
     }
 
     return (
