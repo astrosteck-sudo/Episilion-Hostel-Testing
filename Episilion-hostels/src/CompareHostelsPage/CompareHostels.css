@@ -2,6 +2,37 @@
     display: flex;
     padding: 10px;
     gap: 30px;
+    position: relative;
+    margin-bottom: 50px;
+}
+.compared-hostels-switch{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* border: solid red; */
+}
+.compare-hostels-arrow-button{
+    /* border: solid blue; */
+    border: navajowhite;
+    width: 4%;
+    background-color: transparent;
+}
+.compare-hostels-switch-text{
+    font-size: clamp(20px, 2vw, 30px);
+    margin: 5px;
+    font-weight: lighter;
+}
+.hostel-comparison-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background-color: #0f0909;
+    /* background: linear-gradient(to bottom, transparent, #0c0a0a, transparent); */
 }
 
 .compared-hostels {
@@ -86,5 +117,8 @@
     .compared-hostel-room-type-images-continer .compared-hostel-room-type-image {
         width: 30%;
         height: auto;
+    }
+    .hostel-comparison-container::before{
+        display: none;
     }
 }

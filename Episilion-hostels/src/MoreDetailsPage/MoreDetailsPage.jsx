@@ -84,7 +84,6 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
     const navigate = useNavigate();
     function comapareHostels(parameter){
-        console.log(parameter)
         navigate(`/comparehostels?hostelId=${parameter}`);
     }
 

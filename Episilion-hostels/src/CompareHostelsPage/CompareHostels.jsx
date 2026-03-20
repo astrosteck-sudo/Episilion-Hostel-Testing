@@ -1,16 +1,52 @@
+import { useState } from "react";
 import { PageHeader } from "../PageHeader/PageHeader";
 import { SiteFooter } from "../SiteFooter/SiteFooter";
+import leftArrowImage from '../assets/icons/left-arrow.png';
+import rightArrowImage from '../assets/icons/right-arrow.png'
 import './CompareHostels.css'
+//import { useEffect } from "react";
 
 
 
 export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) {
     const params = new URLSearchParams(window.location.search);
-    const hostelId = params.get("hostelId")
+    const hostelId = params.get("hostelId");
 
-    // const comparedHostel = originalHostelCardData.find((hostel) => hostel.id === hostelId)
-    // console.log(comparedHostel)
+    const [hostelNumber, setHostelNumber] = useState(hostelId)//THIS CONTOLS THE HOSTEL THAT SHOWS UP WHEN THE USER CLICKES THE ARROW KEYS
+    const [controlsListIndex, setControlListIndex] = useState(0)
+    //THIS CONTROL CODE WILL MAKE SURE THE controlsListIndex WILL ALWAYS UPDATE WHEN THE originalHostelCardData CHANGES
+    // useEffect(() => {
+    //     setControlListIndex(originalHostelCardData.length)
+    //     // const index = originalHostelCardData.findIndex(hostel => hostel.id == hostelId)
+    //     // console.log(index + 1)
+    // }, [originalHostelCardData,])
+    
+    function reduceHostelNumber() {
+        let hostelIndex = controlsListIndex
+        if (hostelIndex < 1) {
+            hostelIndex = originalHostelCardData.length;
+            setHostelNumber(originalHostelCardData[hostelIndex - 1].id)
+            setControlListIndex(hostelIndex - 1)
+        } else {
+            setHostelNumber(originalHostelCardData[hostelIndex - 1].id)
+            setControlListIndex(hostelIndex - 1)
+        }
+    }
 
+    function increaseHostelNumber() {
+        let hostelIndex = controlsListIndex +1
+        if (hostelIndex >= originalHostelCardData.length) {
+            console.log("bigger than originalHostelCardData", hostelIndex)
+            hostelIndex = originalHostelCardData.length;
+            setHostelNumber(originalHostelCardData[0].id)
+            setControlListIndex(0)
+        } else {
+            console.log(hostelIndex)
+            setHostelNumber(originalHostelCardData[hostelIndex].id)
+            setControlListIndex(hostelIndex)
+        }
+
+    }
 
     return (
 
@@ -21,7 +57,6 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                 <div className="compared-hostels">
                     {originalHostelCardData.map((hostel) => {
                         if (hostel.id === hostelId) {
-                            console.log(hostel)
                             return (
                                 <>
                                     <h1 className="compared-hostel-name">{hostel.name}</h1>
@@ -97,9 +132,13 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                     })}
                 </div>
                 <div className="compared-hostels">
+                    <div className="compared-hostels-switch">
+                        <button className="compare-hostels-arrow-button" onClick={() => reduceHostelNumber()}><img src={leftArrowImage} alt="" /></button>
+                        <p className="compare-hostels-switch-text">Switch Hostel</p>
+                        <button className="compare-hostels-arrow-button" onClick={() => increaseHostelNumber()}><img src={rightArrowImage} alt="" /></button>
+                    </div>
                     {originalHostelCardData.map((hostel) => {
-                        if (hostel.id === hostelId) {
-                            console.log(hostel)
+                        if (hostel.id === hostelNumber) {
                             return (
                                 <>
                                     <h1 className="compared-hostel-name">{hostel.name}</h1>
