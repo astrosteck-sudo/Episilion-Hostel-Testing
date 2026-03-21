@@ -5,24 +5,28 @@
     position: relative;
     margin-bottom: 50px;
 }
-.compared-hostels-switch{
+
+.compared-hostels-switch {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     /* border: solid red; */
 }
-.compare-hostels-arrow-button{
+
+.compare-hostels-arrow-button {
     /* border: solid blue; */
     border: navajowhite;
-    width: 4%;
+    width: min(30px, 10%);
     background-color: transparent;
 }
-.compare-hostels-switch-text{
+
+.compare-hostels-switch-text {
     font-size: clamp(20px, 2vw, 30px);
     margin: 5px;
     font-weight: lighter;
 }
+
 .hostel-comparison-container::before {
     content: "";
     position: absolute;
@@ -42,6 +46,9 @@
 .compared-hostel-name {
     text-align: center;
     font-family: Playfair Display;
+    margin: 10px;
+    font-size: clamp(18px, 2vw, 30px);
+    min-width: 500px;
 }
 
 .compared-hostel-image {
@@ -63,11 +70,15 @@
     /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); */
     /* font-family: Sancreek; */
 }
-
-.compared-hostel-diatance-advantage {
-    color: green;
+.compared-hostel-diatance-advantage{
     font-weight: lighter;
     font-family: Hezba;
+}
+.compared-hostel-diatance-advantage.true{
+    color: green;
+}
+.compared-hostel-diatance-advantage.false{
+    color: red;
 }
 
 .compared-hostel-pricing {
@@ -99,6 +110,10 @@
         display: block;
     }
 
+    .compared-hostel-name {
+        min-width: 200px;
+    }
+
     .compared-hostels {
         width: 100%;
     }
@@ -118,7 +133,8 @@
         width: 30%;
         height: auto;
     }
-    .hostel-comparison-container::before{
+
+    .hostel-comparison-container::before {
         display: none;
     }
 }

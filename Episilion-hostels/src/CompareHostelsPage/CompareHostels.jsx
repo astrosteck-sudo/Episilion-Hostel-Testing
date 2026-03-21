@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PageHeader } from "../PageHeader/PageHeader";
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import leftArrowImage from '../assets/icons/left-arrow.png';
@@ -20,7 +20,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
     //     // const index = originalHostelCardData.findIndex(hostel => hostel.id == hostelId)
     //     // console.log(index + 1)
     // }, [originalHostelCardData,])
-    
+
     function reduceHostelNumber() {
         let hostelIndex = controlsListIndex
         if (hostelIndex < 1) {
@@ -34,9 +34,9 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
     }
 
     function increaseHostelNumber() {
-        let hostelIndex = controlsListIndex +1
+        let hostelIndex = controlsListIndex + 1
         if (hostelIndex >= originalHostelCardData.length) {
-            console.log("bigger than originalHostelCardData", hostelIndex)
+            //console.log("bigger than originalHostelCardData", hostelIndex)
             hostelIndex = originalHostelCardData.length;
             setHostelNumber(originalHostelCardData[0].id)
             setControlListIndex(0)
@@ -47,6 +47,40 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
         }
 
     }
+
+
+    const [leftHostelDistanceAdvantage, setleftHostelDistanceAdvantage] = useState(true);
+    const [rightHostelDistanceAdvantage, setrightHostelDistanceAdvantage] = useState(true);
+    const [leftHostel, setLeftHostel] = useState();
+    const [rightHostel, setRightHostel] = useState();
+
+    useEffect(() => {
+        if (originalHostelCardData.length > 1) {
+            const foundLeftHostel = (originalHostelCardData.find(hostel => hostel.id === hostelId))
+            const foundRightHostel = (originalHostelCardData.find(hostel => hostel.id === hostelNumber))
+            setLeftHostel(foundLeftHostel)
+            setRightHostel(foundRightHostel)
+        }
+    }, [hostelNumber, originalHostelCardData, hostelId])
+
+
+
+    useEffect(() => {
+        if (leftHostel && rightHostel) {
+            if (leftHostel.distance < rightHostel.distance) {
+                console.log("Left is smaller");
+                setleftHostelDistanceAdvantage(true);
+                setrightHostelDistanceAdvantage(false);
+            } else {
+                console.log("Right is smaller");
+                setleftHostelDistanceAdvantage(false);
+                setrightHostelDistanceAdvantage(true);
+            }
+        }
+    }, [leftHostel, rightHostel]);
+
+
+    //console.log(rightHostel)
 
     return (
 
@@ -61,7 +95,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                 <>
                                     <h1 className="compared-hostel-name">{hostel.name}</h1>
                                     <img className="compared-hostel-image" src={hostel.image} alt="" />
-                                    <p className="compared-hostel-diatance">Distance From Campus : {hostel.distance} <span className="compared-hostel-diatance-advantage">closer</span></p>
+                                    <p className="compared-hostel-diatance">Distance From Campus : {hostel.distance} <span className={`compared-hostel-diatance-advantage ${leftHostelDistanceAdvantage}`}>{leftHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
 
                                     <h1 className="compared-hostel-titles">Price Details</h1>
                                     <p className="compared-hostel-pricing">Minimum Price : {hostel.pricing.priceMin} <span className="compared-hostel-price-advantage">lower</span></p>
@@ -132,24 +166,30 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                     })}
                 </div>
                 <div className="compared-hostels">
-                    <div className="compared-hostels-switch">
+                    {/* <div className="compared-hostels-switch">
                         <button className="compare-hostels-arrow-button" onClick={() => reduceHostelNumber()}><img src={leftArrowImage} alt="" /></button>
                         <p className="compare-hostels-switch-text">Switch Hostel</p>
                         <button className="compare-hostels-arrow-button" onClick={() => increaseHostelNumber()}><img src={rightArrowImage} alt="" /></button>
-                    </div>
+                    </div> */}
                     {originalHostelCardData.map((hostel) => {
                         if (hostel.id === hostelNumber) {
                             return (
                                 <>
-                                    <h1 className="compared-hostel-name">{hostel.name}</h1>
-                                    <img className="compared-hostel-image" src={hostel.image} alt="" />
-                                    <p className="compared-hostel-diatance">Distance From Campus : {hostel.distance} <span className="compared-hostel-diatance-advantage">closer</span></p>
 
-                                    <h1 className="compared-hostel-titles">Price Details</h1>
-                                    <p className="compared-hostel-pricing">Minimum Price : {hostel.pricing.priceMin} <span className="compared-hostel-price-advantage">lower</span></p>
+                                    <div className="compared-hostels-switch">
+                                        <button className="compare-hostels-arrow-button" onClick={() => reduceHostelNumber()}><img src={leftArrowImage} alt="" /></button>
+                                        <h1 className="compared-hostel-name">{hostel.name}</h1>
+                                        <button className="compare-hostels-arrow-button" onClick={() => increaseHostelNumber()}><img src={rightArrowImage} alt="" /></button>
+                                    </div>
+                                    {/* <h1 className="compared-hostel-name">{hostel.name}</h1> */}
+                                    <img className="compared-hostel-image" src={hostel.image} alt="" />
+                                    <p className="compared-hostel-diatance">Distance From Campus : {hostel.distance} m <span className={`compared-hostel-diatance-advantage ${rightHostelDistanceAdvantage}`}>{rightHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
+
+                                    <h1 className="compared-hostel-titles">Price Details <span className="compared-hostel-price-advantage">lower</span></h1>
+                                    <p className="compared-hostel-pricing">Minimum Price : {hostel.pricing.priceMin}</p>
                                     <p className="compared-hostel-pricing"> Additional Fees Total: {hostel.pricing.additionalFees.utilities + hostel.pricing.additionalFees.maintenance + hostel.pricing.additionalFees.cautionDeposit}</p>
 
-                                    <h1 className="compared-hostel-titles">Room Types</h1>
+                                    <h1 className="compared-hostel-titles">Room Types <span className="compared-hostel-price-advantage">More Rooms</span></h1>
                                     <ul className="types-of-rooms js-rooms-types">
                                         {hostel.rooms.types.map((room) => {
                                             return (
@@ -158,7 +198,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                         })}
                                     </ul>
 
-                                    <h1 className="compared-hostel-titles">Facilties And Ameneities</h1>
+                                    <h1 className="compared-hostel-titles">Facilties And Ameneities <span className="compared-hostel-price-advantage">More Facilities And</span></h1>
                                     <ul className="facilities-and-amenities-perks grid js-facilities-and-amenities-perks">
                                         {
                                             hostel.amenities.map((amenity) => {

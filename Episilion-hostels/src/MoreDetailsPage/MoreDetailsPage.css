@@ -85,11 +85,13 @@
   padding-top: 5px;
 }
 
-.comapare-button {
+.compare-button {
   border: solid rgb(71, 67, 67) 2px;
-  width: 8%;
+  width: 7%;
   height: 100%;
   background-color: transparent;
+  border-radius: 5px;
+  padding: 2px;
 }
 
 .font-header {
@@ -446,7 +448,7 @@ p.font-paragraph {
     margin-left: 0px;
   }
 
-  .comapare-button {
+  .compare-button{
     width: 10%;
   }
 

@@ -29,7 +29,7 @@ export function HostelCard({ hostel }) {
                     <td rowspan="2" className="td-vetical"><p id="hostel-price">${hostel.pricing.priceMin}</p></td>
                 </tr>
                 <tr width="20px">
-                    <td colSpan="2" className="td-vetical"><p id="hostel-distace">{hostel.distance}</p></td>
+                    <td colSpan="2" className="td-vetical"><p id="hostel-distace">{hostel.distance}km from campus</p></td>
                 </tr>
                 <tr>
                     <td colSpan="3"><p id="hostel-perks">{hostel.hostelPerks}</p></td>

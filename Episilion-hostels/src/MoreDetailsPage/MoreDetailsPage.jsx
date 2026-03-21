@@ -111,7 +111,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                         <div className="location-details">
                                             <div className='location-header-and-compare-hostel-button'>
                                                 <h2 className="font-header">Location</h2>
-                                                <button className='comapare-button' onClick={() => comapareHostels(hostel.id)}><img src={compareImage} alt="" /></button>
+                                                <button className='compare-button' onClick={() => comapareHostels(hostel.id)}><img src={compareImage} alt="" /></button>
                                             </div>
                                             
                                             <p className="font-paragraph js-location-paragraph">

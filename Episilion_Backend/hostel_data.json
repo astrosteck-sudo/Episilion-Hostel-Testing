@@ -6,7 +6,7 @@
     "type": "Boys",
     "university": "Example University",
     "yearEstablished": 2015,
-    "distance": "2 km From Campus",
+    "distance": 2,
     "hostelPerks": "Wifi • Laundry • Study • Area",
     "featured": "true",
     "location": {
@@ -139,7 +139,7 @@
     "type": "Boys",
     "university": "Example University",
     "yearEstablished": 2012,
-    "distance": "1.8 km From Campus",
+    "distance": 1.8,
     "hostelPerks": "Wifi • Cafeteria • Security",
     "featured": "true",
     "location": {
@@ -247,7 +247,7 @@
     "type": "Girls",
     "university": "Example University",
     "yearEstablished": 2018,
-    "distance": "3.5 km From Campus",
+    "distance": 3.5,
     "hostelPerks": "Wifi • Laundry • Gym",
     "location": {
       "distanceToCampusMinutes": 12,
@@ -355,7 +355,7 @@
     "type": "Mixed",
     "university": "Example University",
     "yearEstablished": 2010,
-    "distance": "4 km From Campus",
+    "distance": 4,
     "hostelPerks": "Laundry • RecreationalArea • Parking",
     "location": {
       "distanceToCampusMinutes": 15,
@@ -458,7 +458,7 @@
     "type": "Mixed",
     "university": "Example University",
     "yearEstablished": 2016,
-    "distance": "2.5 km From Campus",
+    "distance": 2.5,
     "hostelPerks": "Wifi • StudyRoom • Backup Power",
     "location": {
       "distanceToCampusMinutes": 6,
@@ -562,7 +562,7 @@
     "type": "Boys",
     "university": "Example University",
     "yearEstablished": 2013,
-    "distance": "6 km From Campus",
+    "distance": 6,
     "hostelPerks": "Wifi • Laundry • Shuttle • Service",
     "location": {
       "distanceToCampusMinutes": 20,
@@ -664,7 +664,7 @@
     "type": "Girls",
     "university": "Example University",
     "yearEstablished": 2019,
-    "distance": "1.2 km From Campus",
+    "distance": 1.2,
     "hostelPerks": "Wifi • Gym • Cafeteria",
     "location": {
       "distanceToCampusMinutes": 4,
@@ -774,7 +774,7 @@
     "type": "Mixed",
     "university": "Example University",
     "yearEstablished": 2011,
-    "distance": "5 km From Campus",
+    "distance": 5,
     "hostelPerks": "Laundry • Security • Balcony",
     "location": {
       "distanceToCampusMinutes": 18,
@@ -876,7 +876,7 @@
     "type": "Girls",
     "university": "Example University",
     "yearEstablished": 2014,
-    "distance": "3 km From Campus",
+    "distance": 3,
     "hostelPerks": "Wifi • Power Backup • TV Lounge",
     "location": {
       "distanceToCampusMinutes": 7,
@@ -982,7 +982,7 @@
     "type": "Girls",
     "university": "Example University",
     "yearEstablished": 2020,
-    "distance": "2.2 km From Campus",
+    "distance": 2.2,
     "hostelPerks": "Wifi • Quiet • Study Area • Laundry",
     "location": {
       "distanceToCampusMinutes": 3,
