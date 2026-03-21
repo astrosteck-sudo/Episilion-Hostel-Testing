@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { PageHeader } from "../PageHeader/PageHeader";
 import { SiteFooter } from "../SiteFooter/SiteFooter";
-import leftArrowImage from '../assets/icons/left-arrow.png';
-import rightArrowImage from '../assets/icons/right-arrow.png';
+import leftArrowImage from '../assets/icons/left_arrow.png';
+import rightArrowImage from '../assets/icons/right_arrow.png';
 import closeMapImage from '../assets/icons/close.png';
 import './CompareHostels.css'
 //import { showHostelLocationOnMap } from "../UTILS/utils.js";

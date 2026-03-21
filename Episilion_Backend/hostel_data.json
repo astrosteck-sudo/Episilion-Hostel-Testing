@@ -1,6 +1,6 @@
 [
   {
-    "id": "a7e50a8d-0190-4688-8310-b5f77ba551e1",
+    "id": "c460214e-217a-431e-8283-ceaab6da845e",
     "image": "/images/hostel-images/hostel_image_1.jpg",
     "name": "Campus Annex",
     "type": "Boys",
@@ -133,7 +133,7 @@
     }
   },
   {
-    "id": "20793e09-45f6-45ea-959d-979b9c1a628c",
+    "id": "51702536-0c99-4524-898e-6ceb2b93ca62",
     "image": "/images/hostel-images/hostel_image_2.jpg",
     "name": "Unity Lodge",
     "type": "Boys",
@@ -241,7 +241,7 @@
     }
   },
   {
-    "id": "7eceaa7f-6c0e-4951-adf0-9930933e118f",
+    "id": "7de6a0c6-ede0-4894-920d-2fc2813bb0d0",
     "image": "/images/hostel-images/hostel_image_3.jpg",
     "name": "Queens Residence",
     "type": "Girls",
@@ -349,7 +349,7 @@
     }
   },
   {
-    "id": "97d22def-b091-4d35-b7d7-a5474caef1e3",
+    "id": "b3f020f6-b7b0-4eab-a91d-44fab45efe76",
     "image": "/images/hostel-images/hostel_image_4.jpg",
     "name": "Greenfield Hostel",
     "type": "Mixed",
@@ -452,7 +452,7 @@
     }
   },
   {
-    "id": "6b4094f7-43b8-4ed8-895f-6016091d49be",
+    "id": "034ad8d7-1e59-4db2-86cc-60811953e1e5",
     "image": "/images/hostel-images/hostel_image_5.jpg",
     "name": "Sunrise Hostel",
     "type": "Mixed",
@@ -556,7 +556,7 @@
     }
   },
   {
-    "id": "f1a93eb6-3b81-42a2-94b1-5a4440390dd6",
+    "id": "cc7e2aa7-02f5-4537-b18d-69bb03b45350",
     "image": "/images/hostel-images/hostel_image_6.jpg",
     "name": "Victory Hostel",
     "type": "Boys",
@@ -658,7 +658,7 @@
     }
   },
   {
-    "id": "f988a846-d49d-4a21-864c-f1c30d6de581",
+    "id": "12dd0e24-799e-4027-a98a-5c997d5217de",
     "image": "/images/hostel-images/hostel_image_7.jpg",
     "name": "Harmony Hostel",
     "type": "Girls",
@@ -768,7 +768,7 @@
     }
   },
   {
-    "id": "2c1bfb52-7718-45bc-8600-22a9858256ff",
+    "id": "73d58086-4137-4983-8c09-32fe37f2b1cd",
     "image": "/images/hostel-images/hostel_image_8.jpg",
     "name": "City View Hostel",
     "type": "Mixed",
@@ -870,7 +870,7 @@
     }
   },
   {
-    "id": "58159a52-8f23-463f-b684-8bac1cf4f0e6",
+    "id": "ab7ef3d2-29a3-40ce-adff-3859c026eaec",
     "image": "/images/hostel-images/hostel_image_9.jpg",
     "name": "Urban Nest",
     "type": "Girls",
@@ -976,7 +976,7 @@
     }
   },
   {
-    "id": "b4504ebd-4cce-4a37-86e5-eaea054f7247",
+    "id": "e1baf810-bc8f-4b5e-804b-810ee50fb4d4",
     "image": "/images/hostel-images/hostel_image_10.jpg",
     "name": "Scholars Haven",
     "type": "Girls",

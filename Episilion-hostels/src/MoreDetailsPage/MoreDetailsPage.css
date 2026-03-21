@@ -94,6 +94,10 @@
   padding: 2px;
 }
 
+.compare-button:active{
+  transform: scale(0.9);
+}
+
 .font-header {
   font-family: Playfair Display;
   font-size: clamp(1rem, 2vw, 1.3rem);

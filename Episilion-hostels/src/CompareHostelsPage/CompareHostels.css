@@ -20,6 +20,9 @@
     width: min(30px, 10%);
     background-color: transparent;
 }
+.compare-hostels-arrow-button:active{
+    transform: scale(0.9);
+}
 
 .compare-hostels-switch-text {
     font-size: clamp(20px, 2vw, 30px);
