@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import { PageHeader } from "../PageHeader/PageHeader";
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import leftArrowImage from '../assets/icons/left-arrow.png';
-import rightArrowImage from '../assets/icons/right-arrow.png'
+import rightArrowImage from '../assets/icons/right-arrow.png';
+import closeMapImage from '../assets/icons/close.png';
 import './CompareHostels.css'
+//import { showHostelLocationOnMap } from "../UTILS/utils.js";
 //import { useEffect } from "react";
 
 
@@ -51,6 +53,13 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
 
     const [leftHostelDistanceAdvantage, setleftHostelDistanceAdvantage] = useState(true);
     const [rightHostelDistanceAdvantage, setrightHostelDistanceAdvantage] = useState(true);
+
+    const [leftHostelPriceAdvantage, setleftHostelPriceAdvantage] = useState(true);
+    const [rightHostelPriceAdvantage, setRightHostelPriceAdvantage] = useState(true);
+
+    // const [leftHostelRoomsAdvantage, setLeftHostelRoomsAdvantage] = useState(true);
+    // const [rigthHostelRoomsAdvantage, setRightHostelRoomsAdvantage] = useState(true);
+
     const [leftHostel, setLeftHostel] = useState();
     const [rightHostel, setRightHostel] = useState();
 
@@ -68,20 +77,93 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
     useEffect(() => {
         if (leftHostel && rightHostel) {
             if (leftHostel.distance < rightHostel.distance) {
-                console.log("Left is smaller");
+                //console.log("Left is smaller");
                 setleftHostelDistanceAdvantage(true);
                 setrightHostelDistanceAdvantage(false);
             } else {
-                console.log("Right is smaller");
+                //console.log("Right is smaller");
                 setleftHostelDistanceAdvantage(false);
                 setrightHostelDistanceAdvantage(true);
             }
         }
     }, [leftHostel, rightHostel]);
 
+    useEffect(() => {
+        if (leftHostel && rightHostel) {
+            //console.log(leftHostel.pricing.priceMin)
+            if (leftHostel.pricing.priceMin < rightHostel.pricing.priceMin) {
 
-    //console.log(rightHostel)
+                //console.log("Left is smaller");
+                setleftHostelPriceAdvantage(true);
+                setRightHostelPriceAdvantage(false);
+            } else {
+                //console.log("Right is smaller");
+                setleftHostelPriceAdvantage(false);
+                setRightHostelPriceAdvantage(true);
+            }
+        }
+    }, [leftHostel, rightHostel]);
 
+    const [close, setClose] = useState(true);//THIS CONTROLS THE THE IFRAME, OPENING AND CLOSING IT
+    const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
+
+    const [googleMapSrc, setGoogleMapSrc] = useState('')
+    //showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)
+    function showHostelLocationOnMap() {
+        setClose(false);
+        setActivate(true)
+        const hostel = originalHostelCardData.find(h => h.id === hostelId);
+        if (hostel && hostel.location) {
+            const { latitude, longitude } = hostel.location;
+            const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&hl=en&z=15&output=embed`;
+            setGoogleMapSrc(mapUrl);
+        } else {
+            console.error("Hostel not found or missing location data.");
+        }
+    }
+
+    function closeMap() {
+        console.log('Close has bee clciked')
+        if (!close) {
+            setActivate(false)
+            setClose(true)
+        } else {
+            setClose(false)
+        }
+    }
+
+    function getDirectionsOnMap() {
+        //setClose(false);
+        const hostel = originalHostelCardData.find(h => h.id === hostelId);
+
+        if (!hostel) {
+            alert("Hostel not found.");
+            return;
+        }
+
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser.");
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude: userLat, longitude: userLng } = position.coords;
+                const mapURL = `https://www.google.com/maps/dir/${userLat},${userLng}/${hostel.location.latitude},${hostel.location.longitude}/`;
+                window.open(mapURL, "_blank");
+            },
+            (error) => {
+                const messages = {
+                    1: "Location access denied. Please allow location permissions.",
+                    2: "Location unavailable. Try again later.",
+                    3: "Location request timed out.",
+                };
+                alert(messages[error.code] || "Unable to retrieve your location.");
+                console.error(error);
+            },
+            { timeout: 10000, maximumAge: 60000 } // ✅ Add options for better UX
+        );
+    }
     return (
 
         <>
@@ -95,13 +177,31 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                 <>
                                     <h1 className="compared-hostel-name">{hostel.name}</h1>
                                     <img className="compared-hostel-image" src={hostel.image} alt="" />
-                                    <p className="compared-hostel-diatance">Distance From Campus : {hostel.distance} <span className={`compared-hostel-diatance-advantage ${leftHostelDistanceAdvantage}`}>{leftHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
+                                    <p className="compared-hostel-distance">Distance From Campus : {hostel.distance} <span className={`compared-hostel-diatance-advantage ${leftHostelDistanceAdvantage}`}>{leftHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
+                                    <div className="view-location-container">
+                                        <button className="view-location js-view-location" onClick={showHostelLocationOnMap}>View Location</button>
+                                        <button className="view-location js-get-directions" onClick={getDirectionsOnMap} >Get Directions</button>
+                                    </div>
 
-                                    <h1 className="compared-hostel-titles">Price Details</h1>
-                                    <p className="compared-hostel-pricing">Minimum Price : {hostel.pricing.priceMin} <span className="compared-hostel-price-advantage">lower</span></p>
+                                    <div className={`overlay-background ${activate ? 'activate' : ''}`}>
+                                        <div className='map-modal'>
+                                            <div className={`iframe-container ${close ? 'close' : ''}`}>
+                                                <div className='close-button'><img src={closeMapImage} alt="" className='close-image' onClick={closeMap} /></div>
+                                                <iframe
+                                                    src={googleMapSrc}
+                                                    className='iframe'
+                                                    frameborder="1"
+                                                    loading='lazy'
+                                                    title='Hostel Location'></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h1 className="compared-hostel-titles">Price Details <span className={`compared-hostel-price-advantage ${leftHostelPriceAdvantage}`}>{leftHostelPriceAdvantage ? 'Lower' : 'Higher'}</span></h1>
+                                    <p className="compared-hostel-pricing">Minimum Price : {hostel.pricing.priceMin} </p>
                                     <p className="compared-hostel-pricing"> Additional Fees Total: {hostel.pricing.additionalFees.utilities + hostel.pricing.additionalFees.maintenance + hostel.pricing.additionalFees.cautionDeposit}</p>
 
-                                    <h1 className="compared-hostel-titles">Room Types</h1>
+                                    <h1 className="compared-hostel-titles">Room Types <span className="compared-hostel-room-advantage">{ }</span></h1>
                                     <ul className="types-of-rooms js-rooms-types">
                                         {hostel.rooms.types.map((room) => {
                                             return (
@@ -183,13 +283,30 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                     </div>
                                     {/* <h1 className="compared-hostel-name">{hostel.name}</h1> */}
                                     <img className="compared-hostel-image" src={hostel.image} alt="" />
-                                    <p className="compared-hostel-diatance">Distance From Campus : {hostel.distance} m <span className={`compared-hostel-diatance-advantage ${rightHostelDistanceAdvantage}`}>{rightHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
+                                    <p className="compared-hostel-distance">Distance From Campus : {hostel.distance} m <span className={`compared-hostel-diatance-advantage ${rightHostelDistanceAdvantage}`}>{rightHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
+                                    <div className="view-location-container">
+                                        <button className="view-location js-view-location" onClick={showHostelLocationOnMap}>View Location</button>
+                                        <button className="view-location js-get-directions" onClick={getDirectionsOnMap} >Get Directions</button>
+                                    </div>
+                                    <div className={`overlay-background ${activate ? 'activate' : ''}`}>
+                                        <div className='map-modal'>
+                                            <div className={`iframe-container ${close ? 'close' : ''}`}>
+                                                <div className='close-button'><img src={closeMapImage} alt="" className='close-image' onClick={closeMap} /></div>
+                                                <iframe
+                                                    src={googleMapSrc}
+                                                    className='iframe'
+                                                    frameborder="1"
+                                                    loading='lazy'
+                                                    title='Hostel Location'></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    <h1 className="compared-hostel-titles">Price Details <span className="compared-hostel-price-advantage">lower</span></h1>
+                                    <h1 className="compared-hostel-titles">Price Details <span className={`compared-hostel-price-advantage ${rightHostelPriceAdvantage}`}>{rightHostelPriceAdvantage ? 'lower' : 'Higher'}</span></h1>
                                     <p className="compared-hostel-pricing">Minimum Price : {hostel.pricing.priceMin}</p>
                                     <p className="compared-hostel-pricing"> Additional Fees Total: {hostel.pricing.additionalFees.utilities + hostel.pricing.additionalFees.maintenance + hostel.pricing.additionalFees.cautionDeposit}</p>
 
-                                    <h1 className="compared-hostel-titles">Room Types <span className="compared-hostel-price-advantage">More Rooms</span></h1>
+                                    <h1 className="compared-hostel-titles">Room Types <span className="compared-hostel-room-advantage"></span></h1>
                                     <ul className="types-of-rooms js-rooms-types">
                                         {hostel.rooms.types.map((room) => {
                                             return (
@@ -198,7 +315,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                         })}
                                     </ul>
 
-                                    <h1 className="compared-hostel-titles">Facilties And Ameneities <span className="compared-hostel-price-advantage">More Facilities And</span></h1>
+                                    <h1 className="compared-hostel-titles">Facilties And Ameneities <span className="compared-hostel-price-advantage"></span></h1>
                                     <ul className="facilities-and-amenities-perks grid js-facilities-and-amenities-perks">
                                         {
                                             hostel.amenities.map((amenity) => {

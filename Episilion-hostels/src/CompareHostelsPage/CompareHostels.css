@@ -64,7 +64,7 @@
     font-weight: bolder;
 }
 
-.compared-hostel-diatance {
+.compared-hostel-distance {
     font-size: clamp(20px, 2vw, 30px);
     font-family: lato;
     /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); */
@@ -85,12 +85,18 @@
     font-size: clamp(15px, 2vw, 20px);
     font-family: lato;
 }
-
-.compared-hostel-price-advantage {
-    color: green;
+.compared-hostel-price-advantage, .compared-hostel-room-advantage{
     font-weight: lighter;
     font-family: Hezba;
     margin-left: 5px;
+    font-size: clamp(20px, 2vw, 30px);
+}
+
+.compared-hostel-price-advantage.true{
+    color: green;
+}
+.compared-hostel-price-advantage.false{
+    color: red;
 }
 
 .compared-hostel-room-type-images-continer {
