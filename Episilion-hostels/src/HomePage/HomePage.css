@@ -272,6 +272,7 @@
   justify-content: center;    /* center horizontally */
   align-items: center;        /* center vertically */
   height: 100px;  
+  gap: 10px;
 }
 
 .filter-search-box {
@@ -282,6 +283,8 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  min-width: 120px;
+  max-width: 120px;
 }
 .filter-search-box-text{
   font-size: clamp(0.9rem, 2vw, 1.2rem);

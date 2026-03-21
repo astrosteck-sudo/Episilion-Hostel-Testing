@@ -1,13 +1,14 @@
 import { PageHeader } from "../PageHeader/PageHeader.jsx"
 import { HostelCard } from "./HostelCard.jsx";
-import './HomePage.css'
+import './HomePage.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
 import filterImage from '../assets/icons/sort.png';
 import closeFilterImage from '../assets/icons/close.png';
-import boyImage from '../assets/icons/man.png'
-import girlImage from '../assets/icons/woman-avatar.png'
+import boyImage from '../assets/icons/man.png';
+import girlImage from '../assets/icons/woman-avatar.png';
 import mixedImage from '../assets/icons/shuffle.png'
 import searchButton from '../assets/icons/search.png';
+import reset from '../assets/icons/refresh.png';
 import noResultImage from '../assets/icons/no-results-(1).png'
 import { useEffect, useRef, useState } from "react";
 
@@ -128,13 +129,20 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         // filterMenu.current.style.opacity = 0;
         // filterMenu.current.style.pointerEvents = 'none';
     }
+    function resetValues() {
+        setMinPrice('');
+        setMaxPrice('');
+        setGender('');
+        setGenderText('Search')
+        sethostelsCardData(originalHostelCardData)
+    }
 
 
 
 
 
 
-                                  //THIS IS FOR THE SUGGESTIONBOX AND SEARCH BAR
+    //THIS IS FOR THE SUGGESTIONBOX AND SEARCH BAR
     function userSearchedHostelName(event) {
         setSuggestionBoxOpen(true)
         setValue(event.target.value)//THIS MAKES SURE THAT AS THE USER TYPES THE TEXT IS DISPLAYED ON THE THE SEARCH INPUT
@@ -264,10 +272,14 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                             </div>
                         </div>
                     </div>
-                    <div className="filter-search-box-container" onClick={searchHostels}>
-                        <div className="filter-search-box js-search-box">
-                            <p className="filter-search-box-text js-search-box-text">{genderText}</p><img className="filter-search-icon"
-                                src={searchButton}></img>
+                    <div className="filter-search-box-container">
+                        <div className="filter-search-box js-search-box" onClick={searchHostels}>
+                            <p className="filter-search-box-text js-search-box-text">{genderText}</p>
+                            <img className="filter-search-icon" src={searchButton}></img>
+                        </div>
+                        <div className="filter-search-box js-search-box" onClick={resetValues}>
+                            <p className="filter-search-box-text js-search-box-text">Reset</p>
+                            <img className="filter-search-icon" src={reset}></img>
                         </div>
                     </div>
                 </div>
