@@ -5,7 +5,8 @@ import leftArrowImage from '../assets/icons/left_arrow.png';
 import rightArrowImage from '../assets/icons/right_arrow.png';
 import closeMapImage from '../assets/icons/close.png';
 import './CompareHostels.css'
-//import { showHostelLocationOnMap } from "../UTILS/utils.js";
+import { showHostelLocationOnMap } from "../UTILS/mapFunctions.js";
+import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
 //import { useEffect } from "react";
 
 
@@ -108,19 +109,6 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
 
     const [googleMapSrc, setGoogleMapSrc] = useState('')
-    //showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)
-    function showHostelLocationOnMap() {
-        setClose(false);
-        setActivate(true)
-        const hostel = originalHostelCardData.find(h => h.id === hostelId);
-        if (hostel && hostel.location) {
-            const { latitude, longitude } = hostel.location;
-            const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&hl=en&z=15&output=embed`;
-            setGoogleMapSrc(mapUrl);
-        } else {
-            console.error("Hostel not found or missing location data.");
-        }
-    }
 
     function closeMap() {
         console.log('Close has bee clciked')
@@ -130,39 +118,6 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
         } else {
             setClose(false)
         }
-    }
-
-    function getDirectionsOnMap() {
-        //setClose(false);
-        const hostel = originalHostelCardData.find(h => h.id === hostelId);
-
-        if (!hostel) {
-            alert("Hostel not found.");
-            return;
-        }
-
-        if (!navigator.geolocation) {
-            alert("Geolocation is not supported by your browser.");
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude: userLat, longitude: userLng } = position.coords;
-                const mapURL = `https://www.google.com/maps/dir/${userLat},${userLng}/${hostel.location.latitude},${hostel.location.longitude}/`;
-                window.open(mapURL, "_blank");
-            },
-            (error) => {
-                const messages = {
-                    1: "Location access denied. Please allow location permissions.",
-                    2: "Location unavailable. Try again later.",
-                    3: "Location request timed out.",
-                };
-                alert(messages[error.code] || "Unable to retrieve your location.");
-                console.error(error);
-            },
-            { timeout: 10000, maximumAge: 60000 } // ✅ Add options for better UX
-        );
     }
     return (
 
@@ -179,8 +134,8 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                     <img className="compared-hostel-image" src={hostel.image} alt="" />
                                     <p className="compared-hostel-distance">Distance From Campus : {hostel.distance} <span className={`compared-hostel-diatance-advantage ${leftHostelDistanceAdvantage}`}>{leftHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
                                     <div className="view-location-container">
-                                        <button className="view-location js-view-location" onClick={showHostelLocationOnMap}>View Location</button>
-                                        <button className="view-location js-get-directions" onClick={getDirectionsOnMap} >Get Directions</button>
+                                        <button className="view-location js-view-location" onClick={() =>showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)}>View Location</button>
+                                        <button className="view-location js-get-directions" onClick={() => getDirectionsOnMap(originalHostelCardData, hostelId)} >Get Directions</button>
                                     </div>
 
                                     <div className={`overlay-background ${activate ? 'activate' : ''}`}>
@@ -285,8 +240,8 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                     <img className="compared-hostel-image" src={hostel.image} alt="" />
                                     <p className="compared-hostel-distance">Distance From Campus : {hostel.distance} m <span className={`compared-hostel-diatance-advantage ${rightHostelDistanceAdvantage}`}>{rightHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
                                     <div className="view-location-container">
-                                        <button className="view-location js-view-location" onClick={showHostelLocationOnMap}>View Location</button>
-                                        <button className="view-location js-get-directions" onClick={getDirectionsOnMap} >Get Directions</button>
+                                        <button className="view-location js-view-location" onClick={() =>showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)}>View Location</button>
+                                        <button className="view-location js-get-directions" onClick={() => getDirectionsOnMap(originalHostelCardData, hostelId)} >Get Directions</button>
                                     </div>
                                     <div className={`overlay-background ${activate ? 'activate' : ''}`}>
                                         <div className='map-modal'>

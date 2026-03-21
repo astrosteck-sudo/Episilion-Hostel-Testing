@@ -11,6 +11,8 @@ import closeMapImage from '../assets/icons/close.png';
 import websImage from '../assets/icons/web.png'
 import compareImage from '../assets/icons/compare.png'
 import { useState } from 'react';
+import { showHostelLocationOnMap } from "../UTILS/mapFunctions.js";
+import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
 import { useNavigate } from "react-router-dom";
 
 
@@ -25,52 +27,6 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     const hostelId = params.get("hostelId")
 
     const [googleMapSrc, setGoogleMapSrc] = useState('')
-    function showHostelLocationOnMap() {
-        setClose(false);
-        setActivate(true)
-        const hostel = originalHostelCardData.find(h => h.id === hostelId);
-        if (hostel && hostel.location) {
-            const { latitude, longitude } = hostel.location;
-            const mapUrl = `https://www.google.com/maps?q=${latitude},${longitude}&hl=en&z=15&output=embed`;
-            setGoogleMapSrc(mapUrl);
-        } else {
-            console.error("Hostel not found or missing location data.");
-        }
-    }
-
-    function getDirectionsOnMap() {
-        //setClose(false);
-        const hostel = originalHostelCardData.find(h => h.id === hostelId);
-
-        if (!hostel) {
-            alert("Hostel not found.");
-            return;
-        }
-
-        if (!navigator.geolocation) {
-            alert("Geolocation is not supported by your browser.");
-            return;
-        }
-
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const { latitude: userLat, longitude: userLng } = position.coords;
-                const mapURL = `https://www.google.com/maps/dir/${userLat},${userLng}/${hostel.location.latitude},${hostel.location.longitude}/`;
-                window.open(mapURL, "_blank");
-            },
-            (error) => {
-                const messages = {
-                    1: "Location access denied. Please allow location permissions.",
-                    2: "Location unavailable. Try again later.",
-                    3: "Location request timed out.",
-                };
-                alert(messages[error.code] || "Unable to retrieve your location.");
-                console.error(error);
-            },
-            { timeout: 10000, maximumAge: 60000 } // ✅ Add options for better UX
-        );
-    }
-
 
     function closeMap() {
         console.log('Close has bee clciked')
@@ -120,8 +76,8 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                             </p>
 
                                             <div className="view-location-container">
-                                                <button className="view-location js-view-location" onClick={showHostelLocationOnMap}>View Location</button>
-                                                <button className="view-location js-get-directions" onClick={getDirectionsOnMap} >Get Directions</button>
+                                                <button className="view-location js-view-location" onClick={() => showHostelLocationOnMap( setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc )}>View Location</button>
+                                                <button className="view-location js-get-directions" onClick={() => getDirectionsOnMap(originalHostelCardData, hostelId)} >Get Directions</button>
                                             </div>
                                             <div className={`overlay-background ${activate ? 'activate' : ''}`}>
                                                 <div className='map-modal'>
