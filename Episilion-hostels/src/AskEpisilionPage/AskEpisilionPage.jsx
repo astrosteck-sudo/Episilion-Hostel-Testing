@@ -3,14 +3,34 @@ import { Link } from "react-router-dom";
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import { useNavigate } from "react-router-dom";
 import './AskEpisilion.css'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [chatMessages, setChatMessages] = useState([]);  //Initialize as array
     const navigate = useNavigate();
 
-    //const episilionAnswers = ["What can you see", "No hostels available", "Yes no hostel is available", "What more can i say"];
+
+    //This hook scrolls to the bottom whenever chatMessages updates.
+    useEffect(() => {
+        const messagesDiv = document.querySelector('.messages');
+        if (messagesDiv) {
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+    }, [chatMessages]);
+
+    //THIS Loads messages on mount
+    useEffect(() => {
+        const savedMessages = localStorage.getItem("episilionChat");
+        if (savedMessages) {
+            setChatMessages(JSON.parse(savedMessages));
+        }
+    }, []);
+
+    // Save messages whenever they change
+    useEffect(() => {
+        localStorage.setItem("episilionChat", JSON.stringify(chatMessages));
+    }, [chatMessages]);
 
     function searchInput(event) {
         setUserSearchInput(event.target.value);
@@ -32,18 +52,9 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
         )
 
         function goToHostelPage(parameter) {
-            console.log(parameter)      
+            console.log(parameter)
             navigate(`/moreDetails?hostelId=${parameter}`);
         }
-        // filteredHostels.forEach((filteredHostel) => {
-        //     console.log(filteredHostel.name, '\n', filteredHostel.pricing.priceMax)
-        //     responseName += "\n " + filteredHostel.name + `(${filteredHostel.pricing.priceMax})`
-
-        // })
-        // console.log(responseName)
-        // response = filteredHostels.name
-        // response += `(${filteredHostels.pricing.priceMax})`
-        //const answer = "heloooo"
 
         const finalMessages = [
             ...updatedMessages,
@@ -52,11 +63,15 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
                     <p className="episilion-response-header">Try these hostels</p>
                     {filteredHostels.map((hostel) => {
                         return (
-                            <p className="episilion-response">
-                                <p className="episilion-response-hostel-name">{hostel.name}</p>
-                                <p className="episilion-response-hostel-price">$({hostel.pricing.priceMax})</p>
-                                <p className="episilion-response-hostel-link" onClick={() => goToHostelPage(hostel.id)}>CLICK HERE</p>
-                            </p>
+                            <>
+                                <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" />
+                                <p className="episilion-response">
+                                    <p className="episilion-response-hostel-name">{hostel.name}</p>
+                                    <p className="episilion-response-hostel-price">$({hostel.pricing.priceMax})</p>
+                                    <p className="episilion-response-hostel-link" onClick={() => goToHostelPage(hostel.id)}>CLICK HERE</p>
+                                </p>
+                            </>
+
                         )
                     })}
                 </div>, sender: 'episilion'

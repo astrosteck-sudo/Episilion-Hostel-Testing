@@ -49,34 +49,22 @@
 
 .messages {
   position: fixed;
-  bottom: calc(60px + 70px);
-  border: solid red;
-  /* overflow: scroll; */
-  /* search bar height + spacing */
-  left: 50%;
   top: 120px;
-  bottom: 130px;
+  bottom: 130px; /* keeps space for search bar + footer */
+  left: 50%;
   transform: translateX(-50%);
   width: 90%;
-  /* responsive width */
   max-width: 600px;
+
   display: flex;
   flex-direction: column;
-  /* stack messages vertically */
   gap: 30px;
-  /* spacing between bubbles */
-  /* z-index: 9999; */
-  display: flex;
-  justify-content: flex-end;
-  /* max-height: 500px;
-  overflow-y: scroll;
-  flex: 1; */
-  /* height: 60vh;
-  overflow-y: scroll; */
-  /* padding: 10px; */
 
+  overflow-y: auto;   /* allow scrolling */
+  padding: 10px;
   scroll-behavior: smooth;
 }
+
 
 /* User message aligned right */
 .user-message {
@@ -96,7 +84,8 @@
   align-self: flex-start;
   /* pushes bubble to far left */
   background: #f1f1f1;
-  padding: 10px 15px;
+  padding: 10px 2px;
+  margin: 5px;
   border-radius: 8px;
   max-width: 70%;
   word-wrap: break-word;
@@ -114,12 +103,13 @@
 
 .episilion-response {
   display: flex;
+  margin: 5px;
+  width: 100%;
 }
 
 .episilion-response-hostel-name {
   font-family: Sancreek;
   font-weight: lighter;
-  color: red;
   font-size: clamp(13px, 2vw, 15px);
 }
 
@@ -135,4 +125,19 @@
   color: blue;
   font-size: clamp(10px, 2vw, 15px);
   cursor: pointer;
+}
+
+.episilion-response-image{
+  width: 100px;
+  display: block;
+  border-radius: 5px;
+}
+
+@media only screen and (max-width: 600px ){
+  .episilion-response-hostel-price{
+    margin-left: 1px;
+  }
+  .episilion-response-hostel-link{
+    margin-left: 3px;
+  }
 }

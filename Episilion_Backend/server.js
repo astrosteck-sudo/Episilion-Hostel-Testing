@@ -20,20 +20,19 @@ function readData(filePath) {
 
 //THIS ADDED THE RANDOM ID'S TO THE HOSTELS
 
-//import fs from "fs";
-const crypto = require("crypto");
+// //import fs from "fs";
+// const crypto = require("crypto");
 
-
-// Load existing JSON file
-const data = fs.readFileSync("hostel_data.json", "utf-8");
-const hostels = JSON.parse(data);
-//hostel_data.json
-// Assign a UUID string to each hostel
-hostels.forEach(hostel => {
-  if (hostel.id != "") {
-    hostel.id = crypto.randomUUID();
-  }
-});
+// // Load existing JSON file
+// const data = fs.readFileSync("hostel_data.json", "utf-8");
+// const hostels = JSON.parse(data);
+// //hostel_data.json
+// // Assign a UUID string to each hostel
+// hostels.forEach(hostel => {
+//   if (hostel.id != "") {
+//     hostel.id = crypto.randomUUID();
+//   }
+// });
 
 
 // Save back to JSON
