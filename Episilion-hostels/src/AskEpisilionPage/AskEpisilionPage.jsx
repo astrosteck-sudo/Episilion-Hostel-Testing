@@ -19,7 +19,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
         }
     }, [chatMessages]);
 
-    //THIS Loads messages on mount
+    // Load messages on mount
     useEffect(() => {
         const savedMessages = localStorage.getItem("episilionChat");
         if (savedMessages) {
@@ -27,10 +27,13 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
         }
     }, []);
 
-    // Save messages whenever they change
+    // Save messages whenever they change, but only if not empty
     useEffect(() => {
-        localStorage.setItem("episilionChat", JSON.stringify(chatMessages));
+        if (chatMessages.length > 0) {
+            localStorage.setItem("episilionChat", JSON.stringify(chatMessages));
+        }
     }, [chatMessages]);
+
 
     function searchInput(event) {
         setUserSearchInput(event.target.value);
@@ -41,7 +44,10 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
 
         const updatedMessages = [
             ...chatMessages,
-            { message: userSearchInput, sender: 'user' }
+            {
+                message: userSearchInput,
+                sender: 'user'
+            }
         ];
 
         //Add Epsilon's response right after the user message
@@ -50,36 +56,23 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
         const filteredHostels = originalHostelCardData.filter(
             (hostel) => hostel.featured
         )
-
-        function goToHostelPage(parameter) {
-            console.log(parameter)
-            navigate(`/moreDetails?hostelId=${parameter}`);
-        }
+        console.log(filteredHostels)
 
         const finalMessages = [
             ...updatedMessages,
             {
-                message: <div>
-                    <p className="episilion-response-header">Try these hostels</p>
-                    {filteredHostels.map((hostel) => {
-                        return (
-                            <>
-                                <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" />
-                                <p className="episilion-response">
-                                    <p className="episilion-response-hostel-name">{hostel.name}</p>
-                                    <p className="episilion-response-hostel-price">$({hostel.pricing.priceMax})</p>
-                                    <p className="episilion-response-hostel-link" onClick={() => goToHostelPage(hostel.id)}>CLICK HERE</p>
-                                </p>
-                            </>
-
-                        )
-                    })}
-                </div>, sender: 'episilion'
+                message: filteredHostels,
+                type: 'episilionResults',
+                sender: 'episilion'
             }
         ];
 
         setChatMessages(finalMessages);
         setUserSearchInput('');  // Clear input after sending
+    }
+    function goToHostelPage(parameter) {
+        console.log(parameter)
+        navigate(`/moreDetails?hostelId=${parameter}`);
     }
 
     //Allow sending with Enter key
@@ -97,7 +90,24 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
                 {/*Map over chatMessages array to render each bubble */}
                 {chatMessages.map((chat, index) => (
                     <div key={index} className={chat.sender === 'user' ? 'user-message' : 'episilion-message'}>
-                        {chat.message}
+                        {chat.type === 'episilionResults' ?
+                            (
+                                <div>
+                                    <p className="episilion-response-header">Try these hostels</p>
+                                    {chat.message.map((hostel) => {
+                                        return (
+                                            <div key={hostel.id} className="episilion-hostel-card">
+                                                <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" />
+                                                <p className="episilion-response">
+                                                    <p className="episilion-response-hostel-name">{hostel.name}</p>
+                                                    <p className="episilion-response-hostel-price">$({hostel.pricing.priceMax})</p>
+                                                    <p className="episilion-response-hostel-link" onClick={() => goToHostelPage(hostel.id)}>CLICK HERE</p>
+                                                </p>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            ) : chat.message}
                     </div>
                 ))}
             </div>
