@@ -45,6 +45,7 @@
   background-color: green;
   font-weight: bold;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  letter-spacing: 5px;
 }
 
 .messages {

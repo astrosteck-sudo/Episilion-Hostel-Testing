@@ -8,7 +8,7 @@ import boyImage from '../assets/icons/man.png';
 import girlImage from '../assets/icons/woman-avatar.png';
 import mixedImage from '../assets/icons/shuffle.png'
 import searchButton from '../assets/icons/search.png';
-import reset from '../assets/icons/refresh.png';
+import resetImage from '../assets/icons/refresh.png';
 import noResultImage from '../assets/icons/no-results-(1).png'
 import { useEffect, useRef, useState } from "react";
 
@@ -279,7 +279,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                         </div>
                         <div className="filter-search-box js-search-box" onClick={resetValues}>
                             <p className="filter-search-box-text js-search-box-text">Reset</p>
-                            <img className="filter-search-icon" src={reset}></img>
+                            <img className="filter-search-icon" src={resetImage}></img>
                         </div>
                     </div>
                 </div>

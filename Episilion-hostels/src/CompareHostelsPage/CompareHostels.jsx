@@ -122,6 +122,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
     return (
 
         <>
+            <title>Compare Hostels | Epislion Hostels</title>
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
 
             <div className="hostel-comparison-container">

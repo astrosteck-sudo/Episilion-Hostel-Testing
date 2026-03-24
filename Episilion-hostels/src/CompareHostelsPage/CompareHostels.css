@@ -21,6 +21,7 @@
 }
 .compare-hostels-arrow-button:active{
     transform: scale(0.9);
+    background-color: white;
 }
 
 .compare-hostels-switch-text {
@@ -112,10 +113,15 @@
     width: 100%;
     height: auto;
 }
+.compared-hostel-room-type-images-continer img{
+    max-width: 300px;
+}
 
 @media only screen and (max-width: 600px ){
     .hostel-comparison-container {
-        display: block;
+        /* display: block; */
+        display: flex;
+        flex-direction: column-reverse;
     }
 
     .compared-hostel-name {
@@ -154,7 +160,6 @@
     }
 
     .compare-hostels-arrow-button{
-        border: solid rgb(238, 255, 0);
         width: 5%;
     }
 

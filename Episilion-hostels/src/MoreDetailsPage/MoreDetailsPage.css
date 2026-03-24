@@ -87,7 +87,7 @@
 
 .compare-button {
   border: solid rgb(71, 67, 67) 2px;
-  width: 7%;
+  width: min(50px, 13%);
   height: 100%;
   background-color: transparent;
   border-radius: 5px;
@@ -452,9 +452,9 @@ p.font-paragraph {
     margin-left: 0px;
   }
 
-  .compare-button{
+  /* .compare-button{
     width: 10%;
-  }
+  } */
 
   .media-information-cards {
     border: solid transparent;

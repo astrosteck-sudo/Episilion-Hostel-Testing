@@ -89,6 +89,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
 
     return (
         <>
+            <title>Ask Episilion | Episilion Hostels</title>
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
             <div className="messages">
                 <div className="episilion-message">How can I be of help?</div>

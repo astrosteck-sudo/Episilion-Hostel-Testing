@@ -36,9 +36,9 @@ function readData(filePath) {
 
 
 // Save back to JSON
-fs.writeFileSync("hostel_data.json", JSON.stringify(hostels, null, 2));
+//fs.writeFileSync("hostel_data.json", JSON.stringify(hostels, null, 2));
 
-console.log("UUIDs added to hostels!");
+//console.log("UUIDs added to hostels!");
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 
