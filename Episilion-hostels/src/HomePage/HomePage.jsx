@@ -24,8 +24,10 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [value, setValue] = useState('');//THIS CONTROLLS THE TEXT THE USER TYPES IN THE SEARCH BOX 
     const [hostelsFound, setHostelsFound] = useState(true);//THIS CONTROLS THE not found image AND text
 
-    const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
 
+
+    const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
+    
 
 
 
@@ -216,6 +218,62 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
 
 
 
+    //THIS IS FOR THE CHANGING HOSTEL TEXTS
+    // All sentences to cycle through
+    const SENTENCES = [
+        "OVER 100 HOSTELS LISTED",
+        "FIND YOUR PERFECT STAY",
+        "ALWAYS UP-TO-DATE LISTINGS",
+        "COMPARE HOSTELS INSTANTLY",
+        "BROWSE HOSTELS FROM HOME",
+        "BOOK WITH CONFIDENCE",
+        "REAL REVIEWS, REAL STAYS",
+        "FILTER BY PRICE & LOCATION",
+        "NEW HOSTELS ADDED DAILY",
+        "STUDENT-FRIENDLY OPTIONS",
+        "SAFE & VERIFIED HOSTELS",
+        "AFFORDABLE STAYS NEAR YOU",
+        "NO HIDDEN FEES",
+        "YOUR NEXT HOME AWAITS",
+        "EXPLORE. COMPARE. BOOK.",
+    ];
+
+    const [text, setText] = useState("");
+
+    useEffect(() => {
+        let sentenceIndex = 0; // Tracks which sentence we're currently typing
+        let charIndex = 0;     // Tracks how many characters have been revealed
+        let timeoutId;         // Stores the active timeout so we can cancel it on cleanup
+
+        const type = () => {
+            const current = SENTENCES[sentenceIndex];
+
+            // Reveal one more character of the current sentence
+            charIndex++;
+            setText(current.slice(0, charIndex));
+
+            if (charIndex < current.length) {
+                // Sentence not finished yet — schedule the next character in 200ms
+                timeoutId = setTimeout(type, 100);
+            } else {
+                // Sentence fully typed — pause for 1500ms, then clear and move to next
+                timeoutId = setTimeout(() => {
+                    setText("");                                          // Clear the displayed text
+                    charIndex = 0;                                        // Reset character position
+                    sentenceIndex = (sentenceIndex + 1) % SENTENCES.length; // Advance to next sentence, looping back to 0 after the last
+                    timeoutId = setTimeout(type, 300); // Brief pause before starting to type the next sentence
+                }, 1500);
+            }
+        };
+
+        // Small initial delay before the first sentence starts typing
+        timeoutId = setTimeout(type, 300);
+
+        // Cleanup: cancel any pending timeout when the component unmounts
+        return () => clearTimeout(timeoutId);
+    }, []);
+
+
 
 
 
@@ -288,7 +346,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
 
             <section className="search-box-container">
                 <div className="episilion-hostels-changing-texts">
-                    <h1 className="changing-texts">OVER 100 HOSTELS LISTED HERE</h1>
+                    <h1 className="changing-texts">{text}</h1>
                 </div>
                 <div className="search-box">
                     <input
@@ -333,6 +391,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                 </div>
             </section>
             <SiteFooter />
+
         </>
     )
 }

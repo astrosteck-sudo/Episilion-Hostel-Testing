@@ -7,13 +7,12 @@
   /* word-spacing: 50px; */
   padding-top: 80px;
   height: min(300px, 50%);
-
 }
 
 .changing-texts {
   background: rgba(255, 255, 255, 0.1);
   /* transparent white */
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(100px);
   /* glass blur effect */
   -webkit-backdrop-filter: blur(10px);
   /* Safari support */
@@ -23,11 +22,22 @@
   /* rounded corners */
   /* padding: 20px; */
   text-align: center;
-  color: #020801;
+  background: linear-gradient(to right, #2e3192, #1bffff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
   /* text stands out */
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   /* subtle shadow */
-  font-size: clamp(15px, 2vw, 100px);
+  font-size: clamp(12px, 2vw, 100px);
+  min-height: 50px;
+  padding: 7px;
+}
+@media only screen and (max-width: 992px){
+  .changing-texts{
+    min-height: 35px;
+  }
 }
 
 
@@ -190,8 +200,7 @@
   /*align-items: center;        center Vertically */
   /* height: clamp(2px, 1vw, 1%); */
   /* full viewport height */
-  border: solid blue;
-  background-image: url('../images/hostel-images/hostel_image_1.jpg');
+  background-image: url('../images/hostel-images/hostel_image_2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -214,7 +223,6 @@
   justify-content: center;
   /* center horizontally */
   margin-top: 10px;
-  border: solid red;
 }
 
 #search-box-text {
@@ -478,4 +486,20 @@ input[type=number] {
 .not-found-hostel-name {
   color: red;
   font-weight: bolder;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: 
+    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%,#ffa516);
+  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13{ 
+  100%{transform: rotate(1turn)}
 }
