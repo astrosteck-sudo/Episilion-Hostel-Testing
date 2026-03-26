@@ -222,6 +222,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     return (
         <>
             <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} />
+
             <section>
                 <button className="filter-image js-filter-image" onClick={openFilterMenu}>
                     <img src={filterImage}></img>
@@ -286,6 +287,9 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             </section>
 
             <section className="search-box-container">
+                <div className="episilion-hostels-changing-texts">
+                    <h1 className="changing-texts">OVER 100 HOSTELS LISTED HERE</h1>
+                </div>
                 <div className="search-box">
                     <input
                         type="text"

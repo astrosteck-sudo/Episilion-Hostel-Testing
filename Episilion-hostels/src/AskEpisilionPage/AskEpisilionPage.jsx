@@ -119,7 +119,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
                     onKeyDown={handleKeyDown}
                     value={userSearchInput}
                 />
-                <button className="ask-episilion-search-button" onClick={sendMessage}>Search</button>
+                <button className="ask-episilion-search-button" onClick={sendMessage}>Send</button>
             </div>
             <SiteFooter />
         </>
