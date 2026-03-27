@@ -24,7 +24,9 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [value, setValue] = useState('');//THIS CONTROLLS THE TEXT THE USER TYPES IN THE SEARCH BOX 
     const [hostelsFound, setHostelsFound] = useState(true);//THIS CONTROLS THE not found image AND text
 
-
+    useEffect(() => {
+        console.log(hostelsCardData)
+    },[])
 
     const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
     
@@ -136,7 +138,8 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         setMaxPrice('');
         setGender('');
         setGenderText('Search')
-        sethostelsCardData(originalHostelCardData)
+        sethostelsCardData(originalHostelCardData);
+        setHostelsFound(true)
     }
 
 
@@ -373,6 +376,11 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                     </div>
                 </div>
             </section>
+
+            {/* <div className="loader-container">
+                <div className="loader"></div>
+            </div> */}
+
 
 
             <section className="hostels-section">
