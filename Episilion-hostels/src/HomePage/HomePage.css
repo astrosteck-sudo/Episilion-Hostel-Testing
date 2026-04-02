@@ -43,39 +43,7 @@
 
 
 /*HOSTELS INFORMATION*/
-.hostels-cards {
-  display: flex;
-  /*THIS WILL MAKE THE CARDS SIT SIDE BY SIDE*/
-  flex-wrap: wrap;
-  /*THIS WILL MAKE THE CARD WRAP TO THE NEXT LINE IF THERES NOT ENOUGHT SPACE*/
-  gap: 1rem;
-  justify-content: center;
-  /*THIS WILL MAKE THE CARDS CCENTER HORIZONTALLY*/
-  padding: 1rem;
-  box-sizing: border-box;
-  /*THIS WILL INLCUDE PADDING IN WIDTH*/
-  height: 100%;
-  margin-bottom: 5px;
-}
-
-.hostel-card {
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  flex: 1 1 250px;
-  /*THE 250PX HERE IS THAT THE STARTING SIZE OF THE CARD WILL BE 250PX: THIS IS THE FLEX BASIS*/
-  max-width: 300px;
-  min-width: 200px;
-  box-sizing: border-box;
-  /*THIS WILL MAKE SURE THAT THE TOTAL WIDTH WILL ALWAYS BE 200PX NO MATTER HOW MUCH PADDING OR BORDER YOU ADD INSIDE*/
-  text-align: left;
-  transition: transform 0.3s;
-  margin-bottom: 50px;
-}
-
-
 /*THIS IS FOR THE TWO CARDS ON MOBILER*/
-/*
 .hostels-cards {
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +75,7 @@
     min-width: 0;
   }
 }
-*/
+
 
 .image-container {
   position: relative;
@@ -160,7 +128,7 @@
 
 #hostel-name {
   width: 100%;
-  font-size: clamp(1.2rem, 2vw, 1rem);
+  font-size: clamp(0.8rem, 2vw, 1rem);
   margin-top: 0px;
   font-family: Playfair Display;
   font-weight: bolder;
@@ -172,11 +140,13 @@
   font-size: clamp(1rem, 2vw, 1.1rem);
   /*RESPONSIVE FONT SIZE*/
   font-family: Comorant-Garamond;
+  text-align: left;
 }
 
 #hostel-perks {
   font-family: Hezba;
   text-align: center;
+  font-size: clamp(0.78rem, 2vw, 1rem);
   text-decoration: solid;
 }
 
