@@ -132,7 +132,9 @@
   margin-top: 0px;
   font-family: Playfair Display;
   font-weight: bolder;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #hostel-distace {
