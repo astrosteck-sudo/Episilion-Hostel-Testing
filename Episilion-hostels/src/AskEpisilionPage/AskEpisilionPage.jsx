@@ -118,6 +118,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
                     onChange={searchInput}
                     onKeyDown={handleKeyDown}
                     value={userSearchInput}
+                    placeholder="Type here and press Enter..."
                 />
                 <button className="ask-episilion-search-button" onClick={sendMessage}>Send</button>
             </div>

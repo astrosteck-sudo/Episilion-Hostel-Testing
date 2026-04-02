@@ -73,6 +73,42 @@
   margin-bottom: 50px;
 }
 
+
+/*THIS IS FOR THE TWO CARDS ON MOBILER*/
+/*
+.hostels-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  height: 100%;
+  margin-bottom: 5px;
+}
+
+.hostel-card {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  flex: 1 1 250px;
+  max-width: 300px;
+  min-width: 200px;
+  box-sizing: border-box;
+  text-align: left;
+  transition: transform 0.3s;
+  margin-bottom: 50px;
+}
+
+@media (max-width: 600px) {
+  .hostel-card {
+    flex: 1 1 calc(50% - 0.5rem);
+    max-width: calc(50% - 0.5rem);
+    min-width: 0;
+  }
+}
+*/
+
 .image-container {
   position: relative;
   /*ALLOWS ABOLUTE POSITIONING INSIDE*/
