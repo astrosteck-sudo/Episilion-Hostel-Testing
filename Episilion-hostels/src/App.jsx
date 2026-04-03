@@ -20,7 +20,7 @@ function App() {
 
   const loadHostelsCard = async () => {
     //const response = await axios.get('https://episilion-backend-2.onrender.com/api/data')
-    //const response = await axios.get('http://localhost:5000/api/data')
+    const response = await axios.get('http://localhost:5000/api/data')
     //console.log(response.data)
     // if (response.data.data.length > 0) {
     // setOriginalHostelCardData(response.data.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
@@ -33,7 +33,7 @@ function App() {
   }
   useEffect(() => {
     loadHostelsCard();
-  }, [originalHostelCardData]);
+  }, []);
 
 
 

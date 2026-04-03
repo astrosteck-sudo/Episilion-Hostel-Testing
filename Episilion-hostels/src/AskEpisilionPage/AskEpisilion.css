@@ -67,6 +67,23 @@
   scroll-behavior: smooth;
 }
 
+.user-caution-message{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  margin-top: 100px;
+  font-size: clamp(23px, 2vw, 30px);
+  background-color: rgb(247, 244, 244);
+  border-radius: 20px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
+  font-family: AntipastoPro;
+  color: black;
+}
+.user-caution-message.close{
+  display: none;
+}
 
 /* User message aligned right */
 .user-message {

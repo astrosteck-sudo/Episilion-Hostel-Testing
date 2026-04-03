@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [chatMessages, setChatMessages] = useState([]);  //Initialize as array
+    const [userCautionText, setUserCautionText] = useState(true)
     const navigate = useNavigate();
 
 
@@ -23,6 +24,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
     useEffect(() => {
         const savedMessages = localStorage.getItem("episilionChat");
         if (savedMessages) {
+            setUserCautionText(false)
             setChatMessages(JSON.parse(savedMessages));
         }
     }, []);
@@ -40,6 +42,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
     }
 
     function sendMessage() {
+        setUserCautionText(false)
         if (!userSearchInput.trim()) return;  //Prevent empty messages
 
         const updatedMessages = [
@@ -80,12 +83,20 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
         if (event.key === 'Enter') sendMessage();
     }
 
+    // function clearLocalstorage(){
+    //     localStorage.clear()
+    // }
+
     return (
         <>
             <title>Ask Episilion | Episilion Hostels</title>
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
             <div className="messages">
                 <div className="episilion-message">How can I be of help?</div>
+
+                <div className={`user-caution-message ${userCautionText ? 'open': 'close'}`}>
+                    <p>This is a testing of the Episilion AI, questions asked should be short and direct for more accurate responses !!</p>
+                </div>
 
                 {/*Map over chatMessages array to render each bubble */}
                 {chatMessages.map((chat, index) => (
