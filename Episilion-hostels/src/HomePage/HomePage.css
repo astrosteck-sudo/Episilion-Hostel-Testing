@@ -128,13 +128,11 @@
 
 #hostel-name {
   width: 100%;
-  font-size: clamp(0.8rem, 2vw, 1.3rem);
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
   margin-top: 0px;
   font-family: Playfair Display;
   font-weight: bolder;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
 }
 
 #hostel-distace {
@@ -148,7 +146,7 @@
 #hostel-perks {
   font-family: Hezba;
   text-align: center;
-  font-size: clamp(0.78rem, 2vw, 1.2rem);
+  font-size: clamp(0.7rem, 2vw, 1.1rem);
   text-decoration: solid;
 }
 
@@ -531,4 +529,5 @@ input[type=number] {
   align-items: center;
   color: #ffa516;
   font-weight: bolder;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
