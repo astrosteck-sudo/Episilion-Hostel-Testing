@@ -23,13 +23,17 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [suggestionBoxOpen, setSuggestionBoxOpen] = useState(true);//THIS CONTOLS THE CSS THAT DETERMINES WHEATHER OR NOT THE SUGGESTION BOX IS OPEN
     const [value, setValue] = useState('');//THIS CONTROLLS THE TEXT THE USER TYPES IN THE SEARCH BOX 
     const [hostelsFound, setHostelsFound] = useState(true);//THIS CONTROLS THE not found image AND text
+    const [loading, setLoading] = useState(true);
 
+    //console.log(hostelsCardData)
     useEffect(() => {
-        console.log(hostelsCardData)
-    },[])
+        if(hostelsCardData.length > 0){
+            setLoading(false)
+        }
+    }, [hostelsCardData])
 
     const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
-    
+
 
 
 
@@ -377,9 +381,15 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                 </div>
             </section>
 
-            {/* <div className="loader-container">
-                <div className="loader"></div>
-            </div> */}
+            <div className={`loader-container ${loading ? 'open' : 'close'}`}>
+                <div className="loading-animation-conatainer">
+                    <div className="loader"></div>
+                </div>
+
+                <p className="loading-hostels-text">Loading Hostels...</p>
+            </div>
+
+
 
 
 

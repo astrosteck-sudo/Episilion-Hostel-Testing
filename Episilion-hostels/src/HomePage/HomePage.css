@@ -128,7 +128,7 @@
 
 #hostel-name {
   width: 100%;
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.8rem, 2vw, 1.3rem);
   margin-top: 0px;
   font-family: Playfair Display;
   font-weight: bolder;
@@ -139,7 +139,7 @@
 
 #hostel-distace {
   margin: 0.2rem;
-  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-size: clamp(1rem, 2vw, 1.3rem);
   /*RESPONSIVE FONT SIZE*/
   font-family: Comorant-Garamond;
   text-align: left;
@@ -148,7 +148,7 @@
 #hostel-perks {
   font-family: Hezba;
   text-align: center;
-  font-size: clamp(0.78rem, 2vw, 1rem);
+  font-size: clamp(0.78rem, 2vw, 1.2rem);
   text-decoration: solid;
 }
 
@@ -497,14 +497,20 @@ input[type=number] {
 
 
 /* HTML: <div class="loader"></div> */
-.loader-container{
+.loader-container.open{
   padding: 100px;
+}
+.loader-container.close{
+  display: none;
+}
+.loading-animation-conatainer{
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .loader {
   width: 50px;
+  width: min(50px, 25%);
   aspect-ratio: 1;
   border-radius: 50%;
   background: 
@@ -516,4 +522,13 @@ input[type=number] {
 }
 @keyframes l13{ 
   100%{transform: rotate(1turn)}
+}
+
+.loading-hostels-text{
+  /* display: blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffa516;
+  font-weight: bolder;
 }
