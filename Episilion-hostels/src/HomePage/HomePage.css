@@ -99,23 +99,23 @@
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: clamp(9px, 2vw, 15px);
   font-weight: bolder;
   background: linear-gradient(45deg, #2e3192, #1bffff);
 }
 
 .hostel-type-text {
   position: absolute;
+  font-size: clamp(9px, 2vw, 15px);
   bottom: 8px;
   /* distance from bottom edge */
   left: 8px;
   /* distance from right edge */
-  background: #ffffff;
   /* semi-transparent background */
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
-  font-size: 0.9rem;
+  /* font-size: 0.9rem; */
   font-weight: bolder;
   background: linear-gradient(45deg, #2e3192, #1bffff);
 }
@@ -157,7 +157,7 @@
 .view-more-details {
   width: 100%;
   height: 40px;
-  font-size: clamp(1.0rem, 2vw, 1rem);
+  font-size: clamp(1rem, 2vw, 1rem);
   background-color: rgb(17, 175, 227);
   border-radius: 10px;
   cursor: pointer;
@@ -173,56 +173,29 @@
 
 
 
-
-.extras{
-  border: solid red;
-}
-.hello-text{
-  border: solid blue;
-  position: fixed;
-  z-index: 1;
-  margin-top: 50px;
-}
-.extras-background{
-  border: solid  green;
-}
-.buttons-hide{
-  border: solid red;
+.side-bar-buttons-container{
+  /* border: solid red; */
   display: flex;
   flex-direction: column;
   gap: 10px;
   align-items: center;
   justify-content: center;
   padding: 5px;
-  /* padding-bottom: 30px;
-  background-color: red; */
   width: min(70px, 20%);
   position: fixed;
   z-index: 1;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.749);
+  border-radius: 0px;
 }
-.buttons-hide button{
+.side-bar-buttons-container button{
   width: min(50px, 60%);
-  background-color: inherit;
+  background-color: transparent;
   border: none;
+  font-family: AntipastoPro;
 }
 
 
-.filter-image {
-  border: solid #d3c84d;
-  background-color: white;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-  width: min(40px, 30%);
-  height: min(50px, 10%);
-  margin-left: 5px;
-  display: block;
-  cursor: pointer;
-  position: fixed;
-  /*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
-  z-index: 1000;
-  /*THIS ENSURES THE button STAYS ABOVE THE CONTENT AND ALWAYS IN FRONT OF THE CONTENT*/
-  border-radius: 0px 0px 5px 5px;
-}
+
 
 .filter-image:active {
   transform: scale(0.9);

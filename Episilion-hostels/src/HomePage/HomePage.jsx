@@ -13,7 +13,6 @@ import resetImage from '../assets/icons/refresh.png';
 import noResultImage from '../assets/icons/no-results-(1).png'
 import { useEffect, useState } from "react";
 
-
 export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardData, originalHostelCardData }) {
     const [gender, setGender] = useState('');//THIS CONTROLS THE GENDER OT BE USED IN THE FILTERING PROCESS
     const [genderText, setGenderText] = useState('Search');// THIS CONTROLS THE D=GENDER SHOWN IN THE SEARCH BUTTON IN THE FILTER MENUI
@@ -51,7 +50,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     //WITH THIS IF ANY PART OF THE DOCUMENT IS CLICKED WHICH IS NOT THE filter OR filter-image IT WILL CLOSE THE FILTER MENU
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (!event.target.closest('.filter') && !event.target.closest('.filter-image-second')) {
+            if (!event.target.closest('.filter') && !event.target.closest('.filter-image')) {
                 setFilterMenu(false)
             }
         };
@@ -272,8 +271,8 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         <>
             <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} />
 
-            <div className="buttons-hide">
-                <button className="filter-image-second" onClick={openFilterMenu}><img src={filterImage}></img>Filter</button>
+            <div className="side-bar-buttons-container">
+                <button className="filter-image" onClick={openFilterMenu}><img src={filterImage}></img>Filter</button>
                 <button><img src={favoriteImage}></img>Fav</button>
             </div>
             <section className="extras">
