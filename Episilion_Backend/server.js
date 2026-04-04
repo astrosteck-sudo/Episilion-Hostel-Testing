@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const db = require("./db"); // Import the MySQL connection
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -18,30 +19,61 @@ function readData(filePath) {
   return JSON.parse(raw);
 }
 
-//THIS ADDED THE RANDOM ID'S TO THE HOSTELS
 
-// //import fs from "fs";
-// const crypto = require("crypto");
+// ── Database Routes ────────────────────────────────────────────────────────────────
+//app.use(express.json()); // Middleware to parse JSON bodies
 
-// // Load existing JSON file
-// const data = fs.readFileSync("hostel_data.json", "utf-8");
-// const hostels = JSON.parse(data);
-// //hostel_data.json
-// // Assign a UUID string to each hostel
-// hostels.forEach(hostel => {
-//   if (hostel.id != "") {
-//     hostel.id = crypto.randomUUID();
-//   }
-// });
+app.post("/hostels", (req, res) => {
+  const {
+    id,
+    name,
+    type,
+    university,
+    yearEstablished,
+    distance,
+    hostelPerks,
+    image
+  } = req.body;
+
+  const sql = `
+    INSERT INTO Hostels 
+    (hostel_id, name, type, university, year_established, distance, hostel_perks, main_image)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  db.query(
+    sql,
+    [id, name, type, university, yearEstablished, distance, hostelPerks, image],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Error inserting hostel");
+      } else {
+        console.log("Inserted:", result);
+        res.send("Hostel added successfully ✅");
+      }
+    }
+  );
+});
 
 
-// Save back to JSON
-//fs.writeFileSync("hostel_data.json", JSON.stringify(hostels, null, 2));
+app.get("/", (req, res) => {
+  db.query("SELECT * FROM Hostels", (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send("Error fetching data");
+    } else {
+      console.log(result); // 👈 THIS prints in terminal
+      res.json(result);    // 👈 THIS sends to browser
+    }
+  });
+});
 
-//console.log("UUIDs added to hostels!");
+app.listen(3000, () => {
+  console.log("Server running on port 3000 🚀");
+});
 
 // ── Routes ────────────────────────────────────────────────────────────────────
-
 // GET /api/data  → return the entire JSON file
 app.get("/api/data", (req, res) => {
   try {
@@ -71,6 +103,57 @@ app.get("/api/moreProjects", (req, res) => {
     res.status(500).json({ success: false, message: "Failed to read more Projects file." });
   }
 });
+
+
+
+// 404 catch-all
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: "Route not found." });
+});
+
+// ── Start server ──────────────────────────────────────────────────────────────
+app.listen(PORT, () => {
+  console.log(`✅  Server running at http://localhost:${PORT}`);
+  console.log(`   GET /api/data`);
+  console.log(`   GET /api/teamMembers`);
+  console.log(`   GET /api/moreProjects`);
+  // console.log(`   GET /api/products`);
+  // console.log(`   GET /api/products/:id`);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // // GET /api/users  → return only the users array
 // app.get("/api/users", (req, res) => {
@@ -116,17 +199,27 @@ app.get("/api/moreProjects", (req, res) => {
 //   }
 // });
 
-// 404 catch-all
-app.use((req, res) => {
-  res.status(404).json({ success: false, message: "Route not found." });
-});
 
-// ── Start server ──────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`✅  Server running at http://localhost:${PORT}`);
-  console.log(`   GET /api/data`);
-  console.log(`   GET /api/teamMembers`);
-  console.log(`   GET /api/moreProjects`);
-  // console.log(`   GET /api/products`);
-  // console.log(`   GET /api/products/:id`);
-});
+
+
+//THIS ADDED THE RANDOM ID'S TO THE HOSTELS
+
+// //import fs from "fs";
+// const crypto = require("crypto");
+
+// // Load existing JSON file
+// const data = fs.readFileSync("hostel_data.json", "utf-8");
+// const hostels = JSON.parse(data);
+// //hostel_data.json
+// // Assign a UUID string to each hostel
+// hostels.forEach(hostel => {
+//   if (hostel.id != "") {
+//     hostel.id = crypto.randomUUID();
+//   }
+// });
+
+
+// Save back to JSON
+//fs.writeFileSync("hostel_data.json", JSON.stringify(hostels, null, 2));
+
+//console.log("UUIDs added to hostels!");
