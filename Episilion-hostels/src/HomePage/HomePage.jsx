@@ -2,7 +2,8 @@ import { PageHeader } from "../PageHeader/PageHeader.jsx"
 import { HostelCard } from "./HostelCard.jsx";
 import './HomePage.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
-import filterImage from '../assets/icons/sort.png';
+import filterImage from '../assets/icons/filter-3.png';
+import favoriteImage from '../assets/icons/bookmark.png'
 import closeFilterImage from '../assets/icons/close.png';
 import boyImage from '../assets/icons/man.png';
 import girlImage from '../assets/icons/woman-avatar.png';
@@ -10,7 +11,7 @@ import mixedImage from '../assets/icons/shuffle.png'
 import searchButton from '../assets/icons/search.png';
 import resetImage from '../assets/icons/refresh.png';
 import noResultImage from '../assets/icons/no-results-(1).png'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardData, originalHostelCardData }) {
@@ -23,41 +24,35 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [suggestionBoxOpen, setSuggestionBoxOpen] = useState(true);//THIS CONTOLS THE CSS THAT DETERMINES WHEATHER OR NOT THE SUGGESTION BOX IS OPEN
     const [value, setValue] = useState('');//THIS CONTROLLS THE TEXT THE USER TYPES IN THE SEARCH BOX 
     const [hostelsFound, setHostelsFound] = useState(true);//THIS CONTROLS THE not found image AND text
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);//THIS CONTROLS THE CSS LOADING STATE
+    const [filterMenu, setFilterMenu] = useState(false)// THIS CONTROLS THE FILTER MENU OPEN AND CLOSE
+    
 
     //console.log(hostelsCardData)
     useEffect(() => {
-        if(hostelsCardData.length > 0){
+        if (hostelsCardData.length > 0) {
             setLoading(false)
         }
     }, [hostelsCardData])
 
-    const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
+    //const filterMenu = useRef(null) //THIS WILL SELECT THE filter menu 
 
 
 
 
     //THIS IS FOR THE FILTER MENU
     function openFilterMenu() {
-        if (filterMenu.current) {
-            filterMenu.current.style.opacity = 1;
-            filterMenu.current.style.pointerEvents = 'auto';
-        }
+        console.log("Filter Menu Is opened")
+        setFilterMenu(true)
     }
     function closeFilterMenu() {
-        if (filterMenu.current) {
-            filterMenu.current.style.opacity = 0;
-            filterMenu.current.style.pointerEvents = 'none';
-        }
+        setFilterMenu(false)
     }
     //WITH THIS IF ANY PART OF THE DOCUMENT IS CLICKED WHICH IS NOT THE filter OR filter-image IT WILL CLOSE THE FILTER MENU
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (!event.target.closest('.filter') && !event.target.closest('.filter-image')) {
-                if (filterMenu.current) {
-                    filterMenu.current.style.opacity = 0;
-                    filterMenu.current.style.pointerEvents = 'none';
-                }
+            if (!event.target.closest('.filter') && !event.target.closest('.filter-image-second')) {
+                setFilterMenu(false)
             }
         };
         document.addEventListener('click', handleClickOutside);
@@ -78,17 +73,14 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     function searchHostels() {
         setHostelsFound(true)
         if (!gender && !minPrice && !maxPrice) {
-            filterMenu.current.style.opacity = 0;
-            filterMenu.current.style.pointerEvents = 'none';
+            setFilterMenu(false)
             return;
         }
 
 
         let userMinPrice = minPrice === '' ? 0 : Number(minPrice);
-        console.log(userMinPrice)
 
         let userMaxPrice = maxPrice === '' ? 0 : Number(maxPrice);
-        console.log(userMaxPrice)
 
         //THIW WILL INTERCHANGE THE VALUES WHEN THE MIN PRICE IS GREATOR THAN THE MAX PRICE
         if (userMaxPrice < userMinPrice) {
@@ -106,8 +98,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
                 (hostel) => hostel.type === gender && hostel.pricing.priceMin >= userMinPrice && hostel.pricing.priceMin <= userMaxPrice
             )
             sethostelsCardData(filteredHostels);
-            filterMenu.current.style.opacity = 0;
-            filterMenu.current.style.pointerEvents = 'none';
+            setFilterMenu(false)
         } else if (gender || userMinPrice || userMaxPrice) {
             const filteredHostels = originalHostelCardData.filter(
                 (hostel) => hostel.type === gender || hostel.pricing.priceMin >= userMinPrice && hostel.pricing.priceMin <= userMaxPrice
@@ -115,12 +106,10 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
             if (filteredHostels.length === 0) {
                 sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
                 setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
-                filterMenu.current.style.opacity = 0;
-                filterMenu.current.style.pointerEvents = 'none';
+                setFilterMenu(false)
             } else {
                 sethostelsCardData(filteredHostels);
-                filterMenu.current.style.opacity = 0;
-                filterMenu.current.style.pointerEvents = 'none';
+                setFilterMenu(false)
             }
 
         }
@@ -173,9 +162,6 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         setFilter(filtered)//THIS IS THE COLLECTION OF THE HOSTELS THAT FIT THE filter CRITIRIA
     }
 
-
-
-
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!event.target.closest('.suggestions-dropdown')) {
@@ -199,8 +185,6 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
         )
         sethostelsCardData(filteredHostel);
     }
-
-
 
     function searchHostelByName() {
         setHostelsFound(true)
@@ -283,17 +267,28 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
 
 
 
-
+    
     return (
         <>
             <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} />
 
-            <section>
-                <button className="filter-image js-filter-image" onClick={openFilterMenu}>
-                    <img src={filterImage}></img>
-                </button>
+            <div className="buttons-hide">
+                <button className="filter-image-second" onClick={openFilterMenu}><img src={filterImage}></img>Filter</button>
+                <button><img src={favoriteImage}></img>Fav</button>
+            </div>
+            <section className="extras">
+                {/* <div className="extras-background">
+                    <button className="filter-image js-filter-image" onClick={openFilterMenu}>
+                        <img src={filterImage}></img>
+                    </button>
 
-                <div className="filter js-filter" ref={filterMenu}>
+                    <button className="hello-text">
+                        hello
+                    </button>
+                </div> */}
+
+
+                <div className={`filter ${filterMenu ? 'open' : 'close'}`}>
                     <div className="filter-close-button js-close-button" onClick={closeFilterMenu}>
                         <img className="filter-close-image" src={closeFilterImage}></img>
                     </div>

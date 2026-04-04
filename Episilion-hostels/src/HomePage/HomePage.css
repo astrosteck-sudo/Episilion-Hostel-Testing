@@ -174,7 +174,38 @@
 
 
 
-
+.extras{
+  border: solid red;
+}
+.hello-text{
+  border: solid blue;
+  position: fixed;
+  z-index: 1;
+  margin-top: 50px;
+}
+.extras-background{
+  border: solid  green;
+}
+.buttons-hide{
+  border: solid red;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  /* padding-bottom: 30px;
+  background-color: red; */
+  width: min(70px, 20%);
+  position: fixed;
+  z-index: 1;
+  background-color: white;
+}
+.buttons-hide button{
+  width: min(50px, 60%);
+  background-color: inherit;
+  border: none;
+}
 
 
 .filter-image {
@@ -300,7 +331,7 @@
 
 
 
-.filter {
+.filter{
   height: 30%;
   top: 0;
   height: 95%;
@@ -313,7 +344,7 @@
   justify-content: start;
   padding-top: 1rem;
   transition: right 0.3s ease-in-out;
-  opacity: 0;
+  /* opacity: 1; */
   transition: opacity 0.3s ease;
   display: block;
   position: fixed;
@@ -324,10 +355,27 @@
   /*THIS WILL MAKE SURE THAT WHEN THE OPACITY IS SET TO ZERO IT CAN NOT BE CLICKABLE*/
 }
 
-.filter.open {
+.filter.close{
+  opacity: 0;
+}
+.filter.open{
   opacity: 1;
   pointer-events: auto;
 }
+/* .filter.close{
+  opacity: 0;
+} */
+
+/* .filter.open{
+  opacity: 1;
+  pointer-events: auto;
+} */
+/* .filter.close{
+  opacity: 0;
+}
+.filter.open{
+  opacity: 1;
+} */
 
 .filter-close-button {
   position: absolute;

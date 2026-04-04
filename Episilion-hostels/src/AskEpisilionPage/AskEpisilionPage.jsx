@@ -42,9 +42,8 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
     }
 
     function sendMessage() {
-        setUserCautionText(false)
         if (!userSearchInput.trim()) return;  //Prevent empty messages
-
+        setUserCautionText(false)
         const updatedMessages = [
             ...chatMessages,
             {
@@ -95,7 +94,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
                 <div className="episilion-message">How can I be of help?</div>
 
                 <div className={`user-caution-message ${userCautionText ? 'open': 'close'}`}>
-                    <p>This is a testing of the Episilion AI, questions asked should be short and direct for more accurate responses !!</p>
+                    <p>This is a testing of Episilion AI, questions asked should be short and direct for more accurate responses !!</p>
                 </div>
 
                 {/*Map over chatMessages array to render each bubble */}
