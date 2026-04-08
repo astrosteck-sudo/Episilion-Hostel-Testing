@@ -57,26 +57,46 @@ app.post("/hostels", (req, res) => {
 });
 
 
-app.get("/api/hostels", (req, res) => {
+app.get("/hostels", (req, res) => {
   const sql = `
     SELECT 
-      hostel_id AS id,
-      name,
-      type,
-      distance,
-      hostel_perks AS hostelPerks,
-      main_image AS image
-    FROM Hostels
+      h.hostel_id AS id,
+      h.name,
+      h.type,
+      h.distance,
+      h.main_image AS image,
+      h.hostel_perks AS hostelPerks,
+      l.distance_to_campus_in_meters AS distance,
+      l.distance_to_campus_in_minutes AS distanceToCampusMinutes
+    FROM Hostels h
+    LEFT JOIN Locations l 
+    ON h.hostel_id = l.hostel_id
   `;
 
   db.query(sql, (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send("Error fetching hostels");
-    } else {
-      console.log("Fetched:", result); // 👈 see in terminal
-      res.json(result); // 👈 send to frontend
+      return res.status(500).send("Error fetching hostels");
     }
+
+    // 🔥 Transform into nested structure
+    const formatted = result.map(item => ({
+      id: item.id,
+      name: item.name,
+      type: item.type,
+      distance: item.distance,
+      image: item.image,
+      hostelPerks: item.hostelPerks,
+      location: {
+        distanceToCampusMinutes: item.distanceToCampusMinutes,
+        distanceToCampusMinutes: 5,
+      directions: "Located in the city of Accra North Campus A major landmark is Behind Main Gate. For directions, Walk Past the main gate, turn left at the bookshop",
+      latitude: 5.6508,
+      longitude: -0.1869
+      }
+    }));
+
+    res.json(formatted);
   });
 });
 
