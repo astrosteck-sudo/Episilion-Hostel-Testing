@@ -57,21 +57,51 @@ app.post("/hostels", (req, res) => {
 });
 
 
-app.get("/", (req, res) => {
-  db.query("SELECT * FROM Hostels", (err, result) => {
+app.get("/api/hostels", (req, res) => {
+  const sql = `
+    SELECT 
+      hostel_id AS id,
+      name,
+      type,
+      distance,
+      hostel_perks AS hostelPerks,
+      main_image AS image
+    FROM Hostels
+  `;
+
+  db.query(sql, (err, result) => {
     if (err) {
       console.log(err);
-      res.send("Error fetching data");
+      res.status(500).send("Error fetching hostels");
     } else {
-      console.log(result); // 👈 THIS prints in terminal
-      res.json(result);    // 👈 THIS sends to browser
+      console.log("Fetched:", result); // 👈 see in terminal
+      res.json(result); // 👈 send to frontend
     }
   });
 });
 
+
+
+// app.get("/", (req, res) => {
+//   db.query("SELECT * FROM Hostels", (err, result) => {
+//     if (err) {
+//       console.log(err);
+//       res.send("Error fetching data");
+//     } else {
+//       console.log(result); // 👈 THIS prints in terminal
+//       res.json(result);    // 👈 THIS sends to browser
+//     }
+//   });
+// });
+
+
+
 app.listen(3000, () => {
   console.log("Server running on port 3000 🚀");
 });
+
+
+
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 // GET /api/data  → return the entire JSON file

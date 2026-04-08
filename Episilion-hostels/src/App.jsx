@@ -18,16 +18,19 @@ function App() {
   const [navlink, setNavLink] = useState(false);
 
 
+  const testingHostels = async () => {
+    const response = await axios.get('http://localhost:5000/api/hostels')
+    console.log("testing code",response.data)
+  }
+
+  useEffect(() => {
+    testingHostels()
+  },[])
+
   const loadHostelsCard = async () => {
     //const response = await axios.get('https://episilion-backend-2.onrender.com/api/data')
     const response = await axios.get('http://localhost:5000/api/data')
-    //console.log(response.data)
-    // if (response.data.data.length > 0) {
-    // setOriginalHostelCardData(response.data.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
-    // sethostelsCardData(response.data.data);//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
-    // }else{
-    //   console.log("NO HOSTELS FOUND")
-    // }
+    //console.log("Original code",response.data.data)
     setOriginalHostelCardData(response.data.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
     sethostelsCardData(response.data.data);//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
   }
