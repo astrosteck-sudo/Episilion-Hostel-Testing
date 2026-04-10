@@ -9,7 +9,9 @@ import Manager from '../assets/icons/manager-avatar.svg';
 import Clock from '../assets/icons/clock.svg';
 import closeMapImage from '../assets/icons/close.png';
 import websImage from '../assets/icons/web.png'
-import compareImage from '../assets/icons/compare.png'
+import compareImage from '../assets/icons/compare.png';
+import emptyStar from '../assets/icons/empty-star.png';
+import fullStar from '../assets/icons/star.png';
 import { useState } from 'react';
 import { showHostelLocationOnMap } from "../UTILS/mapFunctions.js";
 import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
@@ -39,8 +41,98 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     }
 
     const navigate = useNavigate();
-    function comapareHostels(parameter){
+    function comapareHostels(parameter) {
         navigate(`/comparehostels?hostelId=${parameter}`);
+    }
+
+    const [selectedStarOne, setSelectedStarOne] = useState(emptyStar);
+    const [selectedStarTwo, setSelectedStarTwo] = useState(emptyStar);
+    const [selectedStarThree, setSelectedStarThree] = useState(emptyStar);
+    const [selectedStarFour, setSelectedStarFour] = useState(emptyStar);
+    const [selectedStarFive, setSelectedStarFive] = useState(emptyStar);
+    function starClicked(parameter) {
+        if (parameter === "firstStar") {
+            if (selectedStarOne === fullStar && selectedStarTwo === fullStar && selectedStarThree === fullStar) {
+                setSelectedStarThree(emptyStar)
+                setSelectedStarFour(emptyStar)
+                setSelectedStarTwo(emptyStar)
+                setSelectedStarFive(emptyStar)
+                return;
+            }
+            if (selectedStarOne === fullStar && selectedStarTwo === fullStar) {
+                setSelectedStarTwo(emptyStar)
+                return;
+            }
+            if (selectedStarOne === emptyStar) {
+                setSelectedStarOne(fullStar);
+            } else {
+                setSelectedStarOne(emptyStar);
+
+            }
+        } else if (parameter === "secondStar") {
+
+            if (selectedStarTwo === fullStar && selectedStarThree === fullStar) {
+                setSelectedStarThree(emptyStar)
+                setSelectedStarFive(emptyStar)
+                setSelectedStarFour(emptyStar)
+                return;
+            }
+
+            if (selectedStarTwo === emptyStar) {
+                setSelectedStarOne(fullStar);
+                setSelectedStarTwo(fullStar);
+            } else {
+                setSelectedStarTwo(emptyStar)
+                setSelectedStarOne(emptyStar)
+            }
+
+        } else if (parameter === "thirdStar") {
+            if (selectedStarThree === fullStar && selectedStarFour === fullStar) {
+                setSelectedStarFive(emptyStar)
+                setSelectedStarFour(emptyStar)
+                return;
+            }
+            if (selectedStarThree === emptyStar) {
+                setSelectedStarThree(fullStar)
+                setSelectedStarTwo(fullStar)
+                setSelectedStarOne(fullStar)
+            } else {
+                setSelectedStarThree(emptyStar)
+                setSelectedStarTwo(emptyStar)
+                setSelectedStarOne(emptyStar)
+            }
+        } else if (parameter === "fouthStar") {
+            if (selectedStarFour === fullStar && selectedStarFive === fullStar) {
+                setSelectedStarFive(emptyStar)
+                return;
+            }
+
+            if (selectedStarFour === emptyStar) {
+                setSelectedStarFour(fullStar)
+                setSelectedStarThree(fullStar)
+                setSelectedStarTwo(fullStar)
+                setSelectedStarOne(fullStar)
+            } else {
+                setSelectedStarFour(emptyStar)
+                setSelectedStarThree(emptyStar)
+                setSelectedStarTwo(emptyStar)
+                setSelectedStarOne(emptyStar)
+            }
+        } else if (parameter === "fifthStar") {
+            if (selectedStarFive === emptyStar) {
+                setSelectedStarFive(fullStar)
+                setSelectedStarFour(fullStar)
+                setSelectedStarThree(fullStar)
+                setSelectedStarTwo(fullStar)
+                setSelectedStarOne(fullStar)
+            } else {
+                setSelectedStarFive(emptyStar)
+                setSelectedStarFour(emptyStar)
+                setSelectedStarThree(emptyStar)
+                setSelectedStarTwo(emptyStar)
+                setSelectedStarOne(emptyStar)
+            }
+        }
     }
 
     return (
@@ -68,16 +160,16 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                             <div className='location-header-and-compare-hostel-button'>
                                                 <h2 className="font-header">Location</h2>
                                                 <div className='more-details-hostel-type'>{hostel.type}</div>
-                                                <button className='compare-button' onClick={() => comapareHostels(hostel.id)}><img src={compareImage} alt="Compare Button"/></button>
+                                                <button className='compare-button' onClick={() => comapareHostels(hostel.id)}><img src={compareImage} alt="Compare Button" /></button>
                                             </div>
-                                            
+
                                             <p className="font-paragraph js-location-paragraph">
                                                 {hostel.location.directions}
                                                 <p className="font-paragraph js-distance-from-campus">{`Its about ${hostel.location.distanceToCampusMinutes} minute${hostel.location.distanceToCampusMinutes > 1 ? 's' : ''} walk from campus`}</p>
                                             </p>
 
                                             <div className="view-location-container">
-                                                <button className="view-location js-view-location" onClick={() => showHostelLocationOnMap( setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc )}>View Location</button>
+                                                <button className="view-location js-view-location" onClick={() => showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)}>View Location</button>
                                                 <button className="view-location js-get-directions" onClick={() => getDirectionsOnMap(originalHostelCardData, hostelId)} >Get Directions</button>
                                             </div>
                                             <div className={`overlay-background ${activate ? 'activate' : ''}`}>
@@ -195,7 +287,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                                     <p className="font-paragraph js-email-address">
                                                         {hostel.contact.website}
                                                     </p>
-                                                </a>: "" }
+                                                </a> : ""}
 
                                             </div>
                                         </div>
@@ -223,6 +315,25 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                     })}
                 </div>
             </section>
+
+            <div className='ratings-and-reviews-section'>
+                <h2 className='ratings-and-reviews-header' >Leave a Review</h2>
+                <div className='empty-star-container'>
+                    <img className='star' src={selectedStarOne} alt="" onClick={() => starClicked("firstStar")} />
+                    <img className='star' src={selectedStarTwo} alt="" onClick={() => starClicked("secondStar")} />
+                    <img className='star' src={selectedStarThree} alt="" onClick={() => starClicked("thirdStar")} />
+                    <img className='star' src={selectedStarFour} alt="" onClick={() => starClicked("fouthStar")} />
+                    <img className='star' src={selectedStarFive} alt="" onClick={() => starClicked("fifthStar")} />
+
+                    <div className='review-submit-button'>
+                        <button>submit</button>
+                    </div>
+                </div>
+                <div className='reviews-input'>
+                    {/* <input type="text" name="" id="" /> */}
+                    <textarea maxLength={100} placeholder='leave an honest and respectful review'></textarea>
+                </div>
+            </div>
             <SiteFooter />
         </>
     )
