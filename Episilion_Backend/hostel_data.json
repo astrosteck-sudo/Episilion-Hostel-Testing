@@ -119,7 +119,8 @@
     },
     "reviews": {
       "averageRating": 1.3,
-      "totalReviews": 270
+      "totalReviews": 270,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -227,7 +228,8 @@
     },
     "reviews": {
       "averageRating": 4.1,
-      "totalReviews": 19
+      "totalReviews": 19,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -335,7 +337,8 @@
     },
     "reviews": {
       "averageRating": 4.6,
-      "totalReviews": 35
+      "totalReviews": 35,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -440,7 +443,8 @@
     },
     "reviews": {
       "averageRating": 4,
-      "totalReviews": 22
+      "totalReviews": 22,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -545,7 +549,8 @@
     },
     "reviews": {
       "averageRating": 4.2,
-      "totalReviews": 30
+      "totalReviews": 30,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -647,7 +652,8 @@
     },
     "reviews": {
       "averageRating": 3.9,
-      "totalReviews": 15
+      "totalReviews": 15,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -756,7 +762,8 @@
     },
     "reviews": {
       "averageRating": 4.5,
-      "totalReviews": 28
+      "totalReviews": 28,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -859,7 +866,8 @@
     },
     "reviews": {
       "averageRating": 4,
-      "totalReviews": 21
+      "totalReviews": 21,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -964,7 +972,8 @@
     },
     "reviews": {
       "averageRating": 4.3,
-      "totalReviews": 25
+      "totalReviews": 25,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -1074,7 +1083,8 @@
     },
     "reviews": {
       "averageRating": 4.7,
-      "totalReviews": 40
+      "totalReviews": 40,
+      "reviewText":"very boring hostel"
     },
     "aiTags": {
       "bestFor": [

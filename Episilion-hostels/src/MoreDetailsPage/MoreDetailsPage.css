@@ -439,22 +439,22 @@ p.font-paragraph {
 }
 
 .ratings-and-reviews-section {
-  /* border: solid red; */
-  margin-bottom: 100px;
+  margin-bottom: 50px;
   padding: 5px;
 }
 
-.empty-star-container {
+.star-container {
   width: 100%;
   display: flex;
   gap: 8px;
-  /* width: 100%;
-  display: flex;
-  justify-content: flex-end; */
 }
 
 .star {
-  width: min(30px, 10%);
+  width: min(25px, 10%);
+  height: 30px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
@@ -472,13 +472,10 @@ p.font-paragraph {
 
 .review-submit-button {
   margin-left: 50px;
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 200px; */
 }
 
 .review-submit-button button {
+  height: 100%;
   background-color: green;
   border: solid rgb(71, 67, 67) 2px;
   padding: 10px;
@@ -486,6 +483,32 @@ p.font-paragraph {
   border-radius: 5px;
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
+
+
+
+/* .like-button {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.like-button:active {
+  animation: bounce 0.4s;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.4); }
+  60%  { transform: scale(0.9); }
+  80%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.like-button.bounce {
+  animation: bounce 0.4s ease;
+} */
+
+
+
 
 /*375   812*/
 
@@ -545,8 +568,14 @@ p.font-paragraph {
     background-color: white;
   }
 
-  .empty-star {
-    width: 30px;
+  .star-container {
+    align-items: center;
+    justify-content: baseline;
+  }
+
+  .star {
+    width: 20px;
+    height: 20px;
   }
 
   .reviews-input textarea {

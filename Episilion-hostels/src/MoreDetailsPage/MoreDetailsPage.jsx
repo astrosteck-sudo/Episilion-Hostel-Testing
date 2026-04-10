@@ -45,95 +45,129 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         navigate(`/comparehostels?hostelId=${parameter}`);
     }
 
-    const [selectedStarOne, setSelectedStarOne] = useState(emptyStar);
-    const [selectedStarTwo, setSelectedStarTwo] = useState(emptyStar);
-    const [selectedStarThree, setSelectedStarThree] = useState(emptyStar);
-    const [selectedStarFour, setSelectedStarFour] = useState(emptyStar);
-    const [selectedStarFive, setSelectedStarFive] = useState(emptyStar);
-    function starClicked(parameter) {
-        if (parameter === "firstStar") {
-            if (selectedStarOne === fullStar && selectedStarTwo === fullStar && selectedStarThree === fullStar) {
-                setSelectedStarThree(emptyStar)
-                setSelectedStarFour(emptyStar)
-                setSelectedStarTwo(emptyStar)
-                setSelectedStarFive(emptyStar)
-                return;
-            }
-            if (selectedStarOne === fullStar && selectedStarTwo === fullStar) {
-                setSelectedStarTwo(emptyStar)
-                return;
-            }
-            if (selectedStarOne === emptyStar) {
-                setSelectedStarOne(fullStar);
-            } else {
-                setSelectedStarOne(emptyStar);
+    // const [selectedStarOne, setSelectedStarOne] = useState(emptyStar);
+    // const [selectedStarTwo, setSelectedStarTwo] = useState(emptyStar);
+    // const [selectedStarThree, setSelectedStarThree] = useState(emptyStar);
+    // const [selectedStarFour, setSelectedStarFour] = useState(emptyStar);
+    // const [selectedStarFive, setSelectedStarFive] = useState(emptyStar);
+    // const [starValue, setStarValue] = useState(0);
+    // function starClicked(parameter) {
+    //     if (parameter === "firstStar") {
+    //         if (selectedStarOne === fullStar && selectedStarTwo === fullStar && selectedStarThree === fullStar) {
+    //             setSelectedStarThree(emptyStar)
+    //             setSelectedStarFour(emptyStar)
+    //             setSelectedStarTwo(emptyStar)
+    //             setSelectedStarFive(emptyStar)
 
-            }
-        } else if (parameter === "secondStar") {
+    //             setStarValue(1)
+    //             console.log("Star One value", starValue)
+    //             return;
+    //         }
+    //         if (selectedStarOne === fullStar && selectedStarTwo === fullStar) {
+    //             setSelectedStarTwo(emptyStar)
+    //             return;
+    //         }
+    //         if (selectedStarOne === emptyStar) {
+    //             setSelectedStarOne(fullStar);
+    //             setStarValue(1)
+    //             console.log("Star One value", starValue)
+    //         } else {
+    //             setSelectedStarOne(emptyStar);
 
-            if (selectedStarTwo === fullStar && selectedStarThree === fullStar) {
-                setSelectedStarThree(emptyStar)
-                setSelectedStarFive(emptyStar)
-                setSelectedStarFour(emptyStar)
-                return;
-            }
+    //         }
+    //     } else if (parameter === "secondStar") {
 
-            if (selectedStarTwo === emptyStar) {
-                setSelectedStarOne(fullStar);
-                setSelectedStarTwo(fullStar);
-            } else {
-                setSelectedStarTwo(emptyStar)
-                setSelectedStarOne(emptyStar)
-            }
+    //         if (selectedStarTwo === fullStar && selectedStarThree === fullStar) {
+    //             setSelectedStarThree(emptyStar)
+    //             setSelectedStarFive(emptyStar)
+    //             setSelectedStarFour(emptyStar)
+    //             return;
+    //         }
 
-        } else if (parameter === "thirdStar") {
-            if (selectedStarThree === fullStar && selectedStarFour === fullStar) {
-                setSelectedStarFive(emptyStar)
-                setSelectedStarFour(emptyStar)
-                return;
-            }
-            if (selectedStarThree === emptyStar) {
-                setSelectedStarThree(fullStar)
-                setSelectedStarTwo(fullStar)
-                setSelectedStarOne(fullStar)
-            } else {
-                setSelectedStarThree(emptyStar)
-                setSelectedStarTwo(emptyStar)
-                setSelectedStarOne(emptyStar)
-            }
-        } else if (parameter === "fouthStar") {
-            if (selectedStarFour === fullStar && selectedStarFive === fullStar) {
-                setSelectedStarFive(emptyStar)
-                return;
-            }
+    //         if (selectedStarTwo === emptyStar) {
+    //             setSelectedStarOne(fullStar);
+    //             setSelectedStarTwo(fullStar);
+    //         } else {
+    //             setSelectedStarTwo(emptyStar)
+    //             setSelectedStarOne(emptyStar)
+    //         }
 
-            if (selectedStarFour === emptyStar) {
-                setSelectedStarFour(fullStar)
-                setSelectedStarThree(fullStar)
-                setSelectedStarTwo(fullStar)
-                setSelectedStarOne(fullStar)
-            } else {
-                setSelectedStarFour(emptyStar)
-                setSelectedStarThree(emptyStar)
-                setSelectedStarTwo(emptyStar)
-                setSelectedStarOne(emptyStar)
-            }
-        } else if (parameter === "fifthStar") {
-            if (selectedStarFive === emptyStar) {
-                setSelectedStarFive(fullStar)
-                setSelectedStarFour(fullStar)
-                setSelectedStarThree(fullStar)
-                setSelectedStarTwo(fullStar)
-                setSelectedStarOne(fullStar)
-            } else {
-                setSelectedStarFive(emptyStar)
-                setSelectedStarFour(emptyStar)
-                setSelectedStarThree(emptyStar)
-                setSelectedStarTwo(emptyStar)
-                setSelectedStarOne(emptyStar)
-            }
+    //     } else if (parameter === "thirdStar") {
+    //         if (selectedStarThree === fullStar && selectedStarFour === fullStar) {
+    //             setSelectedStarFive(emptyStar)
+    //             setSelectedStarFour(emptyStar)
+    //             return;
+    //         }
+    //         if (selectedStarThree === emptyStar) {
+    //             setSelectedStarThree(fullStar)
+    //             setSelectedStarTwo(fullStar)
+    //             setSelectedStarOne(fullStar)
+    //         } else {
+    //             setSelectedStarThree(emptyStar)
+    //             setSelectedStarTwo(emptyStar)
+    //             setSelectedStarOne(emptyStar)
+    //         }
+    //     } else if (parameter === "fouthStar") {
+    //         if (selectedStarFour === fullStar && selectedStarFive === fullStar) {
+    //             setSelectedStarFive(emptyStar)
+    //             return;
+    //         }
+
+    //         if (selectedStarFour === emptyStar) {
+    //             setSelectedStarFour(fullStar)
+    //             setSelectedStarThree(fullStar)
+    //             setSelectedStarTwo(fullStar)
+    //             setSelectedStarOne(fullStar)
+    //         } else {
+    //             setSelectedStarFour(emptyStar)
+    //             setSelectedStarThree(emptyStar)
+    //             setSelectedStarTwo(emptyStar)
+    //             setSelectedStarOne(emptyStar)
+    //         }
+    //     } else if (parameter === "fifthStar") {
+    //         if (selectedStarFive === emptyStar) {
+    //             setSelectedStarFive(fullStar)
+    //             setSelectedStarFour(fullStar)
+    //             setSelectedStarThree(fullStar)
+    //             setSelectedStarTwo(fullStar)
+    //             setSelectedStarOne(fullStar)
+    //         } else {
+    //             setSelectedStarFive(emptyStar)
+    //             setSelectedStarFour(emptyStar)
+    //             setSelectedStarThree(emptyStar)
+    //             setSelectedStarTwo(emptyStar)
+    //             setSelectedStarOne(emptyStar)
+    //         }
+    //     }
+    // }
+
+    const [rating, setRating] = useState(0);
+
+    function handleStarClick(value) {
+        if (rating === value) {
+            setRating(0);
+        } else {
+            setRating(value);
         }
+
     }
+
+    function handleSubmit() {
+        setRating(0)
+        setReviewTextValue('')
+        if (rating === 0) {
+            alert("Please select a rating first");
+            return;
+        }
+        console.log(`You have submitted a review with a rating of ${rating} stars!`)
+        console.log(reviewTextValue)
+    }
+
+    const [reviewTextValue, setReviewTextValue] = useState('')
+    function userTypedReview(event){
+        setReviewTextValue(event.target.value)
+    }
+
 
     return (
         <>
@@ -318,20 +352,25 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
             <div className='ratings-and-reviews-section'>
                 <h2 className='ratings-and-reviews-header' >Leave a Review</h2>
-                <div className='empty-star-container'>
-                    <img className='star' src={selectedStarOne} alt="" onClick={() => starClicked("firstStar")} />
-                    <img className='star' src={selectedStarTwo} alt="" onClick={() => starClicked("secondStar")} />
-                    <img className='star' src={selectedStarThree} alt="" onClick={() => starClicked("thirdStar")} />
-                    <img className='star' src={selectedStarFour} alt="" onClick={() => starClicked("fouthStar")} />
-                    <img className='star' src={selectedStarFive} alt="" onClick={() => starClicked("fifthStar")} />
+                <div className='star-container'>
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <img
+                            key={star}
+                            value={star}
+                            className='star'
+                            src={star <= rating ? fullStar : emptyStar}
+                            alt={`star-${star}`}
+                            onClick={() => handleStarClick(star)}
+                        />
+                    ))}
 
                     <div className='review-submit-button'>
-                        <button>submit</button>
+                        <button onClick={handleSubmit}>submit</button>
                     </div>
                 </div>
                 <div className='reviews-input'>
                     {/* <input type="text" name="" id="" /> */}
-                    <textarea maxLength={100} placeholder='leave an honest and respectful review'></textarea>
+                    <textarea maxLength={100} placeholder='leave an honest and respectful review' onChange={userTypedReview} value={reviewTextValue}></textarea>
                 </div>
             </div>
             <SiteFooter />
