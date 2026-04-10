@@ -57,7 +57,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
             setRating(value);
         }
 
-    }  
+    }
     function userTypedReview(event) {
         setReviewTextValue(event.target.value)
     }
@@ -66,7 +66,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
     async function handleSubmit() {
         //THIS WILL STOP ANY FURTHER SUBMITTING WHEN SUBMITTING
-        if(isSubmitting){
+        if (isSubmitting) {
             return;
         }
         if (rating === 0 || reviewTextValue === '') {
@@ -294,6 +294,25 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                 <div className='reviews-input'>
                     {/* <input type="text" name="" id="" /> */}
                     <textarea maxLength={100} placeholder='leave an honest and respectful review' onChange={userTypedReview} value={reviewTextValue}></textarea>
+                </div>
+            </div>
+
+            <div className='reviews-and-ratings-display'>
+                <div className='rating-and-timestamp-container'>
+                    <div className='users-ratings-display'>
+                        <img src={fullStar} alt="" />
+                        <img src={fullStar} alt="" />
+                        <img src={fullStar} alt="" />
+                    </div>
+
+                    <div className='time-stamp'>
+                        2026-04-10 12:53:46
+                    </div>
+                </div>
+
+
+                <div className='users-review-display'>
+                    <div>THIS IS A VERY NICE HOSTEL</div>
                 </div>
             </div>
             <SiteFooter />
