@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { showHostelLocationOnMap } from "../UTILS/mapFunctions.js";
 import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 
@@ -45,101 +46,6 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         navigate(`/comparehostels?hostelId=${parameter}`);
     }
 
-    // const [selectedStarOne, setSelectedStarOne] = useState(emptyStar);
-    // const [selectedStarTwo, setSelectedStarTwo] = useState(emptyStar);
-    // const [selectedStarThree, setSelectedStarThree] = useState(emptyStar);
-    // const [selectedStarFour, setSelectedStarFour] = useState(emptyStar);
-    // const [selectedStarFive, setSelectedStarFive] = useState(emptyStar);
-    // const [starValue, setStarValue] = useState(0);
-    // function starClicked(parameter) {
-    //     if (parameter === "firstStar") {
-    //         if (selectedStarOne === fullStar && selectedStarTwo === fullStar && selectedStarThree === fullStar) {
-    //             setSelectedStarThree(emptyStar)
-    //             setSelectedStarFour(emptyStar)
-    //             setSelectedStarTwo(emptyStar)
-    //             setSelectedStarFive(emptyStar)
-
-    //             setStarValue(1)
-    //             console.log("Star One value", starValue)
-    //             return;
-    //         }
-    //         if (selectedStarOne === fullStar && selectedStarTwo === fullStar) {
-    //             setSelectedStarTwo(emptyStar)
-    //             return;
-    //         }
-    //         if (selectedStarOne === emptyStar) {
-    //             setSelectedStarOne(fullStar);
-    //             setStarValue(1)
-    //             console.log("Star One value", starValue)
-    //         } else {
-    //             setSelectedStarOne(emptyStar);
-
-    //         }
-    //     } else if (parameter === "secondStar") {
-
-    //         if (selectedStarTwo === fullStar && selectedStarThree === fullStar) {
-    //             setSelectedStarThree(emptyStar)
-    //             setSelectedStarFive(emptyStar)
-    //             setSelectedStarFour(emptyStar)
-    //             return;
-    //         }
-
-    //         if (selectedStarTwo === emptyStar) {
-    //             setSelectedStarOne(fullStar);
-    //             setSelectedStarTwo(fullStar);
-    //         } else {
-    //             setSelectedStarTwo(emptyStar)
-    //             setSelectedStarOne(emptyStar)
-    //         }
-
-    //     } else if (parameter === "thirdStar") {
-    //         if (selectedStarThree === fullStar && selectedStarFour === fullStar) {
-    //             setSelectedStarFive(emptyStar)
-    //             setSelectedStarFour(emptyStar)
-    //             return;
-    //         }
-    //         if (selectedStarThree === emptyStar) {
-    //             setSelectedStarThree(fullStar)
-    //             setSelectedStarTwo(fullStar)
-    //             setSelectedStarOne(fullStar)
-    //         } else {
-    //             setSelectedStarThree(emptyStar)
-    //             setSelectedStarTwo(emptyStar)
-    //             setSelectedStarOne(emptyStar)
-    //         }
-    //     } else if (parameter === "fouthStar") {
-    //         if (selectedStarFour === fullStar && selectedStarFive === fullStar) {
-    //             setSelectedStarFive(emptyStar)
-    //             return;
-    //         }
-
-    //         if (selectedStarFour === emptyStar) {
-    //             setSelectedStarFour(fullStar)
-    //             setSelectedStarThree(fullStar)
-    //             setSelectedStarTwo(fullStar)
-    //             setSelectedStarOne(fullStar)
-    //         } else {
-    //             setSelectedStarFour(emptyStar)
-    //             setSelectedStarThree(emptyStar)
-    //             setSelectedStarTwo(emptyStar)
-    //             setSelectedStarOne(emptyStar)
-    //         }
-    //     } else if (parameter === "fifthStar") {
-    //         if (selectedStarFive === emptyStar) {
-    //             setSelectedStarFive(fullStar)
-    //             setSelectedStarFour(fullStar)
-    //             setSelectedStarThree(fullStar)
-    //             setSelectedStarTwo(fullStar)
-    //             setSelectedStarOne(fullStar)
-    //         } else {
-    //             setSelectedStarFive(emptyStar)
-    //             setSelectedStarFour(emptyStar)
-    //             setSelectedStarThree(emptyStar)
-    //             setSelectedStarTwo(emptyStar)
-    //             setSelectedStarOne(emptyStar)
-    //         }
-    //     }
-    // }
 
     const [rating, setRating] = useState(0);
 
@@ -152,21 +58,50 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
     }
 
-    function handleSubmit() {
-        setRating(0)
-        setReviewTextValue('')
-        if (rating === 0) {
+
+
+    const [reviewTextValue, setReviewTextValue] = useState('')
+    function userTypedReview(event) {
+        setReviewTextValue(event.target.value)
+    }
+
+
+    async function handleSubmit() {
+        if (rating === 0 || reviewTextValue === '') {
             alert("Please select a rating first");
             return;
         }
-        console.log(`You have submitted a review with a rating of ${rating} stars!`)
-        console.log(reviewTextValue)
-    }
 
-    const [reviewTextValue, setReviewTextValue] = useState('')
-    function userTypedReview(event){
-        setReviewTextValue(event.target.value)
+        try {
+            const response = await axios.post("http://localhost:3000/api/reviews", {
+                hostel_id: hostelId,
+                rating: rating,
+                review_text: reviewTextValue
+            });
+
+            console.log("Server response:", response.data, response.status);
+            setRating(0)
+            setReviewTextValue('')
+
+        } catch (error) {
+            console.log("Error submitting review:", error.response?.data || error.message);
+        }
     }
+    // async function submitReview(hostelId, rating, reviewText) {
+    //     try {
+    //         const response = await axios.post("http://localhost:3000/reviews", {
+    //             hostel_id: hostelId,
+    //             rating: rating,
+    //             review_text: reviewText
+    //         });
+
+    //         console.log("Server response:", response.data);
+
+    //     } catch (error) {
+    //         console.log("Error submitting review:", error.response?.data || error.message);
+    //     }
+    // }
+
 
 
     return (

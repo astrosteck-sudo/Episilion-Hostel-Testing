@@ -23,7 +23,8 @@ function readData(filePath) {
 // ── Database Routes ────────────────────────────────────────────────────────────────
 //app.use(express.json()); // Middleware to parse JSON bodies
 
-app.post("/hostels", (req, res) => {
+//THIS IS FOR PUTTIN HOSTELS IN THE DATABASE
+app.post("/api/hostels", (req, res) => {
   const {
     id,
     name,
@@ -56,8 +57,8 @@ app.post("/hostels", (req, res) => {
   );
 });
 
-
-app.get("/hostels", (req, res) => {
+//THIS IS FOR GETTING HOSTELS FROM THE P0DATABASE
+app.get("/api/hostels", (req, res) => {
   const sql = `
     SELECT 
       h.hostel_id AS id,
@@ -97,6 +98,45 @@ app.get("/hostels", (req, res) => {
     }));
 
     res.json(formatted);
+  });
+});
+
+app.post("/api/reviews", (req, res) => {
+  const { hostel_id, rating, review_text } = req.body;
+  
+  // 🧠 1. Validate input (VERY IMPORTANT)
+  if (!hostel_id || !rating) {
+    return res.status(400).json({
+      error: "hostel_id and rating are required"
+    });
+  }
+
+  if (rating < 1 || rating > 5) {
+    return res.status(400).json({
+      error: "Rating must be between 1 and 5"
+    });
+  }
+
+  // 🧱 2. SQL Insert query
+  const sql = `
+    INSERT INTO Reviews (hostel_id, rating, review_text)
+    VALUES (?, ?, ?)
+  `;
+
+  // ⚙️ 3. Execute query
+  db.query(sql, [hostel_id, rating, review_text], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        error: "Database error while inserting review"
+      });
+    }
+
+    // ✅ success response
+    res.json({
+      message: "Review added successfully ✅",
+      reviewId: result.insertId
+    });
   });
 });
 
@@ -167,6 +207,7 @@ app.listen(PORT, () => {
   console.log(`   GET /api/data`);
   console.log(`   GET /api/teamMembers`);
   console.log(`   GET /api/moreProjects`);
+  console.log(`   POST /api/reviews`);
   // console.log(`   GET /api/products`);
   // console.log(`   GET /api/products/:id`);
 });
