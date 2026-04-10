@@ -470,11 +470,11 @@ p.font-paragraph {
   border: 2px solid;
 }
 
-.review-submit-button {
+.review-submit-container {
   margin-left: 50px;
 }
 
-.review-submit-button button {
+.review-submit-button {
   height: 100%;
   background-color: green;
   border: solid rgb(71, 67, 67) 2px;
@@ -483,6 +483,10 @@ p.font-paragraph {
   border-radius: 5px;
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
+.review-submit-button.submitting{
+  background-color: grey;
+}
+
 
 
 

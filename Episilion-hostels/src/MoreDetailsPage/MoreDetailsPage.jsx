@@ -23,7 +23,8 @@ import axios from 'axios';
 export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData }) {
     const [close, setClose] = useState(true);//THIS CONTROLS THE THE IFRAME, OPENING AND CLOSING IT
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
-
+    const [reviewTextValue, setReviewTextValue] = useState('')//THIS CONTROLS WHAT THE USER TYPOES IN THE TEXT AREA
+    const [isSubmitting, setIsSubmitting] = useState(false)// THIS CONTROLLS SUBMIT BUTTON SO FREEZE WHEN SUBMITTING
 
 
     const params = new URLSearchParams(window.location.search);
@@ -56,22 +57,24 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
             setRating(value);
         }
 
-    }
-
-
-
-    const [reviewTextValue, setReviewTextValue] = useState('')
+    }  
     function userTypedReview(event) {
         setReviewTextValue(event.target.value)
     }
 
 
+
     async function handleSubmit() {
+        //THIS WILL STOP ANY FURTHER SUBMITTING WHEN SUBMITTING
+        if(isSubmitting){
+            return;
+        }
         if (rating === 0 || reviewTextValue === '') {
             alert("Please select a rating first");
             return;
         }
 
+        setIsSubmitting(true)
         try {
             const response = await axios.post("http://localhost:3000/api/reviews", {
                 hostel_id: hostelId,
@@ -82,27 +85,12 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
             console.log("Server response:", response.data, response.status);
             setRating(0)
             setReviewTextValue('')
+            setIsSubmitting(false)
 
         } catch (error) {
             console.log("Error submitting review:", error.response?.data || error.message);
         }
     }
-    // async function submitReview(hostelId, rating, reviewText) {
-    //     try {
-    //         const response = await axios.post("http://localhost:3000/reviews", {
-    //             hostel_id: hostelId,
-    //             rating: rating,
-    //             review_text: reviewText
-    //         });
-
-    //         console.log("Server response:", response.data);
-
-    //     } catch (error) {
-    //         console.log("Error submitting review:", error.response?.data || error.message);
-    //     }
-    // }
-
-
 
     return (
         <>
@@ -299,8 +287,8 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                         />
                     ))}
 
-                    <div className='review-submit-button'>
-                        <button onClick={handleSubmit}>submit</button>
+                    <div className='review-submit-container'>
+                        <button onClick={handleSubmit} className={`review-submit-button  ${!isSubmitting ? 'notSubmitting' : 'submitting'}`}>{!isSubmitting ? 'Submit' : 'Submitting'}</button>
                     </div>
                 </div>
                 <div className='reviews-input'>
