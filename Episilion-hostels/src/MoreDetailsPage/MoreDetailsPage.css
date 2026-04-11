@@ -473,6 +473,7 @@ p.font-paragraph {
 .review-submit-button {
   height: 100%;
   background-color: green;
+  color: white;
   border: solid rgb(71, 67, 67) 2px;
   padding: 10px;
   font-weight: bolder;
@@ -563,6 +564,8 @@ p.font-paragraph {
 
 .no-review-text{
   color: white;
+  font-weight: bold;
+  font-size: clamp();
 }
 
 
