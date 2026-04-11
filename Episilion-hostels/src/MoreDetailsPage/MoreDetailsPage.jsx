@@ -12,11 +12,12 @@ import websImage from '../assets/icons/web.png'
 import compareImage from '../assets/icons/compare.png';
 import emptyStar from '../assets/icons/empty-star.png';
 import fullStar from '../assets/icons/star.png';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { showHostelLocationOnMap } from "../UTILS/mapFunctions.js";
 import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { Reviews } from './ReviewsData.jsx';
 
 
 
@@ -62,15 +63,13 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         setReviewTextValue(event.target.value)
     }
 
-
-
     async function handleSubmit() {
         //THIS WILL STOP ANY FURTHER SUBMITTING WHEN SUBMITTING
         if (isSubmitting) {
             return;
         }
         if (rating === 0 || reviewTextValue === '') {
-            alert("Please select a rating first");
+            //alert("Please select a rating first");
             return;
         }
 
@@ -86,11 +85,28 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
             setRating(0)
             setReviewTextValue('')
             setIsSubmitting(false)
+            loadingReviews()//THIS FUNCTION WILL RELOAD THE REVIEWS TO SHOW THE NEWLY ADDED REVIEW
 
         } catch (error) {
             console.log("Error submitting review:", error.response?.data || error.message);
         }
     }
+
+
+    const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
+    async function loadingReviews() {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
+            setReviewsResonse(response.data)
+
+        } catch (error) {
+            console.log("Error Retrieving review:", error.response?.data || error.message);
+        }
+    }
+
+    useEffect(() => {
+        loadingReviews()
+    }, [])
 
     return (
         <>
@@ -298,22 +314,9 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
             </div>
 
             <div className='reviews-and-ratings-display'>
-                <div className='rating-and-timestamp-container'>
-                    <div className='users-ratings-display'>
-                        <img src={fullStar} alt="" />
-                        <img src={fullStar} alt="" />
-                        <img src={fullStar} alt="" />
-                    </div>
-
-                    <div className='time-stamp'>
-                        2026-04-10 12:53:46
-                    </div>
-                </div>
-
-
-                <div className='users-review-display'>
-                    <div>THIS IS A VERY NICE HOSTEL</div>
-                </div>
+                {reviewsResponse.map((item) => (
+                    <Reviews key={item.reviewId} item={item}></Reviews>
+                ))}
             </div>
             <SiteFooter />
         </>

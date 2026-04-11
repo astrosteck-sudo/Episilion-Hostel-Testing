@@ -20,7 +20,7 @@ function App() {
 
   const testingHostels = async () => {
     const response = await axios.get('http://localhost:3000/api/hostels')
-    console.log("testing code",response.data[0])
+    //console.log("testing code",response.data[0])
     //sethostelsCardData(response.data)//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
   }
 

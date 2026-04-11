@@ -452,7 +452,7 @@ p.font-paragraph {
 .star {
   width: min(25px, 10%);
   height: 30px;
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -483,35 +483,63 @@ p.font-paragraph {
   border-radius: 5px;
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
-.review-submit-button.submitting{
+
+.review-submit-button.submitting {
   background-color: grey;
 }
 
-.reviews-and-ratings-display{
-  border: solid red;
+.reviews-and-ratings-display {
+  border: 2px solid black;
+  margin: 5px;
   margin-bottom: 50px;
+  border-radius: 5px;
+  background-color: rgb(70, 68, 68);
+  padding: 10px;
 }
 
-.rating-and-timestamp-container{
-  border: solid green;
+.rating-and-timestamp-container {
+  /* border: solid green; */
   display: flex;
 }
-.users-ratings-display{
-  border: solid blue;
+
+.users-ratings-display {
+  /* border: solid blue; */
+  margin-top: 10px;
+  gap: 5px;
   display: flex;
   padding: 5px;
-  width: min(200px, 30%);
+  width: min(200px, 35%);
 }
-.users-ratings-display img{
-  width: min(25px, 20%);
-  height: 20px;
-  display:flex;
+
+.users-ratings-display img {
+  width: min(30px, 28%);
+  height: 28px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.users-review-display{
+.users-review-display {
   font-size: clamp(1rem, 2vw, 1.3rem);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin-top: 10px;
+  color: white;
+}
+
+.time-stamp {
+  /* border: solid red; */
+  margin-top: 10px;
+  padding: 5px;
+  padding-top: 10px;
+  font-size: 1rem;
+  
+  text-align: center;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  /* font-family: Digital-7; */
+  font-weight: bold;
+  color: white;
 }
 
 
@@ -610,5 +638,13 @@ p.font-paragraph {
   .reviews-input textarea {
     width: 100%;
     height: 60px;
+  }
+
+  .users-ratings-display img {
+    height: 23px;
+  }
+
+  .time-stamp {
+    padding-top: 5px;
   }
 }

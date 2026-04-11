@@ -140,6 +140,33 @@ app.post("/api/reviews", (req, res) => {
   });
 });
 
+app.get("/api/reviews/:hostelId", (req, res) => {
+  let { hostelId } = req.params;
+  hostelId = hostelId.replace(":", ""); // Remove the colon if it exists
+  const sql = `
+    SELECT 
+      review_id AS reviewId,
+      hostel_id,
+      rating,
+      review_text AS reviewText,
+      created_at AS createdAt
+    FROM reviews
+    WHERE hostel_id = ?
+    ORDER BY created_at DESC
+  `;
+
+  db.query(sql, [hostelId], (err, result) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        error: "Error fetching reviews"
+      });
+    }
+
+    res.json(result);
+  });
+});
+
 
 
 // app.get("/", (req, res) => {
@@ -208,6 +235,7 @@ app.listen(PORT, () => {
   console.log(`   GET /api/teamMembers`);
   console.log(`   GET /api/moreProjects`);
   console.log(`   POST /api/reviews`);
+  console.log(`   GET /api/reviews/:hostelId`);
   // console.log(`   GET /api/products`);
   // console.log(`   GET /api/products/:id`);
 });
