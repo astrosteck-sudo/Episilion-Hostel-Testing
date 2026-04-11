@@ -28,7 +28,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     const [isSubmitting, setIsSubmitting] = useState(false)// THIS CONTROLLS SUBMIT BUTTON SO FREEZE WHEN SUBMITTING
     const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
     const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
-
+    const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
 
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
@@ -51,7 +51,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     }
 
 
-    const [rating, setRating] = useState(0);
+    
 
     function handleStarClick(value) {
         if (rating === value) {
@@ -63,6 +63,13 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     }
     function userTypedReview(event) {
         setReviewTextValue(event.target.value)
+    }
+    function listenForEnterKey(event){
+        if(event.key === 'Enter'){
+            event.preventDefault();//this stops a new line appearing when the enter key is pressed
+            handleSubmit();
+        }
+        
     }
 
     async function handleSubmit() {
@@ -77,13 +84,13 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
         setIsSubmitting(true)
         try {
-            const response = await axios.post("http://localhost:3000/api/reviews", {
+            await axios.post("http://localhost:3000/api/reviews", {
                 hostel_id: hostelId,
                 rating: rating,
                 review_text: reviewTextValue
             });
 
-            console.log("Server response:", response.data, response.status);
+            //console.log("Server response:", response.data, response.status);
             setRating(0)
             setReviewTextValue('')
             setIsSubmitting(false)
@@ -318,7 +325,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                 </div>
                 <div className='reviews-input'>
                     {/* <input type="text" name="" id="" /> */}
-                    <textarea maxLength={100} placeholder='leave an honest and respectful review' onChange={userTypedReview} value={reviewTextValue}></textarea>
+                    <textarea maxLength={100} placeholder='leave an honest and respectful review' onChange={userTypedReview} value={reviewTextValue} onKeyDown={listenForEnterKey}></textarea>
                 </div>
                 <div className='review-submit-container'>
                     <button onClick={handleSubmit} className={`review-submit-button  ${!isSubmitting ? 'notSubmitting' : 'submitting'}`}>{!isSubmitting ? 'Submit' : 'Submitting'}</button>

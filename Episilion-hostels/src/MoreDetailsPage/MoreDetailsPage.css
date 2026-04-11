@@ -533,13 +533,14 @@ p.font-paragraph {
 }
 .show-reviews-button button{
   font-weight: lighter;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: clamp(1rem, 2vw, 1.5rem);
   padding: 5px;
   border-radius: 5px;
   background-color: transparent;
   border: none;
   text-decoration: underline;
-  color: blue;
+  color: rgb(97, 97, 198);
 }
 
 .users-review-display {

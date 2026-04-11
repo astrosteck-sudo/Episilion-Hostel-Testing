@@ -144,7 +144,7 @@ app.post("/api/reviews", (req, res) => {
         message: "Review added successfully ✅",
         reviewId: result.insertId
       });
-    }, 2000)
+    }, 1000)
   });
 });
 

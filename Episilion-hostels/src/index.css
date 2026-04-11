@@ -5,10 +5,19 @@
   box-sizing: border-box;
 }
 
+:root{
+  color-scheme: light;
+}
+
 html, body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+}
+
+body{
+  background-color: #ffffff;
+  color: #000000;
 }
 html {
   scroll-behavior: smooth 5s;
