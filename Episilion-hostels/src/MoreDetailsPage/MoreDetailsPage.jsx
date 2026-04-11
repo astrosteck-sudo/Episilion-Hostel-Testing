@@ -26,6 +26,8 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
     const [reviewTextValue, setReviewTextValue] = useState('')//THIS CONTROLS WHAT THE USER TYPOES IN THE TEXT AREA
     const [isSubmitting, setIsSubmitting] = useState(false)// THIS CONTROLLS SUBMIT BUTTON SO FREEZE WHEN SUBMITTING
+    const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
+    const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
 
 
     const params = new URLSearchParams(window.location.search);
@@ -92,8 +94,15 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         }
     }
 
+    function toggleReviewsDisplay(){
+        if(toggleReview === 'open'){
+            setToggleReview('close')
+            return;
+        }
+        setToggleReview('open')
+    }
 
-    const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
+
     async function loadingReviews() {
         try {
             const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
@@ -313,7 +322,8 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                 </div>
             </div>
 
-            <div className='reviews-and-ratings-display'>
+            <div className='show-reviews-button' onClick={toggleReviewsDisplay}><button>{toggleReview === 'close' ? 'Show Reviews' : 'Hide Reviews'}</button></div>
+            <div className={`reviews-and-ratings-display ${toggleReview === 'open' ? 'open' : 'close'}`}>
                 {reviewsResponse.map((item) => (
                     <Reviews key={item.reviewId} item={item}></Reviews>
                 ))}

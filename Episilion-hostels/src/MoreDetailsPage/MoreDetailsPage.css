@@ -496,6 +496,9 @@ p.font-paragraph {
   background-color: rgb(70, 68, 68);
   padding: 10px;
 }
+.reviews-and-ratings-display.close{
+  display: none;
+}
 
 .rating-and-timestamp-container {
   /* border: solid green; */
@@ -517,6 +520,20 @@ p.font-paragraph {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.show-reviews-button{
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 50px;
+  
+}
+.show-reviews-button button{
+  font-weight: bolder;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  padding: 5px;
+  border-radius: 5px;
+  background-color: yellow;
 }
 
 .users-review-display {
