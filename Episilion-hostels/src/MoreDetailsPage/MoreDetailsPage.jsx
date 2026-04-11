@@ -29,9 +29,16 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
     const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
+    //const [hostelName, setHostelName] = useState('')
 
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
+    let hostelName = 'Annex'
+    originalHostelCardData.map((hostel) => {
+        if(hostel.id === hostelId){
+            hostelName =hostel.name
+        }
+    })
 
     const [googleMapSrc, setGoogleMapSrc] = useState('')
 
@@ -311,7 +318,10 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
             <div className='ratings-and-reviews-section'>
                 <h2 className='ratings-and-reviews-header' >Leave a Review</h2>
+                <h2 className='ratings-and-reviews-header minitext' >Share your experience at {hostelName}</h2>
+                <p className='your-rating-text'>Your Rating</p>
                 <div className='star-container'>
+                    
                     {[1, 2, 3, 4, 5].map((star) => (
                         <img
                             key={star}
@@ -325,10 +335,10 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                 </div>
                 <div className='reviews-input'>
                     {/* <input type="text" name="" id="" /> */}
-                    <textarea maxLength={100} placeholder='leave an honest and respectful review' onChange={userTypedReview} value={reviewTextValue} onKeyDown={listenForEnterKey}></textarea>
+                    <textarea maxLength={100} placeholder='Share your honest experience - what did you love? What could be improved' onChange={userTypedReview} value={reviewTextValue} onKeyDown={listenForEnterKey}></textarea>
                 </div>
                 <div className='review-submit-container'>
-                    <button onClick={handleSubmit} className={`review-submit-button  ${!isSubmitting ? 'notSubmitting' : 'submitting'}`}>{!isSubmitting ? 'Submit' : 'Submitting'}</button>
+                    <button onClick={handleSubmit} className={`review-submit-button  ${!isSubmitting ? 'notSubmitting' : 'submitting'}`}>{!isSubmitting ? 'Submit Review' : 'Submitting Review'}</button>
                 </div>
             </div>
 
