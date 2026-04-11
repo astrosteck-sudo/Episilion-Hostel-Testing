@@ -3,6 +3,12 @@ import fullStar from '../assets/icons/star.png';
 import dayjs from 'dayjs';
 
 export function Reviews({ item }) {
+
+    
+    if(item === 'no reviews'){
+        return <p className='no-review-text'>No reviews</p>
+    }
+
     return (
 
         <>

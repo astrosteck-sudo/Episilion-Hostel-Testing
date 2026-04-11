@@ -70,7 +70,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         if (isSubmitting) {
             return;
         }
-        if (rating === 0 || reviewTextValue === '') {
+        if (rating === 0 || reviewTextValue === '' || reviewTextValue.length < 10) {
             //alert("Please select a rating first");
             return;
         }
@@ -94,8 +94,8 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         }
     }
 
-    function toggleReviewsDisplay(){
-        if(toggleReview === 'open'){
+    function toggleReviewsDisplay() {
+        if (toggleReview === 'open') {
             setToggleReview('close')
             return;
         }
@@ -106,6 +106,10 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     async function loadingReviews() {
         try {
             const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
+            if (response.data.length === 0) {
+                setReviewsResonse(["no reviews"])
+                return;
+            }
             setReviewsResonse(response.data)
 
         } catch (error) {
@@ -311,14 +315,13 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                             onClick={() => handleStarClick(star)}
                         />
                     ))}
-
-                    <div className='review-submit-container'>
-                        <button onClick={handleSubmit} className={`review-submit-button  ${!isSubmitting ? 'notSubmitting' : 'submitting'}`}>{!isSubmitting ? 'Submit' : 'Submitting'}</button>
-                    </div>
                 </div>
                 <div className='reviews-input'>
                     {/* <input type="text" name="" id="" /> */}
                     <textarea maxLength={100} placeholder='leave an honest and respectful review' onChange={userTypedReview} value={reviewTextValue}></textarea>
+                </div>
+                <div className='review-submit-container'>
+                    <button onClick={handleSubmit} className={`review-submit-button  ${!isSubmitting ? 'notSubmitting' : 'submitting'}`}>{!isSubmitting ? 'Submit' : 'Submitting'}</button>
                 </div>
             </div>
 

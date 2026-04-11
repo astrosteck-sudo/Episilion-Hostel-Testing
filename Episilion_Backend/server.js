@@ -91,9 +91,9 @@ app.get("/api/hostels", (req, res) => {
       location: {
         distanceToCampusMinutes: item.distanceToCampusMinutes,
         distanceToCampusMinutes: 5,
-      directions: "Located in the city of Accra North Campus A major landmark is Behind Main Gate. For directions, Walk Past the main gate, turn left at the bookshop",
-      latitude: 5.6508,
-      longitude: -0.1869
+        directions: "Located in the city of Accra North Campus A major landmark is Behind Main Gate. For directions, Walk Past the main gate, turn left at the bookshop",
+        latitude: 5.6508,
+        longitude: -0.1869
       }
     }));
 
@@ -103,7 +103,7 @@ app.get("/api/hostels", (req, res) => {
 
 app.post("/api/reviews", (req, res) => {
   const { hostel_id, rating, review_text } = req.body;
-  
+
   // 🧠 1. Validate input (VERY IMPORTANT)
   if (!hostel_id || !rating) {
     return res.status(400).json({
@@ -133,10 +133,18 @@ app.post("/api/reviews", (req, res) => {
     }
 
     // ✅ success response
-    res.json({
-      message: "Review added successfully ✅",
-      reviewId: result.insertId
-    });
+    // res.json({
+    //   message: "Review added successfully ✅",
+    //   reviewId: result.insertId
+    // });
+
+
+    setTimeout(() => {
+      res.json({
+        message: "Review added successfully ✅",
+        reviewId: result.insertId
+      });
+    }, 2000)
   });
 });
 

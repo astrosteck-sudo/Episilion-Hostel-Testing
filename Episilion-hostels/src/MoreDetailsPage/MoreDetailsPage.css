@@ -444,7 +444,6 @@ p.font-paragraph {
 }
 
 .star-container {
-  width: 100%;
   display: flex;
   gap: 8px;
 }
@@ -452,9 +451,6 @@ p.font-paragraph {
 .star {
   width: min(25px, 10%);
   height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 
@@ -471,7 +467,7 @@ p.font-paragraph {
 }
 
 .review-submit-container {
-  margin-left: 50px;
+  margin-top: 5px;
 }
 
 .review-submit-button {
@@ -483,9 +479,15 @@ p.font-paragraph {
   border-radius: 5px;
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
+.review-submit-button:active{
+  transform: scale(0.9777);
+}
 
 .review-submit-button.submitting {
   background-color: grey;
+}
+.review-submit-button.submitting:active{
+  transform: none;
 }
 
 .reviews-and-ratings-display {
@@ -556,6 +558,10 @@ p.font-paragraph {
   justify-content: center;
   /* font-family: Digital-7; */
   font-weight: bold;
+  color: white;
+}
+
+.no-review-text{
   color: white;
 }
 
