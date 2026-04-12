@@ -3,7 +3,7 @@ import './logins.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import googleImage from '../assets/icons/google.png';
 import facebookImage from '../assets/icons/contact-us-facebook.png';
-///import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 
@@ -23,11 +23,11 @@ export function LoginPage({ navlink, setNavLink }) {
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
 
             <div className="sign-up-container">
-                <div className="sign-up-wrapper">
-                    <div className="wrapper">
-                        <p className="join-us-text"><span className="join-us-span">JOIN US</span></p>
-                        <h4 className="create-account-text"><span className="create-account-span">Create Account</span></h4>
-                        <p className="start-journey-text">Start your journey with Episilion Hostels</p>
+                <div className="sign-up-wrapper login">
+                    <div className="wrapper login">
+                        <p className="join-us-text login"><span className="join-us-span">WELCOME BACK</span></p>
+                        <h4 className="create-account-text login"><span className="create-account-span">LOGIN</span></h4>
+                        <p className="start-journey-text">Good to see you again - let's let you in</p>
                     </div>
 
                     <div className="external-sign-up-buttons">
@@ -37,11 +37,6 @@ export function LoginPage({ navlink, setNavLink }) {
 
                     <div className="divider">
                         <span>or sign up with email</span>
-                    </div>
-
-                    <div className="fullname-conatainer">
-                        <p for="fullname" className="full-name-header">FULL NAME</p>
-                        <input type="text" name="fullname" placeholder="e.g. John Mensah" className="full-name-input" />
                     </div>
 
                     <div className="email-address-conatainer">
@@ -54,23 +49,14 @@ export function LoginPage({ navlink, setNavLink }) {
                             <p for="password" className="password-header">PASSWORD</p>
                             <input type="password" name="password" placeholder="••••••••••••••••" className="password-input" />
                         </div>
-
-                        <div className="comfirm-password-conatainer">
-                            <p for="comfirm-password" className="comfirm-password-header">COMFIRM PASSWORD</p>
-                            <input type="password" name="comfirm-password" placeholder="••••••••••••••••" className="comfirm-password-input" />
-                        </div>
-                    </div>
-
-                    <div className="show-password-container">
-                        <input type="checkbox" id="showPassword" /><label for="showPassword" className="show-password">Show password</label>
                     </div>
 
                     <div className="create-account-button-container">
-                        <button className="create-account-button">Create Account</button>
+                        <button className="create-account-button">Login</button>
                     </div>
 
                     <div className="alternate-link-container">
-                        <p>Already have an account? <a className="login-page-link">Log in</a></p>
+                        <p>Don't have an account? <Link className="logins-page-link" to="/signup" >Sign up for free</Link></p>
                     </div>
 
                     <div className="perks-container">

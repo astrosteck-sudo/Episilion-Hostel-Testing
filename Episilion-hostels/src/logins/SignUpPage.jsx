@@ -88,7 +88,7 @@ export function SignUpPage({ navlink, setNavLink }) {
                     </div>
 
                     <div className="alternate-link-container">
-                        <p>Already have an account? <Link className="login-page-link" to="/login">Log in</Link></p>
+                        <p>Already have an account? <Link className="logins-page-link" to="/login">Log in</Link></p>
                     </div>
 
                     <div className="perks-container">
