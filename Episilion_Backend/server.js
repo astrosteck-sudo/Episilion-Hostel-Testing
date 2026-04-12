@@ -104,49 +104,52 @@ app.get("/api/hostels", (req, res) => {
 app.post("/api/reviews", (req, res) => {
   const { hostel_id, rating, review_text } = req.body;
 
-  // 🧠 1. Validate input (VERY IMPORTANT)
+  // 1. Validate input
   if (!hostel_id || !rating) {
-    return res.status(400).json({
-      error: "hostel_id and rating are required"
-    });
+    return res.status(400).json({ error: "hostel_id and rating are required" });
   }
-
   if (rating < 1 || rating > 5) {
-    return res.status(400).json({
-      error: "Rating must be between 1 and 5"
-    });
+    return res.status(400).json({ error: "Rating must be between 1 and 5" });
   }
 
-  // 🧱 2. SQL Insert query
-  const sql = `
+  // 2. SQL queries
+  const insertSql = `
     INSERT INTO Reviews (hostel_id, rating, review_text)
     VALUES (?, ?, ?)
   `;
+  const updateSql = `
+    UPDATE hostels
+    SET 
+      total_reviews = (SELECT COUNT(*) FROM Reviews WHERE hostel_id = ?),
+      average_rating = (SELECT IFNULL(AVG(rating), 0) FROM Reviews WHERE hostel_id = ?)
+    WHERE hostel_id = ?
+  `;
 
-  // ⚙️ 3. Execute query
-  db.query(sql, [hostel_id, rating, review_text], (err, result) => {
+  // 3. Execute insert
+  db.query(insertSql, [hostel_id, rating, review_text], (err, result) => {
     if (err) {
-      console.log(err);
-      return res.status(500).json({
-        error: "Database error while inserting review"
-      });
+      console.error(err);
+      return res.status(500).json({ error: "Database error while inserting review" });
     }
 
-    // ✅ success response
-    // res.json({
-    //   message: "Review added successfully ✅",
-    //   reviewId: result.insertId
-    // });
+    // 4. Update hostel summary AFTER insert
+    db.query(updateSql, [hostel_id, hostel_id, hostel_id], (updateErr) => {
+      if (updateErr) {
+        console.error(updateErr);
+        return res.status(500).json({ error: "Database error while updating hostel summary" });
+      }
 
-
-    setTimeout(() => {
-      res.json({
-        message: "Review added successfully ✅",
-        reviewId: result.insertId
-      });
-    }, 1000)
+      // 5. Single success response (with latency simulation)
+      setTimeout(() => {
+        res.json({
+          message: "Review added successfully ✅",
+          reviewId: result.insertId
+        });
+      }, 1000);
+    });
   });
 });
+
 
 app.get("/api/reviews/:hostelId", (req, res) => {
   let { hostelId } = req.params;
