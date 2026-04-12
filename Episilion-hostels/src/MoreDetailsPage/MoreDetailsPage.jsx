@@ -26,17 +26,17 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
     const [reviewTextValue, setReviewTextValue] = useState('')//THIS CONTROLS WHAT THE USER TYPOES IN THE TEXT AREA
     const [isSubmitting, setIsSubmitting] = useState(false)// THIS CONTROLLS SUBMIT BUTTON SO FREEZE WHEN SUBMITTING
-    const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
+    //const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
     const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
-    //const [hostelName, setHostelName] = useState('')
+
 
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
     let hostelName = 'Annex'
     originalHostelCardData.map((hostel) => {
-        if(hostel.id === hostelId){
-            hostelName =hostel.name
+        if (hostel.id === hostelId) {
+            hostelName = hostel.name
         }
     })
 
@@ -58,7 +58,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     }
 
 
-    
+
 
     function handleStarClick(value) {
         if (rating === value) {
@@ -71,12 +71,12 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     function userTypedReview(event) {
         setReviewTextValue(event.target.value)
     }
-    function listenForEnterKey(event){
-        if(event.key === 'Enter'){
+    function listenForEnterKey(event) {
+        if (event.key === 'Enter') {
             event.preventDefault();//this stops a new line appearing when the enter key is pressed
             handleSubmit();
         }
-        
+
     }
 
     async function handleSubmit() {
@@ -108,13 +108,13 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
         }
     }
 
-    function toggleReviewsDisplay() {
-        if (toggleReview === 'open') {
-            setToggleReview('close')
-            return;
-        }
-        setToggleReview('open')
-    }
+    // function toggleReviewsDisplay() {
+    //     if (toggleReview === 'open') {
+    //         setToggleReview('close')
+    //         return;
+    //     }
+    //     setToggleReview('open')
+    // }
 
 
     async function loadingReviews() {
@@ -321,7 +321,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                 <h2 className='ratings-and-reviews-header minitext' >Share your experience at {hostelName}</h2>
                 <p className='your-rating-text'>Your Rating</p>
                 <div className='star-container'>
-                    
+
                     {[1, 2, 3, 4, 5].map((star) => (
                         <img
                             key={star}
@@ -342,9 +342,9 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                 </div>
             </div>
 
-            <div className='show-reviews-button' onClick={toggleReviewsDisplay}><button>{toggleReview === 'close' ? 'Show Reviews' : 'Hide Reviews'}</button></div>
-            <div className={`reviews-and-ratings-display ${toggleReview === 'open' ? 'open' : 'close'}`}>
-                {reviewsResponse.map((item) => (
+            {/* <div className='show-reviews-button' onClick={toggleReviewsDisplay}><button>{toggleReview === 'close' ? 'Show Reviews' : 'Hide Reviews'}</button></div> */}
+            <div className={`reviews-and-ratings-display `}>
+                {reviewsResponse.slice(0, 5).map((item) => (
                     <Reviews key={item.reviewId} item={item}></Reviews>
                 ))}
             </div>

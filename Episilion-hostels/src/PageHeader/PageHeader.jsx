@@ -41,10 +41,10 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                     <NavLink className="link about-us-link" to="/aboutus">About Us</NavLink>
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
-                    {/* <div className="login-systems">
+                    <div className="login-systems">
                         <Link to="/login">LOGIN</Link>
                         <Link to="/signup">SIGN UP</Link>
-                    </div> */}
+                    </div>
                 </nav>
 
                 <button className="hamburger-button" aria-label="Menu" onClick={renderHamburgerMenu}>

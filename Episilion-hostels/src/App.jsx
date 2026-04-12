@@ -15,7 +15,7 @@ import { CompareHostels } from './CompareHostelsPage/CompareHostels.jsx';
 function App() {
   const [hostelsCardData, sethostelsCardData] = useState([]);
   const [originalHostelCardData, setOriginalHostelCardData] = useState([])
-  const [navlink, setNavLink] = useState(false);
+  const [navlink, setNavLink] = useState(false);//THIS HIDES ANDS SHOWS THE HAMBURGER MENU AND BUTTON
 
 
   // const testingHostels = async () => {
@@ -52,7 +52,7 @@ function App() {
         <Route path="aboutus" element={<AboutUsPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path="signup" element={<SignUpPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path="askepisilion" element={<AskEpisilionPage navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
-        {/* <Route path="login" element={<LoginPage navlink={navlink} setNavLink={setNavLink} />} /> */}
+        <Route path="login" element={<LoginPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path='morefromus' element={<MoreFromUsPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path='comparehostels' element={<CompareHostels navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
       </Routes>
