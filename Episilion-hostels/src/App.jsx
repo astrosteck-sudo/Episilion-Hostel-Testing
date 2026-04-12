@@ -3,8 +3,8 @@ import { HomePage } from './HomePage/HomePage';
 import { MoreDetailsPage } from './MoreDetailsPage/MoreDetailsPage';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { SignUpPage } from './logins/SignUpPage';
-import { LoginPage } from './logins/loginPage.jsx';
+import { SignUpPage } from './logins/SignUpPage.jsx';
+// import { LoginPage } from './logins/loginPage.jsx';
 import { AskEpisilionPage } from './AskEpisilionPage/AskEpisilionPage.jsx';
 import { AboutUsPage } from './AboutUs/AboutUsPage.jsx';
 import { MoreFromUsPage } from './MoreFromUs/MoreFromUsPage.jsx';
@@ -52,7 +52,7 @@ function App() {
         <Route path="aboutus" element={<AboutUsPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path="signup" element={<SignUpPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path="askepisilion" element={<AskEpisilionPage navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
-        <Route path="login" element={<LoginPage navlink={navlink} setNavLink={setNavLink} />} />
+        {/* <Route path="login" element={<LoginPage navlink={navlink} setNavLink={setNavLink} />} /> */}
         <Route path='morefromus' element={<MoreFromUsPage navlink={navlink} setNavLink={setNavLink} />} />
         <Route path='comparehostels' element={<CompareHostels navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
       </Routes>

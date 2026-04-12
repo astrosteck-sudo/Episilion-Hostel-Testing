@@ -1,0 +1,218 @@
+/* .sign-up-page{
+  background-image: url(../images/hostel-images/hostel_image_2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: opacity 1s ease-in-out;
+} */
+
+/* styles.css */
+.body-bg {
+  background-image: url('../images/hostel-images/hostel_image_2.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: opacity 1s ease-in-out;
+}
+
+
+.sign-up-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 5px;
+
+  background: rgba(250, 249, 249, 0.1);
+  backdrop-filter: blur(30px);
+  height: 85vh;
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.sign-up-wrapper {
+  background-color: white;
+  /* padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px; */
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 20px;
+  width: min(400px, 100%);
+}
+
+.wrapper {
+
+  /* border: solid red; */
+  /* display: flex; */
+  /* justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; */
+}
+
+.join-us-text {
+  text-align: center;
+  padding: 5px;
+  /* width: 30%; */
+}
+
+.join-us-span {
+  border-radius: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  display: inline-block;
+  font-weight: bold;
+
+  box-shadow: 0 0 12px reba(76, 175, 80, 0.6);
+  background: rgba(252, 216, 8, 0.217);
+  color: rgb(255, 217, 0);
+}
+
+
+.create-account-text {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.create-account-span {
+  font-size: 25px;
+}
+
+.start-journey-text {
+  text-align: center;
+  padding: 5px;
+  color: grey;
+}
+
+
+.external-sign-up-buttons{
+  margin: 5px;
+  display: flex;
+  justify-content: space-around;
+}
+.external-sign-up-button{
+  padding: 10px;
+  border-radius: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: rgb(255, 253, 253);
+  margin: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid grey;
+}
+.external-sign-up-image{
+  width: 20px;
+}
+
+.divider{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 10px 30px;
+  color: grey;
+}
+.divider::before, .divider::after{
+  content: "";
+  flex: 1;
+  border-bottom: 2px solid #ccc;
+}
+.divider::before{
+  margin-right: 10px;
+}
+.divider::after{
+  margin-left: 10px;
+}
+
+.fullname-conatainer, 
+.email-address-conatainer, 
+.password-conatainer, 
+.comfirm-password-conatainer, 
+.show-password-container, 
+.create-account-button-container,
+.alternate-link-container,
+.perks-container{
+  margin: 5px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.show-password-container{
+  display: flex;
+  gap: 10px;
+  font-weight: bold;
+  color: grey;
+}
+.full-name-header, 
+.email-address-header, 
+.password-header, 
+.comfirm-password-header{
+  font-weight: bold;
+  margin: 5px;
+  font-size: clamp(.69rem,2vw, .2rem);
+  color: rgb(59, 57, 57);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.full-name-input, 
+.email-address-input, 
+.password-input, 
+.comfirm-password-input{
+  padding: 13px;
+  margin-left: 3px;
+  border-radius: 10px;
+  width: 100%;
+  border: 1px solid grey;
+}
+
+.show-password{
+  font-size: clamp(.8rem, 2vw, .9rem);
+}
+.passwords-container{
+  display: flex;
+}
+
+.create-account-button-container{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.create-account-button{
+  border: none;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 10px;
+  width: 90%;
+  background-color: #aca020;
+  color: white;
+  font-weight: bold;
+  font-size: clamp(.4rem, 2vw, .8rem);
+}
+
+.alternate-link-container{
+  text-align: center;
+  color: grey;
+}
+
+.login-page-link{
+  color: #aca020;
+  font-weight: bold;
+}
+
+.perks-list{
+  margin-top: 10px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  color: grey;
+}
+
+li::marker{
+  color: #645c02;
+  font-size: 15px;
+}
