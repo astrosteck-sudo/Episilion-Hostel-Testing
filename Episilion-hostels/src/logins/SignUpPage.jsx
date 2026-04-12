@@ -3,7 +3,7 @@ import './logins.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import googleImage from '../assets/icons/google.png';
 import facebookImage from '../assets/icons/contact-us-facebook.png';
-///import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 
@@ -88,7 +88,7 @@ export function SignUpPage({ navlink, setNavLink }) {
                     </div>
 
                     <div className="alternate-link-container">
-                        <p>Already have an account? <a className="login-page-link">Log in</a></p>
+                        <p>Already have an account? <Link className="login-page-link" to="/login">Log in</Link></p>
                     </div>
 
                     <div className="perks-container">
