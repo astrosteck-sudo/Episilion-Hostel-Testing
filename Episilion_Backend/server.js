@@ -59,48 +59,82 @@ app.post("/api/hostels", (req, res) => {
 
 //THIS IS FOR GETTING HOSTELS FROM THE P0DATABASE
 app.get("/api/hostels", (req, res) => {
+
   const sql = `
     SELECT 
       h.hostel_id AS id,
       h.name,
       h.type,
-      h.distance,
       h.main_image AS image,
       h.hostel_perks AS hostelPerks,
-      l.distance_to_campus_in_meters AS distance,
-      l.distance_to_campus_in_minutes AS distanceToCampusMinutes
-    FROM Hostels h
-    LEFT JOIN Locations l 
-    ON h.hostel_id = l.hostel_id
+
+      h.total_reviews AS totalReviews,
+      h.average_rating AS averageRating,
+
+      l.distance_to_campus_in_meters,
+      l.distance_to_campus_in_minutes,
+      l.latitude,
+      l.longitude,
+
+      p.price_min,
+      p.price_max,
+      p.billing_period,
+      p.utilities_fee,
+      p.maintenance_fee,
+      p.caution_deposit
+
+    FROM hostels h
+    LEFT JOIN locations l 
+      ON h.hostel_id = l.hostel_id
+
+    LEFT JOIN pricing p 
+      ON h.hostel_id = p.hostel_id
   `;
 
   db.query(sql, (err, result) => {
+
     if (err) {
       console.log(err);
       return res.status(500).send("Error fetching hostels");
     }
 
-    // 🔥 Transform into nested structure
     const formatted = result.map(item => ({
       id: item.id,
       name: item.name,
       type: item.type,
-      distance: item.distance,
       image: item.image,
       hostelPerks: item.hostelPerks,
+
       location: {
-        distanceToCampusMinutes: item.distanceToCampusMinutes,
-        distanceToCampusMinutes: 5,
-        directions: "Located in the city of Accra North Campus A major landmark is Behind Main Gate. For directions, Walk Past the main gate, turn left at the bookshop",
-        latitude: 5.6508,
-        longitude: -0.1869
+        distanceToCampusMinutes: item.distance_to_campus_in_minutes,
+        distanceToCampusMeters: item.distance_to_campus_in_meters,
+        latitude: item.latitude,
+        longitude: item.longitude
+      },
+
+      pricing: {
+        priceMin: item.price_min,
+        priceMax: item.price_max,
+        billingPeriod: item.billing_period,
+
+         additionalFees: {
+          utilities: item.utilities_fee,
+          maintenance: item.maintenance_fee,
+          cautionDeposit: item.caution_deposit
+        }
+      },
+
+      reviews: {
+        averageRating: item.averageRating,
+        totalReviews: item.totalReviews
       }
     }));
-
+    console.log("Fetched hostels:", formatted);
     res.json(formatted);
   });
 });
 
+//THIS IS FOR ADDING REVIEWS TO THE DATABASE
 app.post("/api/reviews", (req, res) => {
   const { hostel_id, rating, review_text } = req.body;
 
@@ -120,8 +154,8 @@ app.post("/api/reviews", (req, res) => {
   const updateSql = `
     UPDATE hostels
     SET 
-      total_reviews = (SELECT COUNT(*) FROM Reviews WHERE hostel_id = ?),
-      average_rating = (SELECT IFNULL(AVG(rating), 0) FROM Reviews WHERE hostel_id = ?)
+      total_reviews = (SELECT COUNT(*) FROM reviews WHERE hostel_id = ?),
+      average_rating = (SELECT IFNULL(AVG(rating), 0) FROM reviews WHERE hostel_id = ?)
     WHERE hostel_id = ?
   `;
 
