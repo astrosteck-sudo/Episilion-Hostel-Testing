@@ -53,15 +53,15 @@
           "price": 900,
           "availableRooms": 40
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe",
-        "Study Desk",
-        "Chair"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Study Desk",
+      "Chair"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -120,7 +120,7 @@
     "reviews": {
       "averageRating": 1.3,
       "totalReviews": 270,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -172,14 +172,14 @@
           "price": 1200,
           "availableRooms": 12
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe",
-        "Chair"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Chair"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -229,7 +229,7 @@
     "reviews": {
       "averageRating": 4.1,
       "totalReviews": 19,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -280,15 +280,15 @@
           "price": 1600,
           "availableRooms": 6
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe",
-        "Study Desk",
-        "Chair"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Study Desk",
+      "Chair"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -338,7 +338,7 @@
     "reviews": {
       "averageRating": 4.6,
       "totalReviews": 35,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -390,13 +390,13 @@
           "price": 900,
           "availableRooms": 25
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -444,7 +444,7 @@
     "reviews": {
       "averageRating": 4,
       "totalReviews": 22,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -495,14 +495,14 @@
           "price": 1200,
           "availableRooms": 18
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe",
-        "Study Desk"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Study Desk"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -550,7 +550,7 @@
     "reviews": {
       "averageRating": 4.2,
       "totalReviews": 30,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -600,13 +600,13 @@
           "price": 900,
           "availableRooms": 30
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -653,7 +653,7 @@
     "reviews": {
       "averageRating": 3.9,
       "totalReviews": 15,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -703,15 +703,15 @@
           "price": 1600,
           "availableRooms": 8
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe",
-        "Study Desk",
-        "Chair"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Study Desk",
+      "Chair"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -763,7 +763,7 @@
     "reviews": {
       "averageRating": 4.5,
       "totalReviews": 28,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -814,13 +814,13 @@
           "price": 1000,
           "availableRooms": 25
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -867,7 +867,7 @@
     "reviews": {
       "averageRating": 4,
       "totalReviews": 21,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -925,6 +925,12 @@
         "Study Desk"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "Study Desk"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -973,7 +979,7 @@
     "reviews": {
       "averageRating": 4.3,
       "totalReviews": 25,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [
@@ -1024,15 +1030,15 @@
           "price": 1800,
           "availableRooms": 12
         }
-      ],
-      "furnishing": [
-        "Bed",
-        "Mattress",
-        "Wardrobe",
-        "Study Desk",
-        "Chair"
       ]
     },
+    "furnishing": [
+      "Bed",
+      "Mattress",
+      "Wardrobe",
+      "StPudy Desk",
+      "Chair"
+    ],
     "amenities": [
       "Electricity",
       "Water Supply",
@@ -1084,7 +1090,7 @@
     "reviews": {
       "averageRating": 4.7,
       "totalReviews": 40,
-      "reviewText":"very boring hostel"
+      "reviewText": "very boring hostel"
     },
     "aiTags": {
       "bestFor": [

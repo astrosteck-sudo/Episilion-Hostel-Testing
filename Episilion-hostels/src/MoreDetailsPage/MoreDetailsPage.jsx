@@ -228,7 +228,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                                 })
                                             }
                                             {
-                                                hostel.rooms.furnishing.map((funish) => {
+                                                hostel.furnishing.map((funish) => {
                                                     return (
                                                         <li class="special-font">{funish}</li>
                                                     )
