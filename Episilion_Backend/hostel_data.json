@@ -293,7 +293,7 @@
       "Electricity",
       "Water Supply",
       "Wifi",
-      "Air Conditioning",
+      "AirConditioning",
       "Kitchen",
       "Study Area",
       "Laundry Area",
@@ -301,7 +301,7 @@
     ],
     "rules": [
       "Curfew Time (9:00 PM)",
-      "Visitors Allowed",
+      "No Visitors Allowed",
       "Cooking Allowed",
       "No Smoking",
       "No Pets"

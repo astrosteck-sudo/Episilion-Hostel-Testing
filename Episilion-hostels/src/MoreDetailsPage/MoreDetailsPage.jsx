@@ -249,7 +249,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                                 })}
                                             </ul>
                                         </div>
-                                        <div className="info-container">
+                                        {/* <div className="info-container">
                                             <div className="management-contact">
                                                 <h2 className="font-header">Contacts</h2>
                                                 <Link className="contact-item js-phone-number-link" href={hostel.contact.phone}>
@@ -290,10 +290,10 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                                 </a> : ""}
 
                                             </div>
-                                        </div>
+                                        </div> */}
                                     </div>
 
-                                    <div className="media-information-cards js-media-information-cards">
+                                    {/* <div className="media-information-cards js-media-information-cards">
                                         {hostel.media.images.map((image) => {
 
                                             return (
@@ -308,7 +308,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                             )
                                         })}
                                         <video class="hostel-room" muted loop controls src={hostel.media.video} poster={hostel.image}></video>
-                                    </div>
+                                    </div> */}
                                 </>
                             )
                         }

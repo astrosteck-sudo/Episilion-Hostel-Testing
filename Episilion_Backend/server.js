@@ -58,81 +58,166 @@ app.post("/api/hostels", (req, res) => {
 });
 
 //THIS IS FOR GETTING HOSTELS FROM THE P0DATABASE
-app.get("/api/hostels", (req, res) => {
+// app.get("/api/hostels", (req, res) => {
 
-  const sql = `
-    SELECT 
-      h.hostel_id AS id,
-      h.name,
-      h.type,
-      h.main_image AS image,
-      h.hostel_perks AS hostelPerks,
+//   const sql = `
+//     SELECT 
+//       h.hostel_id AS id,
+//       h.name,
+//       h.type,
+//       h.main_image AS image,
+//       h.hostel_perks AS hostelPerks,
 
-      h.total_reviews AS totalReviews,
-      h.average_rating AS averageRating,
+//       h.total_reviews AS totalReviews,
+//       h.average_rating AS averageRating,
 
-      l.distance_to_campus_in_meters,
-      l.distance_to_campus_in_minutes,
-      l.latitude,
-      l.longitude,
+//       l.distance_to_campus_in_meters,
+//       l.distance_to_campus_in_minutes,
+//       l.latitude,
+//       l.longitude,
 
-      p.price_min,
-      p.price_max,
-      p.billing_period,
-      p.utilities_fee,
-      p.maintenance_fee,
-      p.caution_deposit
+//       p.price_min,
+//       p.price_max,
+//       p.billing_period,
+//       p.utilities_fee,
+//       p.maintenance_fee,
+//       p.caution_deposit
 
-    FROM hostels h
-    LEFT JOIN locations l 
-      ON h.hostel_id = l.hostel_id
+//     FROM hostels h
+//     LEFT JOIN locations l 
+//       ON h.hostel_id = l.hostel_id
 
-    LEFT JOIN pricing p 
-      ON h.hostel_id = p.hostel_id
-  `;
+//     LEFT JOIN pricing p 
+//       ON h.hostel_id = p.hostel_id
+//   `;
 
-  db.query(sql, (err, result) => {
+//   db.query(sql, (err, result) => {
 
-    if (err) {
-      console.log(err);
-      return res.status(500).send("Error fetching hostels");
-    }
+//     if (err) {
+//       console.log(err);
+//       return res.status(500).send("Error fetching hostels");
+//     }
 
-    const formatted = result.map(item => ({
-      id: item.id,
-      name: item.name,
-      type: item.type,
-      image: item.image,
-      hostelPerks: item.hostelPerks,
+//     const formatted = result.map(item => ({
+//       id: item.id,
+//       name: item.name,
+//       type: item.type,
+//       image: item.image,
+//       hostelPerks: item.hostelPerks,
 
-      location: {
-        distanceToCampusMinutes: item.distance_to_campus_in_minutes,
-        distanceToCampusMeters: item.distance_to_campus_in_meters,
-        latitude: item.latitude,
-        longitude: item.longitude
-      },
+//       location: {
+//         distanceToCampusMinutes: item.distance_to_campus_in_minutes,
+//         distanceToCampusMeters: item.distance_to_campus_in_meters,
+//         latitude: item.latitude,
+//         longitude: item.longitude
+//       },
 
-      pricing: {
-        priceMin: item.price_min,
-        priceMax: item.price_max,
-        billingPeriod: item.billing_period,
+//       pricing: {
+//         priceMin: item.price_min,
+//         priceMax: item.price_max,
+//         billingPeriod: item.billing_period,
 
-         additionalFees: {
-          utilities: item.utilities_fee,
-          maintenance: item.maintenance_fee,
-          cautionDeposit: item.caution_deposit
+//          additionalFees: {
+//           utilities: item.utilities_fee,
+//           maintenance: item.maintenance_fee,
+//           cautionDeposit: item.caution_deposit
+//         }
+//       },
+
+//       reviews: {
+//         averageRating: item.averageRating,
+//         totalReviews: item.totalReviews
+//       }
+//     }));
+//     console.log("Fetched hostels:", formatted);
+//     res.json(formatted);
+//   });
+// });
+
+app.get("/api/hostels", async (req, res) => {
+
+  const query = (sql, values = []) => {
+    return new Promise((resolve, reject) => {
+      db.query(sql, values, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
         }
-      },
+      });
+    });
+  };
 
-      reviews: {
-        averageRating: item.averageRating,
-        totalReviews: item.totalReviews
-      }
-    }));
-    console.log("Fetched hostels:", formatted);
-    res.json(formatted);
-  });
+
+
+  try {
+    const hostels = await query("SELECT * FROM hostels");
+    const pricing = await query("SELECT * FROM pricing");
+    const locations = await query("SELECT * FROM locations");
+    const rooms = await query("SELECT * FROM rooms");
+    const rules = await query("SELECT * FROM rules");
+    const amenities = await query("SELECT * FROM amenities");
+    const furnishing = await query("SELECT * FROM furnishing");
+    console.log(furnishing);
+
+    const fullData = hostels.map(h => {
+      const loc = locations.find(l => l.hostel_id === h.hostel_id);
+      const price = pricing.find(p => p.hostel_id === h.hostel_id);
+
+      return {
+        id: h.hostel_id,
+        name: h.name,
+        type: h.type,
+        image: h.main_image,
+        hostelPerks: h.hostel_perks,
+
+        location: loc && {
+          distanceToCampusMinutes: loc.distance_to_campus_in_minutes,
+          distanceToCampusMeters: loc.distance_to_campus_in_meters,
+          latitude: loc.latitude,
+          longitude: loc.longitude,
+          directions: loc.directions
+        },
+
+        pricing: price && {
+          priceMin: price.price_min,
+          priceMax: price.price_max,
+          billingPeriod: price.billing_period,
+          additionalFees: {
+            utilities: price.utilities_fee,
+            maintenance: price.maintenance_fee,
+            cautionDeposit: price.caution_deposit
+          },
+          refundPolicy: price.refund_policy
+        },
+
+        rooms: {
+          //THIS FILTERS THE ROOMS TO ONLY SHOW THE ROOMS THAT BELONG TO THE HOSTEL AND THEN MAPS THEM TO THE CORRECT FORMAT
+          types: rooms.filter(r => r.hostel_id === h.hostel_id).map(r => ({
+            type: r.room_type,
+            price: r.price,
+            availableRooms: r.available_rooms
+          }))
+        },
+        amenities: amenities.filter(a => a.hostel_id === h.hostel_id).map(a => a.amenity),
+        furnishing: furnishing.filter(f => f.hostel_id === h.hostel_id).map(f => f.furnishing),
+        rules: rules.filter(r => r.hostel_id === h.hostel_id).map(r => r.rule),
+
+        reviews: {
+          averageRating: h.average_rating,
+          totalReviews: h.total_reviews
+        }
+      };
+    });
+
+    res.json(fullData);
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error");
+  }
 });
+
 
 //THIS IS FOR ADDING REVIEWS TO THE DATABASE
 app.post("/api/reviews", (req, res) => {
