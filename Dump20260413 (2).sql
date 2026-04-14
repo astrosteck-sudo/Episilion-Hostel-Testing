@@ -43,6 +43,38 @@ INSERT INTO `amenities` VALUES (101,'141c9727-155b-472c-b75e-27715725f27c','Cctv
 UNLOCK TABLES;
 
 --
+-- Table structure for table `contact`
+--
+
+DROP TABLE IF EXISTS `contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `contact` (
+  `contact_id` int NOT NULL AUTO_INCREMENT,
+  `hostel_id` varchar(50) DEFAULT NULL,
+  `manager_name` varchar(100) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `whatsapp` varchar(20) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `office_hours` varchar(50) DEFAULT NULL,
+  `website` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`contact_id`),
+  UNIQUE KEY `hostel_id` (`hostel_id`),
+  CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`hostel_id`) REFERENCES `hostels` (`hostel_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact`
+--
+
+LOCK TABLES `contact` WRITE;
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Mr. John Dom','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(2,'ea89beba-18c9-434c-8175-e3fb34581e63','Ms. Grace Mensah','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(3,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Mrs. Akua Boateng','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(4,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Mr. Kwame Owusu','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(5,'d3582f55-470e-49d9-bd94-39dab2ba0cab','Ms. Efua Adjei','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(6,'170ab6f9-9a50-4598-8858-188f59577bf3','Mr. Daniel Tetteh','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(7,'7af2a906-6c09-4941-8227-6325aa6ab8c6','Mrs. Nana Ama Kusi','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(8,'db900f38-3480-481d-b20b-66962ea03b7a','Mr. Joseph Mensah','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(9,'141c9727-155b-472c-b75e-27715725f27c','Mr. Samuel Owusu','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM',''),(10,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Ms. Abena Ofori','+233 555 987 654','+233 555 987 654','unityhostel@email.com','8 AM - 5 PM','');
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Temporary view structure for view `customer_email`
 --
 
@@ -178,7 +210,7 @@ CREATE TABLE `hostels` (
 
 LOCK TABLES `hostels` WRITE;
 /*!40000 ALTER TABLE `hostels` DISABLE KEYS */;
-INSERT INTO `hostels` VALUES ('141c9727-155b-472c-b75e-27715725f27c','Urban Nest','Girls','Example University',2014,3,'Wifi • Power Backup • TV Lounge','/images/hostel-images/hostel_image_9.jpg',1,4.0),('170ab6f9-9a50-4598-8858-188f59577bf3','Victory Hostel','Boys','Example University',2013,6,'Wifi • Laundry • Shuttle • Service','/images/hostel-images/hostel_image_6.jpg',1,4.0),('47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Campus Annex','Boys','Example University',2015,2,'Wifi • Laundry • Study • Area','/images/hostel-images/hostel_image_1.jpg',0,0.0),('4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Greenfield Hostel','Mixed','Example University',2010,4,'Laundry • RecreationalArea • Parking','/images/hostel-images/hostel_image_4.jpg',0,0.0),('5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Scholars Haven','Girls','Example University',2020,2,'Wifi • Quiet • Study Area • Laundry','/images/hostel-images/hostel_image_10.jpg',1,5.0),('7af2a906-6c09-4941-8227-6325aa6ab8c6','Harmony Hostel','Girls','Example University',2019,1,'Wifi • Gym • Cafeteria','/images/hostel-images/hostel_image_7.jpg',0,0.0),('d3582f55-470e-49d9-bd94-39dab2ba0cab','Sunrise Hostel','Mixed','Example University',2016,3,'Wifi • StudyRoom • Backup Power','/images/hostel-images/hostel_image_5.jpg',0,0.0),('db900f38-3480-481d-b20b-66962ea03b7a','City View Hostel','Mixed','Example University',2011,5,'Laundry • Security • Balcony','/images/hostel-images/hostel_image_8.jpg',0,0.0),('ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Queens Residence','Girls','Example University',2018,4,'Wifi • Laundry • Gym','/images/hostel-images/hostel_image_3.jpg',0,0.0),('ea89beba-18c9-434c-8175-e3fb34581e63','Unity Lodge','Boys','Example University',2012,2,'Wifi • Cafeteria • Security','/images/hostel-images/hostel_image_2.jpg',0,0.0);
+INSERT INTO `hostels` VALUES ('141c9727-155b-472c-b75e-27715725f27c','Urban Nest','Girls','Example University',2014,3,'Wifi • Power Backup • TV Lounge','/images/hostel-images/hostel_image_9.jpg',2,4.0),('170ab6f9-9a50-4598-8858-188f59577bf3','Victory Hostel','Boys','Example University',2013,6,'Wifi • Laundry • Shuttle • Service','/images/hostel-images/hostel_image_6.jpg',1,4.0),('47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Campus Annex','Boys','Example University',2015,2,'Wifi • Laundry • Study • Area','/images/hostel-images/hostel_image_1.jpg',0,0.0),('4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Greenfield Hostel','Mixed','Example University',2010,4,'Laundry • RecreationalArea • Parking','/images/hostel-images/hostel_image_4.jpg',0,0.0),('5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Scholars Haven','Girls','Example University',2020,2,'Wifi • Quiet • Study Area • Laundry','/images/hostel-images/hostel_image_10.jpg',1,5.0),('7af2a906-6c09-4941-8227-6325aa6ab8c6','Harmony Hostel','Girls','Example University',2019,1,'Wifi • Gym • Cafeteria','/images/hostel-images/hostel_image_7.jpg',0,0.0),('d3582f55-470e-49d9-bd94-39dab2ba0cab','Sunrise Hostel','Mixed','Example University',2016,3,'Wifi • StudyRoom • Backup Power','/images/hostel-images/hostel_image_5.jpg',0,0.0),('db900f38-3480-481d-b20b-66962ea03b7a','City View Hostel','Mixed','Example University',2011,5,'Laundry • Security • Balcony','/images/hostel-images/hostel_image_8.jpg',0,0.0),('ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Queens Residence','Girls','Example University',2018,4,'Wifi • Laundry • Gym','/images/hostel-images/hostel_image_3.jpg',0,0.0),('ea89beba-18c9-434c-8175-e3fb34581e63','Unity Lodge','Boys','Example University',2012,2,'Wifi • Cafeteria • Security','/images/hostel-images/hostel_image_2.jpg',0,0.0);
 /*!40000 ALTER TABLE `hostels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -289,7 +321,7 @@ CREATE TABLE `reviews` (
   KEY `hostel_id` (`hostel_id`),
   CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`hostel_id`) REFERENCES `hostels` (`hostel_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `reviews_chk_1` CHECK ((`rating` between 1 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +330,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (1,'141c9727-155b-472c-b75e-27715725f27c',4,'Cool hostel bro','2026-04-13 00:07:27'),(2,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Cool hostel bro','2026-04-13 00:08:42'),(3,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd',5,'cool hostel bro','2026-04-13 00:11:15');
+INSERT INTO `reviews` VALUES (1,'141c9727-155b-472c-b75e-27715725f27c',4,'Cool hostel bro','2026-04-13 00:07:27'),(2,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Cool hostel bro','2026-04-13 00:08:42'),(3,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd',5,'cool hostel bro','2026-04-13 00:11:15'),(4,'141c9727-155b-472c-b75e-27715725f27c',4,'Very close to the school','2026-04-14 03:12:39');
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -431,4 +463,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-13 19:44:58
+-- Dump completed on 2026-04-13 20:15:34
