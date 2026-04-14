@@ -5,6 +5,7 @@ import googleImage from '../assets/icons/google.png';
 import facebookImage from '../assets/icons/contact-us-facebook.png';
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import fullStar from '../assets/icons/favorite.png';
 
 
 export function LoginPage({ navlink, setNavLink }) {
@@ -23,6 +24,29 @@ export function LoginPage({ navlink, setNavLink }) {
             <PageHeader navlink={navlink} setNavLink={setNavLink} />
 
             <div className="sign-up-container">
+                <div className="side-bar-login">
+                    <div className="episilion-logo-login">
+                        <img src="/episilion_logo.svg" alt="" />
+                    </div>
+                    <div>
+                        <h3 className="episilion-name-login">EPISILION</h3>
+                        <h3 className="episilion-name-login">HOSTELS</h3>
+                        <p className="home-away-from-home-text">Your home away from home</p>
+                    </div>
+
+                    <div className="testimonial-login">
+                        <p>
+                            <p>"The staff made us feel so welcome. Best hostel experince we've ever had"</p>
+                            <p className="testimonial-person">- Maria T., Traveller from Portugal</p>
+                        </p>
+                    </div>
+
+                    <div className="hostels-figures">
+                        <div className="average-rating-login-container"><p className="average-rating-login">4.8</p><p className="avg-rating-text">Avg Rating</p></div>
+                        <div className="happy-guest-container"><p className="happy-guest-number">2,400+</p> <p className="happy-guest-text">Happy Guest</p></div>
+                        <div className="locations-container-login"><p className="locations-number-login">12+</p> <p className="locations-text-login">Locations</p></div>
+                    </div>
+                </div>
                 <div className="sign-up-wrapper login">
                     <div className="wrapper login">
                         <p className="join-us-text login"><span className="join-us-span">WELCOME BACK</span></p>
