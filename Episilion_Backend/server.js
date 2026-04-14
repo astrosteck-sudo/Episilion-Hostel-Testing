@@ -158,7 +158,7 @@ app.get("/api/hostels", async (req, res) => {
     const rules = await query("SELECT * FROM rules");
     const amenities = await query("SELECT * FROM amenities");
     const furnishing = await query("SELECT * FROM furnishing");
-    console.log(furnishing);
+    const contacts = await query("SELECT * FROM contact");
 
     const fullData = hostels.map(h => {
       const loc = locations.find(l => l.hostel_id === h.hostel_id);
@@ -202,6 +202,19 @@ app.get("/api/hostels", async (req, res) => {
         amenities: amenities.filter(a => a.hostel_id === h.hostel_id).map(a => a.amenity),
         furnishing: furnishing.filter(f => f.hostel_id === h.hostel_id).map(f => f.furnishing),
         rules: rules.filter(r => r.hostel_id === h.hostel_id).map(r => r.rule),
+
+        contact: (() => {
+          const c = contacts.find(x => x.hostel_id === h.hostel_id);
+
+          return c && {
+            managerName: c.manager_name,
+            phone: c.phone,
+            whatsapp: c.whatsapp,
+            email: c.email,
+            officeHours: c.office_hours,
+            website: c.website
+          };
+        })(),
 
         reviews: {
           averageRating: h.average_rating,
