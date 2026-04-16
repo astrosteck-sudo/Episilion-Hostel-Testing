@@ -159,6 +159,7 @@ app.get("/api/hostels", async (req, res) => {
     const amenities = await query("SELECT * FROM amenities");
     const furnishing = await query("SELECT * FROM furnishing");
     const contacts = await query("SELECT * FROM contact");
+    const media = await query("SELECT * FROM media");
 
     const fullData = hostels.map(h => {
       const loc = locations.find(l => l.hostel_id === h.hostel_id);
@@ -219,6 +220,15 @@ app.get("/api/hostels", async (req, res) => {
         reviews: {
           averageRating: h.average_rating,
           totalReviews: h.total_reviews
+        },
+
+        media: {
+          images: media.filter(m => m.hostel_id === h.hostel_id).map(m => ({
+              url: m.url,
+              type: m.type
+            })),
+
+          //video: videos.find(v => v.hostel_id === h.hostel_id)?.url || null
         }
       };
     });

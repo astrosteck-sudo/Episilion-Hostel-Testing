@@ -293,7 +293,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                         </div>
                                     </div>
 
-                                    {/* <div className="media-information-cards js-media-information-cards">
+                                    <div className="media-information-cards js-media-information-cards">
                                         {hostel.media.images.map((image) => {
 
                                             return (
@@ -308,7 +308,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                                             )
                                         })}
                                         <video class="hostel-room" muted loop controls src={hostel.media.video} poster={hostel.image}></video>
-                                    </div> */}
+                                    </div>
                                 </>
                             )
                         }

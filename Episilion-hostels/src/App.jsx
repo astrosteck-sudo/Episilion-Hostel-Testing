@@ -29,16 +29,16 @@ function App() {
     testingHostels()
   },[])
 
-  const loadHostelsCard = async () => {
-    //const response = await axios.get('https://episilion-backend-2.onrender.com/api/data')
-    const response = await axios.get('http://localhost:5000/api/data')
-    //console.log("Original code",response.data.data)
-    setOriginalHostelCardData(response.data.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
-    sethostelsCardData(response.data.data);//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
-  }
-  useEffect(() => {
-    loadHostelsCard();
-  }, []);
+  // const loadHostelsCard = async () => {
+  //   //const response = await axios.get('https://episilion-backend-2.onrender.com/api/data')
+  //   const response = await axios.get('http://localhost:5000/api/data')
+  //   //console.log("Original code",response.data.data)
+  //   setOriginalHostelCardData(response.data.data)//THIS DATA WILL NEVER CHANGE IN THE PROGRAM
+  //   sethostelsCardData(response.data.data);//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
+  // }
+  // useEffect(() => {
+  //   loadHostelsCard();
+  // }, []);
 
 
 
