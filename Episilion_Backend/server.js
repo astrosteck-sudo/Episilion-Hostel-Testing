@@ -5,24 +5,13 @@ const path = require("path");
 const db = require("./db"); // Import the MySQL connection
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-//const DATA_FILE = path.join(__dirname, "hostel_data.json");
+const PORT = process.env.PORT || 3000;
 
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors());          // Allow requests from any frontend origin
 app.use(express.json());  // Parse JSON request bodies
 
-// ── Helper: read the JSON file ────────────────────────────────────────────────
-function readData(filePath) {
-  DATA_FILE = path.join(__dirname, filePath)
-  const raw = fs.readFileSync(DATA_FILE, "utf-8");
-  return JSON.parse(raw);
-}
-
-
 // ── Database Routes ────────────────────────────────────────────────────────────────
-//app.use(express.json()); // Middleware to parse JSON bodies
-
 //THIS IS FOR PUTTIN HOSTELS IN THE DATABASE
 app.post("/api/hostels", (req, res) => {
   const {
@@ -56,83 +45,6 @@ app.post("/api/hostels", (req, res) => {
     }
   );
 });
-
-//THIS IS FOR GETTING HOSTELS FROM THE P0DATABASE
-// app.get("/api/hostels", (req, res) => {
-
-//   const sql = `
-//     SELECT 
-//       h.hostel_id AS id,
-//       h.name,
-//       h.type,
-//       h.main_image AS image,
-//       h.hostel_perks AS hostelPerks,
-
-//       h.total_reviews AS totalReviews,
-//       h.average_rating AS averageRating,
-
-//       l.distance_to_campus_in_meters,
-//       l.distance_to_campus_in_minutes,
-//       l.latitude,
-//       l.longitude,
-
-//       p.price_min,
-//       p.price_max,
-//       p.billing_period,
-//       p.utilities_fee,
-//       p.maintenance_fee,
-//       p.caution_deposit
-
-//     FROM hostels h
-//     LEFT JOIN locations l 
-//       ON h.hostel_id = l.hostel_id
-
-//     LEFT JOIN pricing p 
-//       ON h.hostel_id = p.hostel_id
-//   `;
-
-//   db.query(sql, (err, result) => {
-
-//     if (err) {
-//       console.log(err);
-//       return res.status(500).send("Error fetching hostels");
-//     }
-
-//     const formatted = result.map(item => ({
-//       id: item.id,
-//       name: item.name,
-//       type: item.type,
-//       image: item.image,
-//       hostelPerks: item.hostelPerks,
-
-//       location: {
-//         distanceToCampusMinutes: item.distance_to_campus_in_minutes,
-//         distanceToCampusMeters: item.distance_to_campus_in_meters,
-//         latitude: item.latitude,
-//         longitude: item.longitude
-//       },
-
-//       pricing: {
-//         priceMin: item.price_min,
-//         priceMax: item.price_max,
-//         billingPeriod: item.billing_period,
-
-//          additionalFees: {
-//           utilities: item.utilities_fee,
-//           maintenance: item.maintenance_fee,
-//           cautionDeposit: item.caution_deposit
-//         }
-//       },
-
-//       reviews: {
-//         averageRating: item.averageRating,
-//         totalReviews: item.totalReviews
-//       }
-//     }));
-//     console.log("Fetched hostels:", formatted);
-//     res.json(formatted);
-//   });
-// });
 
 app.get("/api/hostels", async (req, res) => {
 
@@ -241,7 +153,6 @@ app.get("/api/hostels", async (req, res) => {
   }
 });
 
-
 //THIS IS FOR ADDING REVIEWS TO THE DATABASE
 app.post("/api/reviews", (req, res) => {
   const { hostel_id, rating, review_text } = req.body;
@@ -292,7 +203,6 @@ app.post("/api/reviews", (req, res) => {
   });
 });
 
-
 app.get("/api/reviews/:hostelId", (req, res) => {
   let { hostelId } = req.params;
   hostelId = hostelId.replace(":", ""); // Remove the colon if it exists
@@ -321,39 +231,7 @@ app.get("/api/reviews/:hostelId", (req, res) => {
 });
 
 
-
-// app.get("/", (req, res) => {
-//   db.query("SELECT * FROM Hostels", (err, result) => {
-//     if (err) {
-//       console.log(err);
-//       res.send("Error fetching data");
-//     } else {
-//       console.log(result); // 👈 THIS prints in terminal
-//       res.json(result);    // 👈 THIS sends to browser
-//     }
-//   });
-// });
-
-
-
-app.listen(3000, () => {
-  console.log("Server running on port 3000 🚀");
-});
-
-
-
-
 // ── Routes ────────────────────────────────────────────────────────────────────
-// GET /api/data  → return the entire JSON file
-app.get("/api/data", (req, res) => {
-  try {
-    const data = readData("hostel_data.json");
-    res.json({ success: true, data });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to read data file." });
-  }
-});
-
 // GET /api/teamMembers  → return only the teamMembers array
 app.get("/api/teamMembers", (req, res) => {
   try {
@@ -383,14 +261,12 @@ app.use((req, res) => {
 
 // ── Start server ──────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`✅  Server running at http://localhost:${PORT}`);
-  console.log(`   GET /api/data`);
+  console.log(`   Server running at http://localhost:${PORT}`);
+  console.log(`   GET /api/hostels`);
   console.log(`   GET /api/teamMembers`);
   console.log(`   GET /api/moreProjects`);
   console.log(`   POST /api/reviews`);
   console.log(`   GET /api/reviews/:hostelId`);
-  // console.log(`   GET /api/products`);
-  // console.log(`   GET /api/products/:id`);
 });
 
 
