@@ -5,7 +5,7 @@ import googleImage from '../assets/icons/google.png';
 import facebookImage from '../assets/icons/contact-us-facebook.png';
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import fullStar from '../assets/icons/favorite.png';
+//import fullStar from '../assets/icons/favorite.png';
 
 
 export function LoginPage({ navlink, setNavLink }) {
