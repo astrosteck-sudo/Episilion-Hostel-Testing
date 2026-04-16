@@ -210,7 +210,7 @@ CREATE TABLE `hostels` (
 
 LOCK TABLES `hostels` WRITE;
 /*!40000 ALTER TABLE `hostels` DISABLE KEYS */;
-INSERT INTO `hostels` VALUES ('141c9727-155b-472c-b75e-27715725f27c','Urban Nest','Girls','Example University',2014,3,'Wifi • Power Backup • TV Lounge','/images/hostel-images/hostel_image_9.jpg',2,4.0),('170ab6f9-9a50-4598-8858-188f59577bf3','Victory Hostel','Boys','Example University',2013,6,'Wifi • Laundry • Shuttle • Service','/images/hostel-images/hostel_image_6.jpg',1,4.0),('47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Campus Annex','Boys','Example University',2015,2,'Wifi • Laundry • Study • Area','/images/hostel-images/hostel_image_1.jpg',0,0.0),('4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Greenfield Hostel','Mixed','Example University',2010,4,'Laundry • RecreationalArea • Parking','/images/hostel-images/hostel_image_4.jpg',0,0.0),('5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Scholars Haven','Girls','Example University',2020,2,'Wifi • Quiet • Study Area • Laundry','/images/hostel-images/hostel_image_10.jpg',1,5.0),('7af2a906-6c09-4941-8227-6325aa6ab8c6','Harmony Hostel','Girls','Example University',2019,1,'Wifi • Gym • Cafeteria','/images/hostel-images/hostel_image_7.jpg',0,0.0),('d3582f55-470e-49d9-bd94-39dab2ba0cab','Sunrise Hostel','Mixed','Example University',2016,3,'Wifi • StudyRoom • Backup Power','/images/hostel-images/hostel_image_5.jpg',0,0.0),('db900f38-3480-481d-b20b-66962ea03b7a','City View Hostel','Mixed','Example University',2011,5,'Laundry • Security • Balcony','/images/hostel-images/hostel_image_8.jpg',0,0.0),('ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Queens Residence','Girls','Example University',2018,4,'Wifi • Laundry • Gym','/images/hostel-images/hostel_image_3.jpg',0,0.0),('ea89beba-18c9-434c-8175-e3fb34581e63','Unity Lodge','Boys','Example University',2012,2,'Wifi • Cafeteria • Security','/images/hostel-images/hostel_image_2.jpg',0,0.0);
+INSERT INTO `hostels` VALUES ('141c9727-155b-472c-b75e-27715725f27c','Urban Nest','Girls','Example University',2014,3,'Wifi • Power Backup • TV Lounge','/images/hostel-images/hostel_image_9.jpg',3,4.0),('170ab6f9-9a50-4598-8858-188f59577bf3','Victory Hostel','Boys','Example University',2013,6,'Wifi • Laundry • Shuttle • Service','/images/hostel-images/hostel_image_6.jpg',1,4.0),('47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Campus Annex','Boys','Example University',2015,2,'Wifi • Laundry • Study • Area','/images/hostel-images/hostel_image_1.jpg',0,0.0),('4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Greenfield Hostel','Mixed','Example University',2010,4,'Laundry • RecreationalArea • Parking','/images/hostel-images/hostel_image_4.jpg',0,0.0),('5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Scholars Haven','Girls','Example University',2020,2,'Wifi • Quiet • Study Area • Laundry','/images/hostel-images/hostel_image_10.jpg',1,5.0),('7af2a906-6c09-4941-8227-6325aa6ab8c6','Harmony Hostel','Girls','Example University',2019,1,'Wifi • Gym • Cafeteria','/images/hostel-images/hostel_image_7.jpg',0,0.0),('d3582f55-470e-49d9-bd94-39dab2ba0cab','Sunrise Hostel','Mixed','Example University',2016,3,'Wifi • StudyRoom • Backup Power','/images/hostel-images/hostel_image_5.jpg',0,0.0),('db900f38-3480-481d-b20b-66962ea03b7a','City View Hostel','Mixed','Example University',2011,5,'Laundry • Security • Balcony','/images/hostel-images/hostel_image_8.jpg',0,0.0),('ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Queens Residence','Girls','Example University',2018,4,'Wifi • Laundry • Gym','/images/hostel-images/hostel_image_3.jpg',0,0.0),('ea89beba-18c9-434c-8175-e3fb34581e63','Unity Lodge','Boys','Example University',2012,2,'Wifi • Cafeteria • Security','/images/hostel-images/hostel_image_2.jpg',0,0.0);
 /*!40000 ALTER TABLE `hostels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,6 +243,34 @@ LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
 INSERT INTO `locations` VALUES (1,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73',5.00,3,'Located in the city of Accra North Campus A major landmark is Behind Main Gate. For directions, Walk Past the main gate, turn left at the bookshop',5.650800,-0.186900),(2,'ea89beba-18c9-434c-8175-e3fb34581e63',1.80,8,'Near the East Campus library, turn right at the junction',6.673200,-1.565400),(3,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a',3.50,12,'Opposite the South Campus cafeteria',5.115800,-1.290800),(4,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5',4.00,15,'Next to the sports complex',5.659900,-0.166600),(5,'d3582f55-470e-49d9-bd94-39dab2ba0cab',2.50,6,'Behind the science block, near the bookshop',5.759700,-0.219700),(6,'170ab6f9-9a50-4598-8858-188f59577bf3',6.00,20,'Located near the stadium, opposite the sports shop',5.768200,-0.082900),(8,'7af2a906-6c09-4941-8227-6325aa6ab8c6',1.20,4,'Opposite the North Campus gate',5.799300,-0.126100),(9,'db900f38-3480-481d-b20b-66962ea03b7a',5.00,18,'Located near the city center, opposite the bus station',9.373800,-0.884300),(10,'141c9727-155b-472c-b75e-27715725f27c',3.00,7,'Behind the engineering block, near the main road',5.350000,-0.633000),(11,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd',2.20,3,'Located beside the North Campus park',5.650000,-0.183300);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `media`
+--
+
+DROP TABLE IF EXISTS `media`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `media` (
+  `media_id` int NOT NULL AUTO_INCREMENT,
+  `hostel_id` varchar(50) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`media_id`),
+  KEY `hostel_id` (`hostel_id`),
+  CONSTRAINT `media_ibfk_1` FOREIGN KEY (`hostel_id`) REFERENCES `hostels` (`hostel_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `media`
+--
+
+LOCK TABLES `media` WRITE;
+/*!40000 ALTER TABLE `media` DISABLE KEYS */;
+INSERT INTO `media` VALUES (1,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_1.jpeg','compound'),(2,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_2.webp','room'),(3,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_3.jpg','kitchen'),(4,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_4.webp','bathroom'),(5,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_rooms/hostel_room_5.jpg','compund'),(6,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_rooms/hostel_room_5.jpg','room'),(7,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_kitchen_Images/hostel_kitchen_2.jpg','kitchen'),(8,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_bathrooms_images/hostel_bathroom_2.jpg','bathroom'),(9,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_rooms/hostel_room_6.jpg','compund'),(10,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_rooms/hostel_room_6.jpg','room'),(11,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_kitchen_Images/hostel_kitchen_3.jpg','kitchen'),(12,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_bathrooms_images/hostel_bathroom_3.jpg','bathroom'),(13,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_rooms/hostel_room_7.jpg','compund'),(14,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_rooms/hostel_room_7.jpg','room'),(15,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_kitchen_Images/hostel_kitchen_4.jpg','kitchen'),(16,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_bathrooms_images/hostel_bathroom_4.jpg','bathroom'),(17,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_rooms/hostel_room_8.jpg','compund'),(18,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_rooms/hostel_room_8.jpg','room'),(19,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_kitchen_Images/hostel_kitchen_5.jpg','kitchen'),(20,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_bathrooms_images/hostel_bathroom_5.jpg','bathroom'),(21,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_rooms/hostel_room_9.jpg','compund'),(22,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_rooms/hostel_room_9.jpg','room'),(23,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_kitchen_Images/hostel_kitchen_6.jpg','kitchen'),(24,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_bathrooms_images/hostel_bathroom_6.jpg','bathroom'),(25,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_rooms/hostel_room_10.jpg','compund'),(26,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_rooms/hostel_room_10.jpg','room'),(27,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_kitchen_Images/hostel_kitchen_7.jpg','kitchen'),(28,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_bathrooms_images/hostel_bathroom_7.jpg','bathroom'),(33,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_rooms/hostel_room_11.jpg','compund'),(34,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_rooms/hostel_room_11.jpg','room'),(35,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_kitchen_Images/hostel_kitchen_8.jpg','kitchen'),(36,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_bathrooms_images/hostel_bathroom_8.jpg','bathroom'),(37,'141c9727-155b-472c-b75e-27715725f27c','../hostel_rooms/hostel_room_12.jpg','compund'),(38,'141c9727-155b-472c-b75e-27715725f27c','../hostel_rooms/hostel_room_12.jpg','room'),(39,'141c9727-155b-472c-b75e-27715725f27c','../hostel_kitchen_Images/hostel_kitchen_9.jpg','kitchen'),(40,'141c9727-155b-472c-b75e-27715725f27c','../hostel_bathrooms_images/hostel_bathroom_9.jpg','bathroom'),(41,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_rooms/hostel_room_13.jpg','compund'),(42,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_rooms/hostel_room_13.jpg','room'),(43,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_kitchen_Images/hostel_kitchen_10.jpg','kitchen'),(44,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_bathrooms_images/hostel_bathroom_10.jpg','bathroom');
+/*!40000 ALTER TABLE `media` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -321,7 +349,7 @@ CREATE TABLE `reviews` (
   KEY `hostel_id` (`hostel_id`),
   CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`hostel_id`) REFERENCES `hostels` (`hostel_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `reviews_chk_1` CHECK ((`rating` between 1 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -330,7 +358,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (1,'141c9727-155b-472c-b75e-27715725f27c',4,'Cool hostel bro','2026-04-13 00:07:27'),(2,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Cool hostel bro','2026-04-13 00:08:42'),(3,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd',5,'cool hostel bro','2026-04-13 00:11:15'),(4,'141c9727-155b-472c-b75e-27715725f27c',4,'Very close to the school','2026-04-14 03:12:39');
+INSERT INTO `reviews` VALUES (1,'141c9727-155b-472c-b75e-27715725f27c',4,'Cool hostel bro','2026-04-13 00:07:27'),(2,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Cool hostel bro','2026-04-13 00:08:42'),(3,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd',5,'cool hostel bro','2026-04-13 00:11:15'),(4,'141c9727-155b-472c-b75e-27715725f27c',4,'Very close to the school','2026-04-14 03:12:39'),(5,'141c9727-155b-472c-b75e-27715725f27c',4,'Joycelyn stole my data yaya','2026-04-16 20:04:36');
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,4 +491,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-13 20:15:34
+-- Dump completed on 2026-04-16 13:07:39
