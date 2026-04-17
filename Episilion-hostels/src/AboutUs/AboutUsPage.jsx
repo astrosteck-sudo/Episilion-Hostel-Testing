@@ -12,7 +12,7 @@ import phone from '../assets/icons/contact-us-phone.png'
 import whatsapp from '../assets/icons/contact-us-whatsapp.png'
 
 
-export function AboutUsPage({ navlink, setNavLink }) {
+export function AboutUsPage() {
     const [teamData, setTeamData] = useState([]);
 
     const loadTeamCards = async () => {
@@ -30,7 +30,7 @@ export function AboutUsPage({ navlink, setNavLink }) {
     return (
         <>
             <title>About Us | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
 
             <main className='about-main'>
                 <section className="about-hero">

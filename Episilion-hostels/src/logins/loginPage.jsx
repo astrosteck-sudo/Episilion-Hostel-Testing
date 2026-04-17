@@ -4,12 +4,21 @@ import { SiteFooter } from "../SiteFooter/SiteFooter";
 import googleImage from '../assets/icons/google.png';
 import facebookImage from '../assets/icons/contact-us-facebook.png';
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 //import fullStar from '../assets/icons/favorite.png';
 
 
-export function LoginPage({ navlink, setNavLink }) {
+export function LoginPage({ setIsLoggedIn }) {
 
+    const navigate = useNavigate();
+    const [type, setType] = useState('password');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    //THIS USEEFFECT ADDS A BACKGROUND PICTURE TO THE BODY WHEN THE LOGIN PAGE IS RENDERED AND REMOVES IT WHEN THE COMPONENT UNMOUNTS
     useEffect(() => {
         document.body.classList.add("body-bg");
         return () => {
@@ -17,11 +26,65 @@ export function LoginPage({ navlink, setNavLink }) {
         };
     }, []);
 
+    function showPassword(parameter) {
+        if (parameter === 'password') {
+            setType('text')
+        } else {
+            setType('password')
+        }
+    }
+    function handleEmail(event) {
+        setEmail(event.target.value);
+    }
+    function handlePasword(event) {
+        setPassword(event.target.value);
+    }
+
+
+
+
+
+
+
+    //const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
+
+    async function handleLogin(e) {
+        e.preventDefault();
+        setErrorMessage('');
+
+        try {
+            const res = await axios.post(`http://localhost:3000/api/login`, {
+                email,
+                password
+            });
+
+            const token = res.data.token;
+
+            // ✅ STORE TOKEN
+            localStorage.setItem("token", token);
+
+            console.log("Login successful");
+
+            // ✅ REDIRECT TO HOME
+            setIsLoggedIn(true);
+            navigate("/");
+
+        } catch (error) {
+            setErrorMessage(error.response?.data || "Login failed");
+        }
+    }
+
+
+
+
+
+
+
 
     return (
         <>
-            <title>Sign-Up | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            <title>Login | Episilion Hostels</title>
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
 
             <div className="sign-up-container">
                 <div className="side-bar-login">
@@ -63,20 +126,29 @@ export function LoginPage({ navlink, setNavLink }) {
                         <span>or sign up with email</span>
                     </div>
 
-                    <div className="email-address-conatainer">
-                        <p for="email-address" className="email-address-header">EMAIL ADDRESS</p>
-                        <input type="email" name="email" placeholder="you@example.com" className="email-address-input" />
-                    </div>
-
-                    <div className="passwords-container">
-                        <div className="password-conatainer">
-                            <p for="password" className="password-header">PASSWORD</p>
-                            <input type="password" name="password" placeholder="••••••••••••••••" className="password-input" />
+                    <form method="POST" id="myForm" onSubmit={handleLogin}>
+                        <div className="email-address-conatainer">
+                            <p for="email-address" className="email-address-header">EMAIL ADDRESS</p>
+                            <input type="email" name="email" placeholder="you@example.com" className="email-address-input" value={email} onChange={handleEmail} required />
                         </div>
-                    </div>
 
-                    <div className="create-account-button-container">
-                        <button className="create-account-button">Login</button>
+                        <div className="passwords-container">
+                            <div className="password-conatainer">
+                                <p for="password" className="password-header">PASSWORD</p>
+                                <input type={type} name="password" placeholder="••••••••••••••••" className="password-input" value={password} onChange={handlePasword} required />
+                            </div>
+                        </div>
+
+                        <div className="show-password-container">
+                            <input type="checkbox" id="showPassword" onClick={() => showPassword(type)} /><label for="showPassword" className="show-password">Show password</label>
+                        </div>
+
+                        <div className="create-account-button-container">
+                            <button className="create-account-button" type="submit">Login</button>
+                        </div>
+                    </form>
+                    <div className="error-message-container login">
+                        <p>{errorMessage}</p>
                     </div>
 
                     <div className="alternate-link-container">

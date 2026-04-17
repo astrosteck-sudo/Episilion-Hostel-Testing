@@ -13,7 +13,7 @@ import resetImage from '../assets/icons/refresh.png';
 import noResultImage from '../assets/icons/no-results-(1).png'
 import { useEffect, useState } from "react";
 
-export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardData, originalHostelCardData }) {
+export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCardData }) {
     const [gender, setGender] = useState('');//THIS CONTROLS THE GENDER OT BE USED IN THE FILTERING PROCESS
     const [genderText, setGenderText] = useState('Search');// THIS CONTROLS THE D=GENDER SHOWN IN THE SEARCH BUTTON IN THE FILTER MENUI
     const [minPrice, setMinPrice] = useState('');//THIS CONTROLS THE MIN PRICE IN THE FILTER
@@ -269,7 +269,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     
     return (
         <>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} /> */}
 
             <div className="side-bar-buttons-container">
                 <button className="filter-image" onClick={openFilterMenu}><img src={filterImage}></img>Filter</button>

@@ -21,7 +21,7 @@ import { Reviews } from './ReviewsData.jsx';
 
 
 
-export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData }) {
+export function MoreDetailsPage({originalHostelCardData }) {
     const [close, setClose] = useState(true);//THIS CONTROLS THE THE IFRAME, OPENING AND CLOSING IT
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
     const [reviewTextValue, setReviewTextValue] = useState('')//THIS CONTROLS WHAT THE USER TYPOES IN THE TEXT AREA
@@ -138,7 +138,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     return (
         <>
             <title>View Details | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
 
 
             <section className="more-details js-more-details">

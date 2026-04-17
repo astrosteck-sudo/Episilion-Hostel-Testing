@@ -7,7 +7,7 @@ import axios from "axios";
 import { ProjectsCards } from "./ProjectsCards";
 
 
-export function MoreFromUsPage({ navlink, setNavLink }) {
+export function MoreFromUsPage() {
 
     const [moreFromUsData, setMoreFromUs] = useState([])
 
@@ -25,7 +25,7 @@ export function MoreFromUsPage({ navlink, setNavLink }) {
 
         <>
             <title>More From Us | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
 
 
             <section class="more-from-us-section js-more-from-us-section">

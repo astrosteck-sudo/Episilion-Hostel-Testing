@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export function SignUpPage({ navlink, setNavLink }) {
+export function SignUpPage() {
     const navigate = useNavigate();
 
     const [fullName, setFullName] = useState('');
@@ -39,11 +39,11 @@ export function SignUpPage({ navlink, setNavLink }) {
     const [type, setType] = useState('password');
 
     function showPassword(parameter) {
-        if (type === 'password') {
-            setType('text')
-        } else {
-            setType('password')
-        }
+        // if (type === 'password') {
+        //     setType('text')
+        // } else {
+        //     setType('password')
+        // }
         if (parameter === 'password') {
             setType('text');
         } else {
@@ -52,36 +52,6 @@ export function SignUpPage({ navlink, setNavLink }) {
         console.log(parameter)
 
     }
-
-
-
-
-    // function Signup() {
-    // const handleSumbit = async (e) => {
-    //     e.preventDefault(); // 🔥 stops page reload & URL params
-
-    //     const formData = new FormData(e.target);
-    //     const password = formData.get("password");
-    //     const confirmPassword = formData.get("confirmPassword");
-
-    //     if (password !== confirmPassword) {
-    //         console.log("Passwords do not match");
-    //         return;
-    //     }
-
-    //     try {
-    //         const response = await axios.post("/api/signup", {
-    //             password,
-    //             // include other fields
-    //         });
-
-    //         console.log(response.data);
-    //     } catch (err) {
-    //         console.error(err);
-    //     }
-    // };
-    // }
-
 
 
     async function handleSumbit(event) {
@@ -115,7 +85,7 @@ export function SignUpPage({ navlink, setNavLink }) {
     return (
         <>
             <title>Sign-Up | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
 
             <div className="sign-up-container">
                 <div className="sign-up-wrapper">
@@ -195,5 +165,5 @@ export function SignUpPage({ navlink, setNavLink }) {
 
 
 
-//const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
+
 //await axios.post(`${API_URL}/api/signup`, {...});

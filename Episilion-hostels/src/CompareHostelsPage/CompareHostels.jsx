@@ -11,7 +11,7 @@ import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
 
 
 
-export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) {
+export function CompareHostels({ originalHostelCardData }) {
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId");
     //const url = 'https://episilion-backend-2lt0.onrender.com';
@@ -124,7 +124,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
 
         <>
             <title>Compare Hostels | Epislion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
 
             <div className="hostel-comparison-container">
                 <div className="compared-hostels">

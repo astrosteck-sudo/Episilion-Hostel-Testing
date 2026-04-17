@@ -1,16 +1,20 @@
-.header-section{
+.header-section {
   /* border: solid red; */
   height: 10%;
   display: flex;
   align-items: center;
   /* width: 100vw; */
   justify-content: space-between;
-  flex-wrap: wrap;/*THIS LET ITEMS WRAP TO THE NEXT LINE IF THE SCREEN IS TO SMALL*/
+  flex-wrap: wrap;
+  /*THIS LET ITEMS WRAP TO THE NEXT LINE IF THE SCREEN IS TO SMALL*/
   background-color: #d3c84d;
 
-  position: sticky;/*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
-  top: 0;/*STCIKS THE HEADER AT THE VERY TOP OF THE PAGE*/
-  z-index: 1000;/*THIS ENSURES THE HEADER STAYS ABOVE THE CONTENT*/
+  position: sticky;
+  /*THIS MAKES THE HEADER STICKY WHEN SCOLLING IF YOU MAKE THIS sticky YOU WONT NEED THE WIDTH*/
+  top: 0;
+  /*STCIKS THE HEADER AT THE VERY TOP OF THE PAGE*/
+  z-index: 1000;
+  /*THIS ENSURES THE HEADER STAYS ABOVE THE CONTENT*/
   padding: 1rem;
   box-sizing: border-box;
   overflow: scroll;
@@ -19,28 +23,48 @@
 
 }
 
-.episilion-logo{
+.episilion-logo {
   width: 40px;
   /* background: white; */
   float: left;
   margin-right: 5px;
   border-radius: 5px 7px;
 }
-.prop-nav-link{
+
+.prop-nav-link {
   opacity: 1;
   border: solid red;
 }
 
-.login-systems{
+.login-systems {
   width: 20vw;
   display: flex;
   /* flex-wrap: wrap; */
   text-align: center;
   align-items: center;
-  justify-content:space-around;
+  justify-content: space-around;
   gap: 10px;
 }
-.login-systems > a{
+
+.login-systems.logout {
+  width: 18vw;
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.login-systems button {
+  font-size: clamp(0.8rem, 1vw, 1rem);
+  border-radius: 11px;
+  width: 50%;
+  background: black;
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+  font-weight: bolder;
+}
+
+.login-systems>a {
   font-size: 20px;
   border-radius: 11px;
   width: 50%;
@@ -50,27 +74,32 @@
   padding: 8px;
   font-weight: bolder;
 }
-.episilion{
+
+.episilion {
   font-size: 15px;
-  text-decoration: none; 
-  color: rgb(194, 8, 8); 
-  text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  text-decoration: none;
+  color: rgb(194, 8, 8);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-.episilion:hover{
+
+.episilion:hover {
   border: white solid;
 }
-.episilion p{
+
+.episilion p {
   font-family: BBHBartle;
 }
+
 /* .episilion:active {
   border: solid white;
   border-radius: 10px;
 } */
-.navigation-links{
+.navigation-links {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  flex: 1 1 auto;/*(flex_grow: 1)NAV TAKES REMAINING SPACE (flex_shrink: 1)SHRINKS IF SCREEN IS NARROW (flex-basis: auto)NATURAL SIZE.THIS MAKES NAV AUTOMATICALLY ADJUST TO DIFFRENT WIDTHS*/
+  flex: 1 1 auto;
+  /*(flex_grow: 1)NAV TAKES REMAINING SPACE (flex_shrink: 1)SHRINKS IF SCREEN IS NARROW (flex-basis: auto)NATURAL SIZE.THIS MAKES NAV AUTOMATICALLY ADJUST TO DIFFRENT WIDTHS*/
   text-align: right;
   align-items: center;
   justify-content: space-evenly;
@@ -78,22 +107,26 @@
   padding-left: 50px;
   z-index: 1000;
 }
-.navigation-links .link{
+
+.navigation-links .link {
   text-decoration: none;
   /* border: solid red; */
   font-family: AntipastoPro;
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
-.link{
+
+.link {
   float: left;
 }
 
 
-.hamburger-button{
+.hamburger-button {
   display: none;
 }
 
-.about-us-link.active, .more-from-us.active, .ask-episilion.active{
+.about-us-link.active,
+.more-from-us.active,
+.ask-episilion.active {
   background: linear-gradient(45deg, #2e3192, #1bffff);
   padding: 10px;
   border-radius: 5px;
@@ -109,17 +142,20 @@
 
 
 
-@media only screen and (max-width: 992px){
-    /* Default hidden sidebar */
+@media only screen and (max-width: 992px) {
+
+  /* Default hidden sidebar */
   .navigation-links {
     position: fixed;
     top: 0;
-    right: -5050px;  /*hide off-screen */
+    right: -5050px;
+    /*hide off-screen */
     height: 100%;
     width: 65%;
     background-color: #d3c84d;
     display: flex;
-    opacity: 1;/*THIS MAKES IT DISAPEAR INITIALLY BUT ONLY REAPPEARS WHEN THE BUTTON IS CLICKED*/
+    opacity: 1;
+    /*THIS MAKES IT DISAPEAR INITIALLY BUT ONLY REAPPEARS WHEN THE BUTTON IS CLICKED*/
     flex-direction: column;
     align-items: center;
     justify-content: start;
@@ -128,6 +164,7 @@
     overflow: scroll;
     padding-left: 0px;
   }
+
   /* Active state: visible sidebar */
   .navigation-links.active {
     right: 0;
@@ -140,12 +177,23 @@
     text-decoration: none;
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
-  .login-systems{
+
+  .login-systems {
     width: 60vw;
   }
-  .login-systems > a{
+  .login-systems.logout {
+    justify-content: center;
+  }
+
+  .login-systems.logout {
+    width: 60vw;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+
+  }
+
+  .login-systems>a {
     padding: 8px;
   }
 
@@ -156,37 +204,41 @@
     height: 100%;
     border: none;
   }
-  .hamburger-button img{
+
+  .hamburger-button img {
     background-color: #d3c84d;
     height: 100%;
     width: 100%;
   }
+
   .navigation-links {
     display: flex;
   }
 
-  .login-systems a{
+  .login-systems a {
     margin-left: 0px;
   }
 }
 
 /*Mobile Display*/
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
 
   .hamburger-button {
     height: 20%;
-    
+
   }
+
   .navigation-links.active {
     right: 0;
     opacity: 1;
   }
 
-  #all-rights-text{
+  #all-rights-text {
     width: 100%;
     text-align: center;
   }
-  .footer-links{
+
+  .footer-links {
     width: 100%;
     align-items: center;
     justify-content: space-between;
@@ -195,7 +247,7 @@
 
 
 
-@media screen and (min-width: 600px) and (max-width: 992px){
+@media screen and (min-width: 600px) and (max-width: 992px) {
   .hamburger-button {
     height: 50%;
   }
