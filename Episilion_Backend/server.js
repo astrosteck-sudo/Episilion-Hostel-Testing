@@ -140,9 +140,9 @@ app.get("/api/hostels", async (req, res) => {
 
         media: {
           images: media.filter(m => m.hostel_id === h.hostel_id).map(m => ({
-              url: m.url,
-              type: m.type
-            })),
+            url: m.url,
+            type: m.type
+          })),
 
           //video: videos.find(v => v.hostel_id === h.hostel_id)?.url || null
         }
@@ -171,9 +171,9 @@ app.post("/api/reviews", (req, res) => {
 
   // 2. SQL queries
   const insertSql = `
-    INSERT INTO Reviews (hostel_id, rating, review_text)
-    VALUES (?, ?, ?)
-  `;
+  INSERT INTO reviews (hostel_id, rating, review_text)
+  VALUES (?, ?, ?)
+`;
   const updateSql = `
     UPDATE hostels
     SET 
