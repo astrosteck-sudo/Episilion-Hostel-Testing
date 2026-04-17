@@ -44,7 +44,6 @@ app.post("/api/hostels", (req, res) => {
         console.log(err);
         res.status(500).send("Error inserting hostel");
       } else {
-        console.log("Inserted:", result);
         res.send("Hostel added successfully ✅");
       }
     }
