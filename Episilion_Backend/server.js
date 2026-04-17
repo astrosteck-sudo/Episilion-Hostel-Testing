@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const db = require("./db"); // Import the MySQL connection
 
 const app = express();
@@ -241,7 +243,6 @@ app.get("/api/reviews/:hostelId", (req, res) => {
   });
 });
 
-
 // ── Routes ────────────────────────────────────────────────────────────────────
 // GET /api/teamMembers  → return only the teamMembers array
 app.get("/api/teamMembers", (req, res) => {
@@ -265,6 +266,69 @@ app.get("/api/moreProjects", (req, res) => {
 });
 
 
+//THIS IS FOR SIGNING UP USERS AND STORING THEM IN THE DATABASE
+// If you also want form data:
+//app.use(express.urlencoded({ extended: true }));
+app.post("/api/signup", async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    // 1. Check if user already exists
+    const checkSql = "SELECT * FROM users WHERE email = ?";
+    db.query(checkSql, [email], async (err, result) => {
+      if (result.length > 0) {
+        return res.status(400).send("User already exists");
+      }
+
+      // 2. Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // 3. Insert user
+      const insertSql =
+        "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
+
+      db.query(insertSql, [name, email, hashedPassword], (err, result) => {
+        if (err) return res.status(500).send("Error creating user");
+
+        res.send("Signup successful");
+      });
+    });
+
+  } catch (err) {
+    res.status(500).send("Server error");
+  }
+});
+
+
+
+app.post("/api/login", (req, res) => {
+  const { email, password } = req.body;
+
+  const sql = "SELECT * FROM users WHERE email = ?";
+
+  db.query(sql, [email], async (err, result) => {
+    if (result.length === 0) {
+      return res.status(400).send("User not found");
+    }
+
+    const user = result[0];
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).send("Wrong password");
+    }
+
+    const token = jwt.sign(
+      { user_id: user.user_id },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.json({ token });
+  });
+});
+
 
 // 404 catch-all
 app.use((req, res) => {
@@ -279,6 +343,8 @@ app.listen(PORT, () => {
   console.log(`   GET /api/moreProjects`);
   console.log(`   POST /api/reviews`);
   console.log(`   GET /api/reviews/:hostelId`);
+  console.log(`   POST /api/signup`);
+  console.log(`   POST /api/login`);
 });
 
 
