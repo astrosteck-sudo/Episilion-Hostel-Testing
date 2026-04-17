@@ -14,7 +14,7 @@ import { getDirectionsOnMap } from '../UTILS/mapFunctions.js';
 export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) {
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId");
-
+    const url = 'http://localhost:3000'
     const [hostelNumber, setHostelNumber] = useState(hostelId)//THIS CONTOLS THE HOSTEL THAT SHOWS UP WHEN THE USER CLICKES THE ARROW KEYS
     const [controlsListIndex, setControlListIndex] = useState(0)
     //THIS CONTROL CODE WILL MAKE SURE THE controlsListIndex WILL ALWAYS UPDATE WHEN THE originalHostelCardData CHANGES
@@ -132,7 +132,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                             return (
                                 <>
                                     <h1 className="compared-hostel-name">{hostel.name}</h1>
-                                    <img className="compared-hostel-image" src={hostel.image} alt="" />
+                                    <img className="compared-hostel-image" src={url + hostel.image} alt="" />
                                     <p className="compared-hostel-distance">Distance From Campus : {hostel.distance} <span className={`compared-hostel-diatance-advantage ${leftHostelDistanceAdvantage}`}>{leftHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
                                     <div className="view-location-container">
                                         <button className="view-location js-view-location" onClick={() =>showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)}>View Location</button>
@@ -178,7 +178,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                             })
                                         }
                                         {
-                                            hostel.rooms.furnishing.map((funish) => {
+                                            hostel.furnishing.map((funish) => {
                                                 return (
                                                     <li class="special-font">{funish}</li>
                                                 )
@@ -202,8 +202,8 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
 
                                             return (
                                                 <div class="compared-hostel-room-type-image">
-                                                    <a href={image.url}>
-                                                        <img class="hostel-room" src={image.url} alt={image.type}></img>
+                                                    <a href={url + image.url}>
+                                                        <img class="hostel-room" src={url + image.url} alt={image.type}></img>
                                                     </a>
                                                     <div class="hostel-room-type-overlay">
                                                         <span class="hostel-room-type-overlay-text">{image.type}</span>
@@ -212,6 +212,8 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                             )
                                         })}
                                     </div>
+
+
                                 </>
                             )
                         }
@@ -236,7 +238,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                         <button className="compare-hostels-arrow-button" onClick={() => increaseHostelNumber()}><img src={rightArrowImage} alt="" /></button>
                                     </div>
                                     {/* <h1 className="compared-hostel-name">{hostel.name}</h1> */}
-                                    <img className="compared-hostel-image" src={hostel.image} alt="" />
+                                    <img className="compared-hostel-image" src={url + hostel.image} alt="" />
                                     <p className="compared-hostel-distance">Distance From Campus : {hostel.distance} m <span className={`compared-hostel-diatance-advantage ${rightHostelDistanceAdvantage}`}>{rightHostelDistanceAdvantage ? 'Closer' : 'Further'}</span></p>
                                     <div className="view-location-container">
                                         <button className="view-location js-view-location" onClick={() =>showHostelLocationOnMap(setClose, setActivate, originalHostelCardData, hostelId, setGoogleMapSrc)}>View Location</button>
@@ -281,7 +283,7 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                             })
                                         }
                                         {
-                                            hostel.rooms.furnishing.map((funish) => {
+                                            hostel.furnishing.map((funish) => {
                                                 return (
                                                     <li class="special-font">{funish}</li>
                                                 )
@@ -305,8 +307,8 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
 
                                             return (
                                                 <div class="compared-hostel-room-type-image">
-                                                    <a href={image.url}>
-                                                        <img class="hostel-room" src={image.url} alt={image.type}></img>
+                                                    <a href={url + image.url}>
+                                                        <img class="hostel-room" src={url + image.url} alt={image.type}></img>
                                                     </a>
                                                     <div class="hostel-room-type-overlay">
                                                         <span class="hostel-room-type-overlay-text">{image.type}</span>
