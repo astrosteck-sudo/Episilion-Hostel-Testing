@@ -4,6 +4,9 @@ import { getDistance } from 'geolib';
 
 export function HostelCard({ hostel }) {
 
+    //THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+    const url = 'http://localhost:3000'
+
     const navigate = useNavigate();
     // function showHostelId(parameter){
     //     window.location.href = `moreDetails?hostelId=${parameter}`;
@@ -15,7 +18,7 @@ export function HostelCard({ hostel }) {
     return (
         <div className="hostel-card">
             <div className="image-container">
-                <img id="hostel-card-image" src={hostel.image} alt="hostel-image"></img>
+                <img id="hostel-card-image" src={url + hostel.image} alt="hostel-image"></img>
                 <div className="hostel-rating-text">
                     <span className="overlay-text-hostel-rating">{hostel.reviews.averageRating}({hostel.reviews.totalReviews})</span><br></br>
                 </div>

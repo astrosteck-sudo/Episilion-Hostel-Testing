@@ -212,8 +212,6 @@ export function CompareHostels({ navlink, setNavLink, originalHostelCardData }) 
                                             )
                                         })}
                                     </div>
-
-
                                 </>
                             )
                         }

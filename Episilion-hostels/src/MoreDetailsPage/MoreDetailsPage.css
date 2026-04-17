@@ -249,6 +249,7 @@ p.font-paragraph {
   align-items: center;
   gap: clamp(5px, 1vw, 1px);
   row-gap: 0px;
+  margin-top: 10px;
 }
 
 
@@ -317,7 +318,7 @@ p.font-paragraph {
 .hostel-room-type-image {
   cursor: pointer;
   overflow: hidden;
-  /* position: relative; */
+  position: relative;
 }
 
 .hostel-room-type-image img {

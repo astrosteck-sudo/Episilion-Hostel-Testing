@@ -25,7 +25,7 @@ export function HomePage({ hostelsCardData, navlink, setNavLink, sethostelsCardD
     const [hostelsFound, setHostelsFound] = useState(true);//THIS CONTROLS THE not found image AND text
     const [loading, setLoading] = useState(true);//THIS CONTROLS THE CSS LOADING STATE
     const [filterMenu, setFilterMenu] = useState(false)// THIS CONTROLS THE FILTER MENU OPEN AND CLOSE
-    
+    //const url = 'http://localhost:3000'    
 
     //console.log(hostelsCardData)
     useEffect(() => {

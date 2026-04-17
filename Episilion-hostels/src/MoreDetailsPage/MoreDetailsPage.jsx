@@ -29,7 +29,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
     //const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
     const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
-
+    const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
 
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
@@ -149,7 +149,7 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
                             return (
                                 <>
                                     <div className="hostel-image-card">
-                                        <img src={hostel.image} alt={`${hostel.name} image`}></img>
+                                        <img src={url + hostel.image} alt={`${hostel.name} image`}></img>
                                         <div className="overlay">
                                             <span className="overlay-text">{hostel.name}</span>
                                         </div>
@@ -298,8 +298,8 @@ export function MoreDetailsPage({ navlink, setNavLink, originalHostelCardData })
 
                                             return (
                                                 <div class="hostel-room-type-image">
-                                                    <a href={image.url}>
-                                                        <img class="hostel-room" src={image.url} alt={image.type}></img>
+                                                    <a href={url + image.url}>
+                                                        <img class="hostel-room" src={url +image.url} alt={image.type}></img>
                                                     </a>
                                                     <div class="hostel-room-type-overlay">
                                                         <span class="hostel-room-type-overlay-text">{image.type}</span>

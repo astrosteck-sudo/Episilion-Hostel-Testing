@@ -7,6 +7,11 @@ const db = require("./db"); // Import the MySQL connection
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
+//THIS MAKES THE IMAGES IN THE PUBLIC FOLDER ACCESSIBLE TO THE FRONTEND
+app.use("/images", express.static("public/images")); // Serve images from the public/images directory
+console.log("Static Images served at /images");
+
 // ── Middleware ────────────────────────────────────────────────────────────────
 app.use(cors());          // Allow requests from any frontend origin
 app.use(express.json());  // Parse JSON request bodies
