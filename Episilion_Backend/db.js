@@ -4,11 +4,15 @@ const mysql = require("mysql2");
 
 
 const db = mysql.createConnection({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD, // your MySQL password
-  database: process.env.DB_NAME ||  "mydb"
-});
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  ssl: {
+    rejectUnauthorized: false
+  }// important for Railway
+})
 
 
 //THIS CODE RUNS EVERY MIDNIGHT TO DELETE ANY REVIEW THAT IS MORE THAN 2 MONTHS OLD and then it recalculates the average rating and total reviews for all hostels in the database every 24 hours
