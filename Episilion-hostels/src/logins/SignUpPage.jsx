@@ -4,11 +4,31 @@ import { SiteFooter } from "../SiteFooter/SiteFooter";
 import googleImage from '../assets/icons/google.png';
 import facebookImage from '../assets/icons/contact-us-facebook.png';
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export function SignUpPage({ navlink, setNavLink }) {
+    const navigate = useNavigate();
 
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+
+    function handleFullname(event) {
+        setFullName(event.target.value);
+    }
+    function handleEmail(event) {
+        setEmail(event.target.value);
+    }
+    function handlePassword(event) {
+        setPassword(event.target.value);
+    }
+    function handleConfirmPassword(event) {
+        setConfirmPassword(event.target.value);
+    }
     useEffect(() => {
         document.body.classList.add("body-bg");
         return () => {
@@ -16,23 +36,80 @@ export function SignUpPage({ navlink, setNavLink }) {
         };
     }, []);
 
-    // const [type, setType] = useState('password');
+    const [type, setType] = useState('password');
 
-    // function showpassword(parameter){
-    // if(type === 'password'){
-    //     setType('text')
-    // }else{
-    //     setType('password')
-    // }
-    //console.log('Show password has been clicked')
-    //     if(parameter === 'password'){
-    //         setType('text');
-    //     }else{
-    //         setType('password')
+    function showPassword(parameter) {
+        if (type === 'password') {
+            setType('text')
+        } else {
+            setType('password')
+        }
+        if (parameter === 'password') {
+            setType('text');
+        } else {
+            setType('password')
+        }
+        console.log(parameter)
+
+    }
+
+
+
+
+    // function Signup() {
+    // const handleSumbit = async (e) => {
+    //     e.preventDefault(); // 🔥 stops page reload & URL params
+
+    //     const formData = new FormData(e.target);
+    //     const password = formData.get("password");
+    //     const confirmPassword = formData.get("confirmPassword");
+
+    //     if (password !== confirmPassword) {
+    //         console.log("Passwords do not match");
+    //         return;
     //     }
-    //     console.log(parameter)
 
+    //     try {
+    //         const response = await axios.post("/api/signup", {
+    //             password,
+    //             // include other fields
+    //         });
+
+    //         console.log(response.data);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
     // }
+
+
+
+    async function handleSumbit(event) {
+        event.preventDefault();
+        if (password !== confirmPassword) {
+            setErrorMessage("Passwords do not match");
+            return;
+        }
+        setErrorMessage('');
+        try {
+            console.log("Submitting data:")
+            await axios.post("http://localhost:3000/api/signup", {
+                name: fullName,
+                email: email,
+                password: password
+            });
+            console.log("Signup successful");
+            navigate("/login"); // Redirect to login page after successful signup
+            // Optionally, you can redirect the user to the login page or home page after successful signup
+            // For example: window.location.href = "/login";
+
+        } catch (error) {
+            setErrorMessage(error.response?.data || "An error occurred during signup");
+            console.log("Error submitting review:", error.response?.data || error.message);
+        }
+    }
+
+
 
 
     return (
@@ -57,36 +134,40 @@ export function SignUpPage({ navlink, setNavLink }) {
                         <span>or sign up with email</span>
                     </div>
 
-                    <div className="fullname-conatainer">
-                        <p for="fullname" className="full-name-header">FULL NAME</p>
-                        <input type="text" name="fullname" placeholder="e.g. John Mensah" className="full-name-input" />
-                    </div>
-
-                    <div className="email-address-conatainer">
-                        <p for="email-address" className="email-address-header">EMAIL ADDRESS</p>
-                        <input type="email" name="email" placeholder="you@example.com" className="email-address-input" />
-                    </div>
-
-                    <div className="passwords-container">
-                        <div className="password-conatainer">
-                            <p for="password" className="password-header">PASSWORD</p>
-                            <input type="password" name="password" placeholder="••••••••••••••••" className="password-input" />
+                    <form method="POST" id="myForm" onSubmit={handleSumbit}>
+                        <div className="fullname-conatainer">
+                            <p for="fullname" className="full-name-header">FULL NAME</p>
+                            <input type="text" name="fullname" placeholder="e.g. John Mensah" className="full-name-input" value={fullName} onChange={handleFullname} required />
                         </div>
 
-                        <div className="comfirm-password-conatainer">
-                            <p for="comfirm-password" className="comfirm-password-header">COMFIRM PASSWORD</p>
-                            <input type="password" name="comfirm-password" placeholder="••••••••••••••••" className="comfirm-password-input" />
+                        <div className="email-address-conatainer">
+                            <p for="email-address" className="email-address-header">EMAIL ADDRESS</p>
+                            <input type="email" name="email" placeholder="you@example.com" className="email-address-input" value={email} onChange={handleEmail} required />
                         </div>
-                    </div>
 
-                    <div className="show-password-container">
-                        <input type="checkbox" id="showPassword" /><label for="showPassword" className="show-password">Show password</label>
-                    </div>
+                        <div className="passwords-container">
+                            <div className="password-conatainer">
+                                <p for="password" className="password-header">PASSWORD</p>
+                                <input type={type} name="password" placeholder="••••••••••••••••" className="password-input" value={password} onChange={handlePassword} required />
+                            </div>
 
-                    <div className="create-account-button-container">
-                        <button className="create-account-button">Create Account</button>
-                    </div>
+                            <div className="comfirm-password-conatainer">
+                                <p for="comfirm-password" className="comfirm-password-header">COMFIRM PASSWORD</p>
+                                <input type={type} name="comfirm-password" placeholder="••••••••••••••••" className="comfirm-password-input" value={confirmPassword} onChange={handleConfirmPassword} required />
+                            </div>
+                        </div>
 
+                        <div className="show-password-container">
+                            <input type="checkbox" id="showPassword" onClick={() => showPassword(type)} /><label for="showPassword" className="show-password">Show password</label>
+                        </div>
+
+                        <div className="create-account-button-container">
+                            <button className="create-account-button" type="submit">Create Account</button>
+                        </div>
+                        <div className="error-message-container login">
+                            <p>{errorMessage}</p>
+                        </div>
+                    </form>
                     <div className="alternate-link-container">
                         <p>Already have an account? <Link className="logins-page-link" to="/login">Log in</Link></p>
                     </div>
@@ -106,3 +187,13 @@ export function SignUpPage({ navlink, setNavLink }) {
         </>
     )
 }
+
+
+
+
+
+
+
+
+//const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
+//await axios.post(`${API_URL}/api/signup`, {...});

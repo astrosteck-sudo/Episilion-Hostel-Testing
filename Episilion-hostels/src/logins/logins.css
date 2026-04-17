@@ -296,6 +296,12 @@
   font-size: .8rem;
 }
 
+.error-message-container.login{
+  text-align: center;
+  color: red;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .alternate-link-container {
   text-align: center;
   color: grey;
