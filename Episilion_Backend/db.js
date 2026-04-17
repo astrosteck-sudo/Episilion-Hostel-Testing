@@ -18,7 +18,7 @@ cron.schedule("0 0 * * *", () => {
 
   // 1️⃣ Delete old reviews
   db.query(`
-    DELETE FROM Reviews
+    DELETE FROM reviews
     WHERE created_at <= NOW() - INTERVAL 2 MONTH
   `, (err) => {
     if (err) return console.log(err);

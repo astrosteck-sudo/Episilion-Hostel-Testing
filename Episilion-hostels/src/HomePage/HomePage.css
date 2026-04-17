@@ -210,7 +210,7 @@
   /*align-items: center;        center Vertically */
   /* height: clamp(2px, 1vw, 1%); */
   /* full viewport height */
-  background-image: url('../images/hostel-images/hostel_image_2.jpg');
+  background-image: url('../image.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

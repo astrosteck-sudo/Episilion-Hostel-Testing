@@ -17,7 +17,7 @@ export function AboutUsPage({ navlink, setNavLink }) {
 
     const loadTeamCards = async () => {
         const reposnse = await axios.get('https://episilion-backend-2lt0.onrender.com/api/teamMembers');
-        //const reposnse = await axios.get('http://localhost:5000/api/teamMembers');
+        // const reposnse = await axios.get('http://localhost:3000/api/teamMembers');
         setTeamData(reposnse.data.teamMembers);
     }
 

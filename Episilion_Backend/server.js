@@ -8,6 +8,13 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 
+//THIS FUNCTION READS THE JSON FILES IN THE DATA FOLDER AND RETURNS THE PARSED JSON OBJECT
+function readData(filename) {
+  const filePath = path.join(__dirname, filename);
+  const raw = fs.readFileSync(filePath, "utf-8");
+  return JSON.parse(raw);
+}
+
 //THIS MAKES THE IMAGES IN THE PUBLIC FOLDER ACCESSIBLE TO THE FRONTEND
 app.use("/images", express.static("public/images")); // Serve images from the public/images directory
 console.log("Static Images served at /images");
@@ -240,6 +247,7 @@ app.get("/api/reviews/:hostelId", (req, res) => {
 app.get("/api/teamMembers", (req, res) => {
   try {
     const teamMembers = readData("team_Members_data.json");
+    //console.log("Team Members data sent:", teamMembers);
     res.json({ success: true, teamMembers });
   } catch (err) {
     res.status(500).json({ success: false, message: "Failed to read team Members file." });
