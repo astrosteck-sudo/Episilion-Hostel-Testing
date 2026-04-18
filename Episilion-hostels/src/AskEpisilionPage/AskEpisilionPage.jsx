@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './AskEpisilion.css'
 import { useState, useEffect } from "react";
 
-export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }) {
+export function AskEpisilionPage({ originalHostelCardData }) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [chatMessages, setChatMessages] = useState([]);  //Initialize as array
     const [userCautionText, setUserCautionText] = useState(true)
@@ -89,7 +89,7 @@ export function AskEpisilionPage({ navlink, setNavLink, originalHostelCardData }
     return (
         <>
             <title>Ask Episilion | Episilion Hostels</title>
-            <PageHeader navlink={navlink} setNavLink={setNavLink} />
+            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
             <div className="messages">
                 <div className="episilion-message">How can I be of help?</div>
 
