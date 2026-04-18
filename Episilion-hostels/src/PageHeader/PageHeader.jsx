@@ -3,6 +3,8 @@ import HamburgerButton from '../assets/icons/hamburger_button_2.png';
 import { Link } from 'react-router-dom';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import profilePicture from '../assets/icons/user.png';
+import downArrow from '../assets/icons/down-arrow.png'
 
 export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethostelsCardData, setHostelFound, isLoggedIn, setIsLoggedIn }) {
     const navigate = useNavigate();
@@ -44,6 +46,15 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
         setHostelFound(true)
     }
 
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // console.log("User info from localStorage:", user);
+    // localStorage.removeItem("user");
+    // localStorage.removeItem("token");
+    // console.log(user.name);
+    // console.log(user.email);
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log(user.name);
+
 
     return (
         <>
@@ -60,7 +71,13 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
                     {isLoggedIn ?
-                        <div className="login-systems logout"><button onClick={() => setShowLogoutModal(true)}>LOGIN OUT</button></div>
+                        <div className="user-button-pill-container">
+                            <button onClick={() => setShowLogoutModal(true)} className='user-button-pill'>
+                                <img src={profilePicture} className='user-pill-down-profile-pic'></img>
+                                {user.name}
+                                <img src={downArrow} alt="" className='user-pill-down-arrow' />
+                            </button>
+                        </div>
 
                         :
                         <div className="login-systems">

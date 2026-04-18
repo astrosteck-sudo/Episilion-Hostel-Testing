@@ -58,13 +58,15 @@ export function LoginPage({ setIsLoggedIn }) {
                 password
             });
 
-            const token = res.data.token;
+            // const token = res.data.token;
 
             // ✅ STORE TOKEN
-            localStorage.setItem("token", token);
+            localStorage.setItem("token", res.data.token);// 1. store login proof
+            localStorage.setItem("user", JSON.stringify(res.data.user));// 2. store user info
+            
 
             setEmail('');
-            setPassword('');    
+            setPassword('');
             console.log("Login successful");
 
             // ✅ REDIRECT TO HOME

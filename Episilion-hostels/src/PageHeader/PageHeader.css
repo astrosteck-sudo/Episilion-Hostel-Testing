@@ -181,6 +181,36 @@
   cursor: pointer;
 }
 
+.user-button-pill-container{
+  border: solid black 1px;
+  padding-left: 10px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 60px;
+  background-color: #d7c718;
+}
+.user-button-pill{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: inherit;
+  border: none;
+  color: black;
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.user-pill-down-profile-pic{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-pill-down-arrow{
+  width: 15px;
+  height: 15px;
+  border-radius: 0px;
+}
 
 
 

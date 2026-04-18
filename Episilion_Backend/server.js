@@ -326,14 +326,23 @@ app.post("/api/login", (req, res) => {
     const token = jwt.sign(
       {
         user_id: user.user_id,
-        username: user.username
+        name: user.name,   // use 'name' instead of 'username'
+        email: user.email
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
-    console.log("Generated JWT token for user:", user.username);
 
-    res.json({ token });
+    console.log("Generated JWT token for user:", user.name);
+
+    res.json({
+      token,
+      user: {
+        id: user.user_id,
+        name: user.name,
+        email: user.email
+      }
+    });
   });
 });
 
