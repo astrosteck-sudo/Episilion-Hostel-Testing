@@ -1,6 +1,6 @@
 # Express JSON Backend
 
-A simple Node.js + Express API that reads data from a local `hostel_data.json` file and exposes it via REST endpoints.
+A simple Node.js + Express API that reads data from a local hostel database file and exposes it via REST endpoints.
 
 ## Setup
 

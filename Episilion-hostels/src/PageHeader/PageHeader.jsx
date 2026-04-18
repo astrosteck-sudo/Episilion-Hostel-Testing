@@ -46,13 +46,17 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
 
     const user = JSON.parse(localStorage.getItem("user"));
 
-    function handleDisplayUserPopUpMenu(){
-        if(openUserPopUpMenu){
+    function handleDisplayUserPopUpMenu() {
+        if (openUserPopUpMenu) {
             setOpenUserPopUpMenu(false)
-        }else{
+        } else {
             setOpenUserPopUpMenu(true)
         }
     }
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.user-option-pop-up-container') && !event.target.closest('.header-section'))
+            setOpenUserPopUpMenu(false)
+    })
 
     //onClick={() => setShowLogoutModal(true)}
     return (
@@ -70,7 +74,7 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
                     {isLoggedIn ?
-                        <div >
+                        <div>
                             <div className="user-button-pill-container" onClick={handleDisplayUserPopUpMenu}>
                                 <button className='user-button-pill'>
                                     <img src={profilePicture} className='user-pill-down-profile-pic'></img>
