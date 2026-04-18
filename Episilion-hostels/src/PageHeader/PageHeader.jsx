@@ -50,7 +50,7 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
                     {isLoggedIn ? 
-                    <div className="login-systems logout"><button onClick={handleLogout}>LOGIN OUT</button></div> 
+                    <div className="login-systems logout"><button onClick={handleLogout}>LOG OUT</button></div> 
                     
                     :
                         <div className="login-systems">

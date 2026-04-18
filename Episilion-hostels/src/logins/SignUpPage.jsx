@@ -68,6 +68,10 @@ export function SignUpPage() {
                 email: email,
                 password: password
             });
+            setFullName('')
+            setPassword('')
+            setConfirmPassword('')
+            setEmail('')
             console.log("Signup successful");
             navigate("/login"); // Redirect to login page after successful signup
             // Optionally, you can redirect the user to the login page or home page after successful signup

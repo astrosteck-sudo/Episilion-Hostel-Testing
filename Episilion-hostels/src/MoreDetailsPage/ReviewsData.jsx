@@ -1,7 +1,7 @@
 //import { useState } from 'react';
 import fullStar from '../assets/icons/favorite.png';
 import dayjs from 'dayjs';
-import profilePicture from '../assets/profilePic.png';
+import profilePicture from '../assets/icons/user.png';
 
 export function Reviews({ item }) {
 

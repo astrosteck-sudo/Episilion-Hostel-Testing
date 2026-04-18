@@ -63,6 +63,8 @@ export function LoginPage({ setIsLoggedIn }) {
             // ✅ STORE TOKEN
             localStorage.setItem("token", token);
 
+            setEmail('');
+            setPassword('');    
             console.log("Login successful");
 
             // ✅ REDIRECT TO HOME
