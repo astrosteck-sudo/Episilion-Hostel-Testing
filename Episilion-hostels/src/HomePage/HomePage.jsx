@@ -2,7 +2,7 @@ import { PageHeader } from "../PageHeader/PageHeader.jsx"
 import { HostelCard } from "./HostelCard.jsx";
 import './HomePage.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
-import filterImage from '../assets/icons/filter-3.png';
+import filterImage from '../assets/icons/filter4.png';
 import favoriteImage from '../assets/icons/bookmark.png'
 import closeFilterImage from '../assets/icons/close.png';
 import boyImage from '../assets/icons/man.png';
@@ -266,7 +266,7 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
 
 
 
-    
+
     return (
         <>
             {/* <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} /> */}
@@ -275,7 +275,7 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
                 <button className="filter-image" onClick={openFilterMenu}><img src={filterImage}></img>Filter</button>
                 <button><img src={favoriteImage}></img>Fav</button>
             </div>
-            <section className="extras">
+            <section>
                 {/* <div className="extras-background">
                     <button className="filter-image js-filter-image" onClick={openFilterMenu}>
                         <img src={filterImage}></img>
@@ -383,9 +383,19 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
                 <p className="loading-hostels-text">Loading Hostels...</p>
             </div>
 
-
-
-
+            <div className="filter-horizontal-bar">
+                <div className="filter-buttons">
+                    <div className="filter-button">
+                        <img src={filterImage} alt="" className="filter-button-image" />
+                        <p>Filter</p>
+                    </div>
+                </div>
+                <div className="filter-buttons">All</div>
+                <div className="filter-buttons">Girls</div>
+                <div className="filter-buttons">Boys</div>
+                <div className="filter-buttons">Mixed</div>
+                <div className="filter-buttons">{'<'}$3000</div>
+            </div>
 
             <section className="hostels-section">
                 {hostelsFound ? "" :

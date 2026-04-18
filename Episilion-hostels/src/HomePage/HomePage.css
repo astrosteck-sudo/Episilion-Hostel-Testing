@@ -34,8 +34,9 @@
   min-height: 50px;
   padding: 7px;
 }
-@media only screen and (max-width: 992px){
-  .changing-texts{
+
+@media only screen and (max-width: 992px) {
+  .changing-texts {
     min-height: 35px;
   }
 }
@@ -173,7 +174,7 @@
 
 
 
-.side-bar-buttons-container{
+.side-bar-buttons-container {
   /* border: solid red; */
   display: flex;
   flex-direction: column;
@@ -187,7 +188,8 @@
   background-color: rgba(255, 255, 255, 0.749);
   border-radius: 0px;
 }
-.side-bar-buttons-container button{
+
+.side-bar-buttons-container button {
   width: min(50px, 60%);
   background-color: transparent;
   border: none;
@@ -304,7 +306,7 @@
 
 
 
-.filter{
+.filter {
   height: 30%;
   top: 0;
   height: 95%;
@@ -328,13 +330,15 @@
   /*THIS WILL MAKE SURE THAT WHEN THE OPACITY IS SET TO ZERO IT CAN NOT BE CLICKABLE*/
 }
 
-.filter.close{
+.filter.close {
   opacity: 0;
 }
-.filter.open{
+
+.filter.open {
   opacity: 1;
   pointer-events: auto;
 }
+
 /* .filter.close{
   opacity: 0;
 } */
@@ -516,34 +520,40 @@ input[type=number] {
 
 
 /* HTML: <div class="loader"></div> */
-.loader-container.open{
+.loader-container.open {
   padding: 100px;
 }
-.loader-container.close{
+
+.loader-container.close {
   display: none;
 }
-.loading-animation-conatainer{
+
+.loading-animation-conatainer {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .loader {
   width: 50px;
   width: min(50px, 25%);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: 
-    radial-gradient(farthest-side,#ffa516 94%,#0000) top/8px 8px no-repeat,
-    conic-gradient(#0000 30%,#ffa516);
-  -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 8px),#000 0);
+  background:
+    radial-gradient(farthest-side, #ffa516 94%, #0000) top/8px 8px no-repeat,
+    conic-gradient(#0000 30%, #ffa516);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
   animation: l13 1s infinite linear;
-  
-}
-@keyframes l13{ 
-  100%{transform: rotate(1turn)}
+
 }
 
-.loading-hostels-text{
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn)
+  }
+}
+
+.loading-hostels-text {
   /* display: blue; */
   display: flex;
   justify-content: center;
@@ -551,4 +561,75 @@ input[type=number] {
   color: #ffa516;
   font-weight: bolder;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+
+
+
+
+
+
+
+
+
+.filter-horizontal-bar {
+  display: flex;
+  gap: 15px;
+  padding-top: 10px;
+  margin-left: 10px;
+
+
+  overflow: scroll;
+  scrollbar-width: none;
+  /* For Internet Explorer and Edge */
+  -ms-overflow-style: none;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.filter-horizontal-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-button-image {
+  width: 20px;
+  height: 20px;
+}
+
+.filter-button-image {
+  filter: brightness(0) invert(1) ;
+}
+
+.filter-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 20px;
+  background-color: #aca125;
+  color: white;
+  font-size: clamp(10px, 2vw, 15px);
+  font-weight: bolder;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+@media only screen and (max-width: 600px) {
+  .filter-buttons {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: clamp(10px, 2vw, 12px);
+  }
+  .filter-button-image{
+    height: 15px;
+  }
 }
