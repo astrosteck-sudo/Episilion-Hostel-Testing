@@ -2,10 +2,12 @@ import './PageHeader.css';
 import HamburgerButton from '../assets/icons/hamburger_button_2.png';
 import { Link } from 'react-router-dom';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethostelsCardData, setHostelFound, isLoggedIn, setIsLoggedIn }) {
     const navigate = useNavigate();
     // const [navlink, setNavLink] = useState(false)
+    const [showLogoutModal, setShowLogoutModal] = useState(false);
 
     function renderHamburgerMenu() {
         if (!navlink) {
@@ -14,13 +16,20 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
             setNavLink(false)
         }
     }
+    const handleLogout = () => {
+        navigate("/login")
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        setShowLogoutModal(false);
+        // your logout logic here (clear token, redirect, etc.)
+    };
 
-    function handleLogout() {
-        alert("Are you sure you want to log out")
-        localStorage.removeItem("token");  // 1. remove login proof
-        setIsLoggedIn(false);              // 2. update UI state
-        navigate("/login");                // 3. send user out
-    }
+    // function handleLogout() {
+    //     alert("Are you sure you want to log out")
+    //     localStorage.removeItem("token");  // 1. remove login proof
+    //     setIsLoggedIn(false);              // 2. update UI state
+    //     navigate("/login");                // 3. send user out
+    // }
 
     //THIS WILL CHECK IF THE TARGET IS NOT THE HAMBURGER 
     // BUTTON, NAVLINKS MENU, AND IF THE NAVLINKS IS OPEN, 
@@ -34,6 +43,7 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
         sethostelsCardData(originalHostelCardData)
         setHostelFound(true)
     }
+
 
     return (
         <>
@@ -49,10 +59,10 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                     <NavLink className="link about-us-link" to="/aboutus">About Us</NavLink>
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
-                    {isLoggedIn ? 
-                    <div className="login-systems logout"><button onClick={handleLogout}>LOG OUT</button></div> 
-                    
-                    :
+                    {isLoggedIn ?
+                        <div className="login-systems logout"><button onClick={() => setShowLogoutModal(true)}>LOGIN OUT</button></div>
+
+                        :
                         <div className="login-systems">
                             <Link to="/login">LOGIN</Link>
                             <Link to="/signup">SIGN UP</Link>
@@ -63,6 +73,27 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                 <button className="hamburger-button" aria-label="Menu" onClick={renderHamburgerMenu}>
                     <img src={HamburgerButton} alt="Menu"></img>
                 </button>
+
+
+
+
+
+                {showLogoutModal && (
+                    <div className="modal-overlay" onClick={() => setShowLogoutModal(false)}>
+                        <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+                            <h3 className="modal-title">Log Out</h3>
+                            <p className="modal-message">Are you sure you want to log out?</p>
+                            <div className="modal-buttons">
+                                <button className="modal-cancel" onClick={() => setShowLogoutModal(false)}>
+                                    Cancel
+                                </button>
+                                <button className="modal-confirm" onClick={handleLogout}>
+                                    Log Out
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </section>
         </>
     )

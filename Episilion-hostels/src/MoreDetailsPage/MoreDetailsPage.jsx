@@ -31,6 +31,7 @@ export function MoreDetailsPage({originalHostelCardData }) {
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
     const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
     //const url = "https://episilion-backend-2lt0.onrender.com";//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+    
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
     let hostelName = 'Annex'
