@@ -4,12 +4,16 @@ import { Link } from 'react-router-dom';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import profilePicture from '../assets/icons/user.png';
-import downArrow from '../assets/icons/down-arrow.png'
+import downArrow from '../assets/icons/down-arrow.png';
+import userPopImage from '../assets/icons/user4.png';
+import userPopFavoriteImage from '../assets/icons/star-black-fivepointed-shape-symbol.png';
+import userPopLogOutImage from '../assets/icons/logout.png'
 
 export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethostelsCardData, setHostelFound, isLoggedIn, setIsLoggedIn }) {
     const navigate = useNavigate();
     // const [navlink, setNavLink] = useState(false)
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    const [openUserPopUpMenu, setOpenUserPopUpMenu] = useState(false)
 
     function renderHamburgerMenu() {
         if (!navlink) {
@@ -26,12 +30,6 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
         // your logout logic here (clear token, redirect, etc.)
     };
 
-    // function handleLogout() {
-    //     alert("Are you sure you want to log out")
-    //     localStorage.removeItem("token");  // 1. remove login proof
-    //     setIsLoggedIn(false);              // 2. update UI state
-    //     navigate("/login");                // 3. send user out
-    // }
 
     //THIS WILL CHECK IF THE TARGET IS NOT THE HAMBURGER 
     // BUTTON, NAVLINKS MENU, AND IF THE NAVLINKS IS OPEN, 
@@ -46,16 +44,17 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
         setHostelFound(true)
     }
 
-    // const user = JSON.parse(localStorage.getItem("user"));
-    // console.log("User info from localStorage:", user);
-    // localStorage.removeItem("user");
-    // localStorage.removeItem("token");
-    // console.log(user.name);
-    // console.log(user.email);
     const user = JSON.parse(localStorage.getItem("user"));
-    console.log(user.name);
 
+    function handleDisplayUserPopUpMenu(){
+        if(openUserPopUpMenu){
+            setOpenUserPopUpMenu(false)
+        }else{
+            setOpenUserPopUpMenu(true)
+        }
+    }
 
+    //onClick={() => setShowLogoutModal(true)}
     return (
         <>
             <section className="header-section">
@@ -71,12 +70,34 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                     <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
                     <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
                     {isLoggedIn ?
-                        <div className="user-button-pill-container">
-                            <button onClick={() => setShowLogoutModal(true)} className='user-button-pill'>
-                                <img src={profilePicture} className='user-pill-down-profile-pic'></img>
-                                {user.name}
-                                <img src={downArrow} alt="" className='user-pill-down-arrow' />
-                            </button>
+                        <div >
+                            <div className="user-button-pill-container" onClick={handleDisplayUserPopUpMenu}>
+                                <button className='user-button-pill'>
+                                    <img src={profilePicture} className='user-pill-down-profile-pic'></img>
+                                    {user.name}
+                                    <img src={downArrow} alt="" className='user-pill-down-arrow' />
+                                </button>
+                            </div>
+
+                            <div className={`user-option-pop-up-container ${openUserPopUpMenu ? 'open' : 'close'}`}>
+                                <div className='user-option-pop-up-name-and-email-container'>
+                                    <p>{user.name}</p>
+                                    <p className='user-option-pop-up-email'>{user.email}</p>
+                                </div>
+                                <div className='user-option-pop-up-profile-container'>
+                                    <img src={userPopImage} className='user-option-pop-up-images' />
+                                    <p>My profile</p>
+                                </div>
+                                <div className='user-option-pop-up-favorite-container'>
+                                    <img src={userPopFavoriteImage} className='user-option-pop-up-images' />
+                                    <p>My Favorites</p>
+                                </div>
+                                <div className='user-option-pop-up-logout-container logout' onClick={() => setShowLogoutModal(true)}>
+                                    <img src={userPopLogOutImage} className='user-option-pop-up-images' />
+                                    <p>Log Out </p>
+                                </div>
+                            </div>
+
                         </div>
 
                         :
