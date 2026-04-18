@@ -10,6 +10,8 @@ export function Reviews({ item }) {
         return <p className='no-review-text'>No reviews</p>
     }
 
+    //console.log("Review item:", item); // Debugging log to check the structure of the review item
+
     return (
 
         <>
@@ -19,7 +21,7 @@ export function Reviews({ item }) {
                         <table border="0">
                             <tr>
                                 <td rowspan="2" className='profile-picture'><img src={profilePicture} alt="" /></td>
-                                <td className='profile-name'>James Otoo</td>
+                                <td className='profile-name'>{item.name}</td>
                             </tr>
                             <tr>
                                 <td><div className='time-stamp'><p>{dayjs(item.createdAt).format("MMMM D, YYYY, h:mm A")}</p></div></td>

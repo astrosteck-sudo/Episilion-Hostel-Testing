@@ -34,7 +34,6 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
         sethostelsCardData(originalHostelCardData)
         setHostelFound(true)
     }
-    console.log("is logged in", isLoggedIn)
 
     return (
         <>

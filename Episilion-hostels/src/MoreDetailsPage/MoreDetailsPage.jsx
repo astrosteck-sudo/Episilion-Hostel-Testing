@@ -91,10 +91,14 @@ export function MoreDetailsPage({originalHostelCardData }) {
 
         setIsSubmitting(true)
         try {
-            await axios.post("https://episilion-backend-2lt0.onrender.com/api/reviews", {
+            await axios.post("http://localhost:3000/api/reviews", {
                 hostel_id: hostelId,
                 rating: rating,
                 review_text: reviewTextValue
+            },{
+                headers:{
+                    Authorization: localStorage.getItem("token")
+                }
             });
 
             //console.log("Server response:", response.data, response.status);
@@ -104,6 +108,9 @@ export function MoreDetailsPage({originalHostelCardData }) {
             loadingReviews()//THIS FUNCTION WILL RELOAD THE REVIEWS TO SHOW THE NEWLY ADDED REVIEW
 
         } catch (error) {
+            if (error.response?.status === 401) {
+                navigate("/login")
+            }
             console.log("Error submitting review:", error.response?.data || error.message);
         }
     }
@@ -119,11 +126,12 @@ export function MoreDetailsPage({originalHostelCardData }) {
 
     async function loadingReviews() {
         try {
-            const response = await axios.get(`https://episilion-backend-2lt0.onrender.com/api/reviews/${hostelId}`)
+            const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
             if (response.data.length === 0) {
                 setReviewsResonse(["no reviews"])
                 return;
             }
+            console.log("Reviews retrieved successfully:", response.data);
             setReviewsResonse(response.data)
 
         } catch (error) {

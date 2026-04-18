@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const authMiddleware = require("./middleware/auth.js");
 const db = require("./db"); // Import the MySQL connection
 
 const app = express();
@@ -167,8 +168,11 @@ app.get("/api/hostels", async (req, res) => {
 });
 
 //THIS IS FOR ADDING REVIEWS TO THE DATABASE
-app.post("/api/reviews", (req, res) => {
+app.post("/api/reviews", authMiddleware, (req, res) => {
+  const userId = req.user.user_id; // Extracted from token by authMiddleware
+  console.log("Authenticated user ID:", userId);
   const { hostel_id, rating, review_text } = req.body;
+  console.log("User Name from token:", req.user.username);
 
   // 1. Validate input
   if (!hostel_id || !rating) {
@@ -180,9 +184,9 @@ app.post("/api/reviews", (req, res) => {
 
   // 2. SQL queries
   const insertSql = `
-  INSERT INTO reviews (hostel_id, rating, review_text)
-  VALUES (?, ?, ?)
-`;
+    INSERT INTO reviews (hostel_id, user_id, rating, review_text)
+    VALUES (?, ?, ?, ?)
+  `;
   const updateSql = `
     UPDATE hostels
     SET 
@@ -192,7 +196,7 @@ app.post("/api/reviews", (req, res) => {
   `;
 
   // 3. Execute insert
-  db.query(insertSql, [hostel_id, rating, review_text], (err, result) => {
+  db.query(insertSql, [hostel_id, userId, rating, review_text], (err, result) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ error: "Database error while inserting review" });
@@ -221,14 +225,14 @@ app.get("/api/reviews/:hostelId", (req, res) => {
   hostelId = hostelId.replace(":", ""); // Remove the colon if it exists
   const sql = `
     SELECT 
-      review_id AS reviewId,
-      hostel_id,
-      rating,
-      review_text AS reviewText,
-      created_at AS createdAt
-    FROM reviews
-    WHERE hostel_id = ?
-    ORDER BY created_at DESC
+      r.review_id,
+      r.rating,
+      r.review_text AS reviewText,
+      u.name
+    FROM reviews r
+    JOIN users u ON r.user_id = u.user_id
+    WHERE r.hostel_id = ?
+    ORDER BY r.created_at DESC
   `;
 
   db.query(sql, [hostelId], (err, result) => {
@@ -320,10 +324,14 @@ app.post("/api/login", (req, res) => {
     }
 
     const token = jwt.sign(
-      { user_id: user.user_id },
+      {
+        user_id: user.user_id,
+        username: user.username
+      },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "7d" }
     );
+    console.log("Generated JWT token for user:", user.username);
 
     res.json({ token });
   });
