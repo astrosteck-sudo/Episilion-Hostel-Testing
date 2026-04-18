@@ -145,7 +145,7 @@
 
 #hostel-perks {
   font-family: Hezba;
-  text-align: center;
+  /* text-align: center; */
   font-size: clamp(0.7rem, 2vw, 1.1rem);
   text-decoration: solid;
 }

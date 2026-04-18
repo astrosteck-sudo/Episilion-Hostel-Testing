@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { getDistance } from 'geolib';
-
+import { useEffect, useState } from "react";
+import './HostelCard.css'
 
 export function HostelCard({ hostel }) {
 
@@ -15,6 +16,18 @@ export function HostelCard({ hostel }) {
     function showHostelId(parameter) {
         navigate(`/moreDetails?hostelId=${parameter}`);
     }
+
+    const [amenities, setAmenities] = useState([])
+
+
+    useEffect(() => {
+        setAmenities(hostel.amenities.slice(1, 4)); // first 3 amenities
+    }, [hostel]);
+
+
+
+
+    // console.log("hostel data in hostel card", hostel)
 
     return (
         <div className="hostel-card">
@@ -40,8 +53,16 @@ export function HostelCard({ hostel }) {
                             km from campus
                         </p></td>
                 </tr>
-                <tr>
-                    <td colSpan="2" ><p id="hostel-perks">{hostel.hostelPerks}</p></td>
+                <tr className="amenities-homepage">
+                    <td colSpan="2">
+                        <div id="hostel-perks">
+                            {amenities.map((amenity, index) => (
+                                <span key={index} className="amenity">
+                                    {amenity}{index < amenities.length - 1 ? " • " : ""}
+                                </span>
+                            ))}
+                        </div>
+                    </td>
                 </tr>
             </table>
             <p><button className="view-more-details js-view-more-details" onClick={() => showHostelId(hostel.id)}>View Details</button></p>
