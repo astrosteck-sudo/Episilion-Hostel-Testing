@@ -47,17 +47,17 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
 
 
     //THIS IS FOR THE FILTER MENU
-    // function openFilterMenu() {
-    //     console.log("Filter Menu Is opened")
-    //     setFilterMenu(true)
-    // }
+    function openFilterMenu() {
+        console.log("Filter Menu Is opened")
+        setFilterMenu(true)
+    }
     function closeFilterMenu() {
         setFilterMenu(false)
     }
     //WITH THIS IF ANY PART OF THE DOCUMENT IS CLICKED WHICH IS NOT THE filter OR filter-image IT WILL CLOSE THE FILTER MENU
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (!event.target.closest('.filter') && !event.target.closest('.filter-image')) {
+            if (!event.target.closest('.filter') && !event.target.closest('.main-filter')) {
                 setFilterMenu(false)
             }
         };
@@ -363,17 +363,6 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
             </div> */}
             
             <section>
-                {/* <div className="extras-background">
-                    <button className="filter-image js-filter-image" onClick={openFilterMenu}>
-                        <img src={filterImage}></img>
-                    </button>
-
-                    <button className="hello-text">
-                        hello
-                    </button>
-                </div> */}
-
-
                 <div className={`filter ${filterMenu ? 'open' : 'close'}`}>
                     <div className="filter-close-button js-close-button" onClick={closeFilterMenu}>
                         <img className="filter-close-image" src={closeFilterImage}></img>
@@ -471,8 +460,8 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
             </div>
 
             <div className="filter-horizontal-bar">
-                <div className={`filter-buttons main-filter`}>
-                    <div className="filter-button ">
+                <div className={`filter-buttons main-filter`} onClick={openFilterMenu}>
+                    <div className="filter-button " >
                         <img src={filterImage} alt="" className="filter-button-image" />
                         <p>Filter</p>
                     </div>

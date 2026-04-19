@@ -619,7 +619,6 @@ input[type=number] {
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 20px;
-  border: solid black 1px;
   color: white;
   /* background-color: blue; */
   font-size: clamp(10px, 2vw, 15px);
@@ -629,6 +628,7 @@ input[type=number] {
 }
 .filter-buttons.inactive{
   color: black;
+  border: solid black .1px;
 }
 .filter-buttons.active{
   background-color: #cabd31;

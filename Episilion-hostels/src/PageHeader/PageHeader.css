@@ -213,9 +213,11 @@
 }
 
 .user-option-pop-up-container{
+  margin-top: 10px;
+  position: absolute;
   position: fixed;
   width: min(200px, 50%);
-  background-color: rgb(215, 209, 209);
+  background-color: rgb(248, 246, 246);
   text-align: left;
   padding: 20px;
   padding-bottom: 0;
@@ -360,6 +362,9 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
+  }
+  .user-option-pop-up-container{
+    width: 60%;
   }
 }
 
