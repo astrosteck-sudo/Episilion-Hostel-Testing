@@ -3,7 +3,6 @@ import { HostelCard } from "./HostelCard.jsx";
 import './HomePage.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter.jsx";
 import filterImage from '../assets/icons/filter4.png';
-import favoriteImage from '../assets/icons/bookmark.png'
 import closeFilterImage from '../assets/icons/close.png';
 import boyImage from '../assets/icons/man.png';
 import girlImage from '../assets/icons/woman-avatar.png';
@@ -12,6 +11,7 @@ import searchButton from '../assets/icons/search.png';
 import resetImage from '../assets/icons/refresh.png';
 import noResultImage from '../assets/icons/no-results-(1).png'
 import { useEffect, useState } from "react";
+//import { all } from "axios";
 
 export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCardData }) {
     const [gender, setGender] = useState('');//THIS CONTROLS THE GENDER OT BE USED IN THE FILTERING PROCESS
@@ -25,6 +25,13 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
     const [hostelsFound, setHostelsFound] = useState(true);//THIS CONTROLS THE not found image AND text
     const [loading, setLoading] = useState(true);//THIS CONTROLS THE CSS LOADING STATE
     const [filterMenu, setFilterMenu] = useState(false)// THIS CONTROLS THE FILTER MENU OPEN AND CLOSE
+    //THESE CONTROLS THE COLOR OF THE BACKGROUND OF THE TEXT WHEN IT IS CLICKED
+    const [allActive, setAllActive] = useState(true)
+    const [boysActive, setBoysActive] = useState(false)
+    const [girlsActive, setGirlsActive] = useState(false)
+    const [mixedActive, setMixedActive] = useState(false)
+    const [underActive, setUnderActive] = useState(false)
+    
     //const url = 'http://localhost:3000'    
 
     //console.log(hostelsCardData)
@@ -40,10 +47,10 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
 
 
     //THIS IS FOR THE FILTER MENU
-    function openFilterMenu() {
-        console.log("Filter Menu Is opened")
-        setFilterMenu(true)
-    }
+    // function openFilterMenu() {
+    //     console.log("Filter Menu Is opened")
+    //     setFilterMenu(true)
+    // }
     function closeFilterMenu() {
         setFilterMenu(false)
     }
@@ -266,15 +273,95 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
 
 
 
+    
+
+
+    function handleFilterSelection(parameter) {
+        if (parameter === 'allActive') {
+            setHostelsFound(true)
+            sethostelsCardData(originalHostelCardData)
+            setAllActive(true)
+            setBoysActive(false)
+            setGirlsActive(false)
+            setUnderActive(false)
+            setMixedActive(false)
+        } else if (parameter === 'boysActive') {
+            setHostelsFound(true)
+            const filteredHostels = originalHostelCardData.filter(
+                (hostel) => hostel.type === 'Boys'
+            )
+            if (filteredHostels.length === 0) {
+                sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
+                setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
+            } else {
+                sethostelsCardData(filteredHostels)
+            }
+            setBoysActive(true)
+            setGirlsActive(false)
+            setUnderActive(false)
+            setAllActive(false)
+            setMixedActive(false)
+        }
+        else if (parameter === 'girlsActive') {
+            setHostelsFound(true)
+            const filteredHostels = originalHostelCardData.filter(
+                (hostel) => hostel.type === 'Girls'
+            )
+            if (filteredHostels.length === 0) {
+                sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
+                setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
+            } else {
+                sethostelsCardData(filteredHostels)
+            }
+            setGirlsActive(true)
+            setBoysActive(false)
+            setUnderActive(false)
+            setAllActive(false)
+            setMixedActive(false)
+        } else if (parameter === 'mixedActive') {
+            setHostelsFound(true)
+            const filteredHostels = originalHostelCardData.filter(
+                (hostel) => hostel.type === 'Mixed'
+            )
+            if (filteredHostels.length === 0) {
+                sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
+                setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
+            } else {
+                sethostelsCardData(filteredHostels)
+            }
+            setMixedActive(true)
+            setBoysActive(false)
+            setGirlsActive(false)
+            setUnderActive(false)
+            setAllActive(false)
+        } else if (parameter === 'underActive') {
+            setHostelsFound(true)
+            setUnderActive(true)
+            setBoysActive(false)
+            setGirlsActive(false)
+            setMixedActive(false)
+            setAllActive(false)
+            const filteredHostels = originalHostelCardData.filter(
+                (hostel) => hostel.pricing.priceMin <= 1000
+            )
+            if (filteredHostels.length === 0) {
+                sethostelsCardData([])//THIS WILL EMPTY ANY VALUE IN hostelsCardData
+                setHostelsFound(false)//AND THIS WILL DISPLAY THE NOT FOUND TEXT
+            } else {
+                sethostelsCardData(filteredHostels)
+            }
+        }
+    }
 
     return (
         <>
             {/* <PageHeader navlink={navlink} setNavLink={setNavLink} sethostelsCardData={sethostelsCardData} originalHostelCardData={originalHostelCardData} setHostelsFound={setHostelsFound} /> */}
 
-            <div className="side-bar-buttons-container">
+            {/* <div className="side-bar-buttons-container">
                 <button className="filter-image" onClick={openFilterMenu}><img src={filterImage}></img>Filter</button>
                 <button><img src={favoriteImage}></img>Fav</button>
-            </div>
+            </div> */}
+            
             <section>
                 {/* <div className="extras-background">
                     <button className="filter-image js-filter-image" onClick={openFilterMenu}>
@@ -384,17 +471,17 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
             </div>
 
             <div className="filter-horizontal-bar">
-                <div className="filter-buttons">
-                    <div className="filter-button">
+                <div className={`filter-buttons main-filter`}>
+                    <div className="filter-button ">
                         <img src={filterImage} alt="" className="filter-button-image" />
                         <p>Filter</p>
                     </div>
                 </div>
-                <div className="filter-buttons">All</div>
-                <div className="filter-buttons">Girls</div>
-                <div className="filter-buttons">Boys</div>
-                <div className="filter-buttons">Mixed</div>
-                <div className="filter-buttons">{'<'}$3000</div>
+                <div className={`filter-buttons ${allActive ? 'active' : 'inactive'}`} onClick={() => handleFilterSelection('allActive')} >All</div>
+                <div className={`filter-buttons ${girlsActive ? 'active' : 'inactive'}`} onClick={() => handleFilterSelection('girlsActive')} >Girls</div>
+                <div className={`filter-buttons ${boysActive ? 'active' : 'inactive'}`} onClick={() => handleFilterSelection('boysActive')} >Boys</div>
+                <div className={`filter-buttons ${mixedActive ? 'active' : 'inactive'}`} onClick={() => handleFilterSelection('mixedActive')} >Mixed</div>
+                <div className={`filter-buttons ${underActive ? 'active' : 'inactive'}`} onClick={() => handleFilterSelection('underActive')} >{'<'}$1000</div>
             </div>
 
             <section className="hostels-section">

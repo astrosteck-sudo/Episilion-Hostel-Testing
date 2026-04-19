@@ -597,13 +597,18 @@ input[type=number] {
 }
 
 .filter-button-image {
-  filter: brightness(0) invert(1) ;
+  filter: brightness(0) ;
 }
 
 .filter-button {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.filter-buttons.main-filter{
+  background-color: #cabd31;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .filter-buttons {
@@ -614,11 +619,19 @@ input[type=number] {
   padding-top: 5px;
   padding-bottom: 5px;
   border-radius: 20px;
-  background-color: #aca125;
+  border: solid black 1px;
   color: white;
+  /* background-color: blue; */
   font-size: clamp(10px, 2vw, 15px);
   font-weight: bolder;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor: pointer;
+}
+.filter-buttons.inactive{
+  color: black;
+}
+.filter-buttons.active{
+  background-color: #cabd31;
 }
 
 @media only screen and (max-width: 600px) {
