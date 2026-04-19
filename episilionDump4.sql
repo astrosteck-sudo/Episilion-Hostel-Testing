@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.44, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.45, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: mydb
 -- ------------------------------------------------------
--- Server version	8.0.44
+-- Server version	8.0.45
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -210,7 +210,7 @@ CREATE TABLE `hostels` (
 
 LOCK TABLES `hostels` WRITE;
 /*!40000 ALTER TABLE `hostels` DISABLE KEYS */;
-INSERT INTO `hostels` VALUES ('141c9727-155b-472c-b75e-27715725f27c','Urban Nest','Girls','Example University',2014,3,'Wifi • Power Backup • TV Lounge','/images/hostel-images/hostel_image_9.jpg',3,4.0),('170ab6f9-9a50-4598-8858-188f59577bf3','Victory Hostel','Boys','Example University',2013,6,'Wifi • Laundry • Shuttle • Service','/images/hostel-images/hostel_image_6.jpg',1,4.0),('47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Campus Annex','Boys','Example University',2015,2,'Wifi • Laundry • Study • Area','/images/hostel-images/hostel_image_1.jpg',0,0.0),('4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Greenfield Hostel','Mixed','Example University',2010,4,'Laundry • RecreationalArea • Parking','/images/hostel-images/hostel_image_4.jpg',0,0.0),('5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Scholars Haven','Girls','Example University',2020,2,'Wifi • Quiet • Study Area • Laundry','/images/hostel-images/hostel_image_10.jpg',1,5.0),('7af2a906-6c09-4941-8227-6325aa6ab8c6','Harmony Hostel','Girls','Example University',2019,1,'Wifi • Gym • Cafeteria','/images/hostel-images/hostel_image_7.jpg',0,0.0),('d3582f55-470e-49d9-bd94-39dab2ba0cab','Sunrise Hostel','Mixed','Example University',2016,3,'Wifi • StudyRoom • Backup Power','/images/hostel-images/hostel_image_5.jpg',0,0.0),('db900f38-3480-481d-b20b-66962ea03b7a','City View Hostel','Mixed','Example University',2011,5,'Laundry • Security • Balcony','/images/hostel-images/hostel_image_8.jpg',0,0.0),('ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Queens Residence','Girls','Example University',2018,4,'Wifi • Laundry • Gym','/images/hostel-images/hostel_image_3.jpg',0,0.0),('ea89beba-18c9-434c-8175-e3fb34581e63','Unity Lodge','Boys','Example University',2012,2,'Wifi • Cafeteria • Security','/images/hostel-images/hostel_image_2.jpg',0,0.0);
+INSERT INTO `hostels` VALUES ('141c9727-155b-472c-b75e-27715725f27c','Urban Nest','Girls','Example University',2014,3,'Wifi • Power Backup • TV Lounge','/images/hostel-images/hostel_image_9.jpg',3,4.0),('170ab6f9-9a50-4598-8858-188f59577bf3','Victory Hostel','Boys','Example University',2013,6,'Wifi • Laundry • Shuttle • Service','/images/hostel-images/hostel_image_6.jpg',2,4.0),('47b10dd3-6ef6-44a3-a00b-5051c14d8c73','Campus Annex','Boys','Example University',2015,2,'Wifi • Laundry • Study • Area','/images/hostel-images/hostel_image_1.jpg',1,5.0),('4ff107e9-6493-4d32-ad4f-a50dc864d0a5','Greenfield Hostel','Mixed','Example University',2010,4,'Laundry • RecreationalArea • Parking','/images/hostel-images/hostel_image_4.jpg',0,0.0),('5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','Scholars Haven','Girls','Example University',2020,2,'Wifi • Quiet • Study Area • Laundry','/images/hostel-images/hostel_image_10.jpg',1,5.0),('7af2a906-6c09-4941-8227-6325aa6ab8c6','Harmony Hostel','Girls','Example University',2019,1,'Wifi • Gym • Cafeteria','/images/hostel-images/hostel_image_7.jpg',0,0.0),('d3582f55-470e-49d9-bd94-39dab2ba0cab','Sunrise Hostel','Mixed','Example University',2016,3,'Wifi • StudyRoom • Backup Power','/images/hostel-images/hostel_image_5.jpg',0,0.0),('db900f38-3480-481d-b20b-66962ea03b7a','City View Hostel','Mixed','Example University',2011,5,'Laundry • Security • Balcony','/images/hostel-images/hostel_image_8.jpg',1,4.0),('ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','Queens Residence','Girls','Example University',2018,4,'Wifi • Laundry • Gym','/images/hostel-images/hostel_image_3.jpg',1,4.0),('ea89beba-18c9-434c-8175-e3fb34581e63','Unity Lodge','Boys','Example University',2012,2,'Wifi • Cafeteria • Security','/images/hostel-images/hostel_image_2.jpg',3,3.7);
 /*!40000 ALTER TABLE `hostels` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +269,7 @@ CREATE TABLE `media` (
 
 LOCK TABLES `media` WRITE;
 /*!40000 ALTER TABLE `media` DISABLE KEYS */;
-INSERT INTO `media` VALUES (1,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_1.jpeg','compound'),(2,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_2.webp','room'),(3,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_3.jpg','kitchen'),(4,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','../hostel_rooms/hostel_room_4.webp','bathroom'),(5,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_rooms/hostel_room_5.jpg','compund'),(6,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_rooms/hostel_room_5.jpg','room'),(7,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_kitchen_Images/hostel_kitchen_2.jpg','kitchen'),(8,'ea89beba-18c9-434c-8175-e3fb34581e63','../hostel_bathrooms_images/hostel_bathroom_2.jpg','bathroom'),(9,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_rooms/hostel_room_6.jpg','compund'),(10,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_rooms/hostel_room_6.jpg','room'),(11,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_kitchen_Images/hostel_kitchen_3.jpg','kitchen'),(12,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','../hostel_bathrooms_images/hostel_bathroom_3.jpg','bathroom'),(13,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_rooms/hostel_room_7.jpg','compund'),(14,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_rooms/hostel_room_7.jpg','room'),(15,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_kitchen_Images/hostel_kitchen_4.jpg','kitchen'),(16,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','../hostel_bathrooms_images/hostel_bathroom_4.jpg','bathroom'),(17,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_rooms/hostel_room_8.jpg','compund'),(18,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_rooms/hostel_room_8.jpg','room'),(19,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_kitchen_Images/hostel_kitchen_5.jpg','kitchen'),(20,'d3582f55-470e-49d9-bd94-39dab2ba0cab','../hostel_bathrooms_images/hostel_bathroom_5.jpg','bathroom'),(21,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_rooms/hostel_room_9.jpg','compund'),(22,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_rooms/hostel_room_9.jpg','room'),(23,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_kitchen_Images/hostel_kitchen_6.jpg','kitchen'),(24,'170ab6f9-9a50-4598-8858-188f59577bf3','../hostel_bathrooms_images/hostel_bathroom_6.jpg','bathroom'),(25,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_rooms/hostel_room_10.jpg','compund'),(26,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_rooms/hostel_room_10.jpg','room'),(27,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_kitchen_Images/hostel_kitchen_7.jpg','kitchen'),(28,'7af2a906-6c09-4941-8227-6325aa6ab8c6','../hostel_bathrooms_images/hostel_bathroom_7.jpg','bathroom'),(33,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_rooms/hostel_room_11.jpg','compund'),(34,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_rooms/hostel_room_11.jpg','room'),(35,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_kitchen_Images/hostel_kitchen_8.jpg','kitchen'),(36,'db900f38-3480-481d-b20b-66962ea03b7a','../hostel_bathrooms_images/hostel_bathroom_8.jpg','bathroom'),(37,'141c9727-155b-472c-b75e-27715725f27c','../hostel_rooms/hostel_room_12.jpg','compund'),(38,'141c9727-155b-472c-b75e-27715725f27c','../hostel_rooms/hostel_room_12.jpg','room'),(39,'141c9727-155b-472c-b75e-27715725f27c','../hostel_kitchen_Images/hostel_kitchen_9.jpg','kitchen'),(40,'141c9727-155b-472c-b75e-27715725f27c','../hostel_bathrooms_images/hostel_bathroom_9.jpg','bathroom'),(41,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_rooms/hostel_room_13.jpg','compund'),(42,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_rooms/hostel_room_13.jpg','room'),(43,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_kitchen_Images/hostel_kitchen_10.jpg','kitchen'),(44,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','../hostel_bathrooms_images/hostel_bathroom_10.jpg','bathroom');
+INSERT INTO `media` VALUES (1,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','/images/hostel_rooms/hostel_room_1.jpeg','compound'),(2,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','/images/hostel_rooms/hostel_room_2.webp','room'),(3,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','/images/hostel_rooms/hostel_room_3.jpg','kitchen'),(4,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73','/images/hostel_rooms/hostel_room_4.webp','bathroom'),(5,'ea89beba-18c9-434c-8175-e3fb34581e63','/images/hostel_rooms/hostel_room_5.jpg','compund'),(6,'ea89beba-18c9-434c-8175-e3fb34581e63','/images/hostel_rooms/hostel_room_5.jpg','room'),(7,'ea89beba-18c9-434c-8175-e3fb34581e63','/images/hostel_kitchen_Images/hostel_kitchen_2.jpg','kitchen'),(8,'ea89beba-18c9-434c-8175-e3fb34581e63','/images/hostel_bathrooms_images/hostel_bathroom_2.jpg','bathroom'),(9,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','/images/hostel_rooms/hostel_room_6.jpg','compund'),(10,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','/images/hostel_rooms/hostel_room_6.jpg','room'),(11,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','/images/hostel_kitchen_Images/hostel_kitchen_3.jpg','kitchen'),(12,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a','/images/hostel_bathrooms_images/hostel_bathroom_3.jpg','bathroom'),(13,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','/images/hostel_rooms/hostel_room_7.jpg','compund'),(14,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','/images/hostel_rooms/hostel_room_7.jpg','room'),(15,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','/images/hostel_kitchen_Images/hostel_kitchen_4.jpg','kitchen'),(16,'4ff107e9-6493-4d32-ad4f-a50dc864d0a5','/images/hostel_bathrooms_images/hostel_bathroom_4.jpg','bathroom'),(17,'d3582f55-470e-49d9-bd94-39dab2ba0cab','/images/hostel_rooms/hostel_room_8.jpg','compund'),(18,'d3582f55-470e-49d9-bd94-39dab2ba0cab','/images/hostel_rooms/hostel_room_8.jpg','room'),(19,'d3582f55-470e-49d9-bd94-39dab2ba0cab','/images/hostel_kitchen_Images/hostel_kitchen_5.jpg','kitchen'),(20,'d3582f55-470e-49d9-bd94-39dab2ba0cab','/images/hostel_bathrooms_images/hostel_bathroom_5.jpg','bathroom'),(21,'170ab6f9-9a50-4598-8858-188f59577bf3','/images/hostel_rooms/hostel_room_9.jpg','compund'),(22,'170ab6f9-9a50-4598-8858-188f59577bf3','/images/hostel_rooms/hostel_room_9.jpg','room'),(23,'170ab6f9-9a50-4598-8858-188f59577bf3','/images/hostel_kitchen_Images/hostel_kitchen_6.jpg','kitchen'),(24,'170ab6f9-9a50-4598-8858-188f59577bf3','/images/hostel_bathrooms_images/hostel_bathroom_6.jpg','bathroom'),(25,'7af2a906-6c09-4941-8227-6325aa6ab8c6','/images/hostel_rooms/hostel_room_10.jpg','compund'),(26,'7af2a906-6c09-4941-8227-6325aa6ab8c6','/images/hostel_rooms/hostel_room_10.jpg','room'),(27,'7af2a906-6c09-4941-8227-6325aa6ab8c6','/images/hostel_kitchen_Images/hostel_kitchen_7.jpg','kitchen'),(28,'7af2a906-6c09-4941-8227-6325aa6ab8c6','/images/hostel_bathrooms_images/hostel_bathroom_7.jpg','bathroom'),(33,'db900f38-3480-481d-b20b-66962ea03b7a','/images/hostel_rooms/hostel_room_11.jpg','compund'),(34,'db900f38-3480-481d-b20b-66962ea03b7a','/images/hostel_rooms/hostel_room_11.jpg','room'),(35,'db900f38-3480-481d-b20b-66962ea03b7a','/images/hostel_kitchen_Images/hostel_kitchen_8.jpg','kitchen'),(36,'db900f38-3480-481d-b20b-66962ea03b7a','/images/hostel_bathrooms_images/hostel_bathroom_8.jpg','bathroom'),(37,'141c9727-155b-472c-b75e-27715725f27c','/images/hostel_rooms/hostel_room_12.jpg','compund'),(38,'141c9727-155b-472c-b75e-27715725f27c','/images/hostel_rooms/hostel_room_12.jpg','room'),(39,'141c9727-155b-472c-b75e-27715725f27c','/images/hostel_kitchen_Images/hostel_kitchen_9.jpg','kitchen'),(40,'141c9727-155b-472c-b75e-27715725f27c','/images/hostel_bathrooms_images/hostel_bathroom_9.jpg','bathroom'),(41,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','/images/hostel_rooms/hostel_room_13.jpg','compund'),(42,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','/images/hostel_rooms/hostel_room_13.jpg','room'),(43,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','/images/hostel_kitchen_Images/hostel_kitchen_10.jpg','kitchen'),(44,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd','/images/hostel_bathrooms_images/hostel_bathroom_10.jpg','bathroom');
 /*!40000 ALTER TABLE `media` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,11 +345,12 @@ CREATE TABLE `reviews` (
   `rating` int NOT NULL,
   `review_text` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int DEFAULT NULL,
   PRIMARY KEY (`review_id`),
   KEY `hostel_id` (`hostel_id`),
   CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`hostel_id`) REFERENCES `hostels` (`hostel_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `reviews_chk_1` CHECK ((`rating` between 1 and 5))
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -358,7 +359,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (1,'141c9727-155b-472c-b75e-27715725f27c',4,'Cool hostel bro','2026-04-13 00:07:27'),(2,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Cool hostel bro','2026-04-13 00:08:42'),(3,'5bf2d87a-dd16-42d9-b7a7-4aecdde9cedd',5,'cool hostel bro','2026-04-13 00:11:15'),(4,'141c9727-155b-472c-b75e-27715725f27c',4,'Very close to the school','2026-04-14 03:12:39'),(5,'141c9727-155b-472c-b75e-27715725f27c',4,'Joycelyn stole my data yaya','2026-04-16 20:04:36');
+INSERT INTO `reviews` VALUES (1,'47b10dd3-6ef6-44a3-a00b-5051c14d8c73',5,'I have to admit, very nice hostel.','2026-04-18 00:12:41',1),(2,'ea7ae95e-7dd1-4bb7-acff-4ada2022ed2a',4,'Hello guys, john kumah here, Very nice hostel.','2026-04-18 00:21:01',1),(3,'ea89beba-18c9-434c-8175-e3fb34581e63',4,'Hello guys, john kumah here, just pass through.','2026-04-18 00:22:42',2),(4,'ea89beba-18c9-434c-8175-e3fb34581e63',4,'Am just a fresher , but this platform will really help me. Thanks guys.','2026-04-18 01:14:27',3),(5,'ea89beba-18c9-434c-8175-e3fb34581e63',3,'Cool hostels here. Very helpful.','2026-04-18 01:18:12',4),(6,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Am so gratefull for life','2026-04-18 20:23:02',4),(7,'170ab6f9-9a50-4598-8858-188f59577bf3',4,'Am so greatfull i found this hostel','2026-04-18 20:33:16',4);
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -447,6 +448,34 @@ INSERT INTO `transactions` VALUES (1000,4.99,3,'2023-01-01'),(1001,2.89,2,'2023-
 UNLOCK TABLES;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Felix Brown Nice','felix60@gmailcom','$2b$10$S4QwiEtgb/FGaFBz8oAAgOCIaBq/e65io0LsdUdsAP7V3xvwlZ9xi','2026-04-19 03:52:13');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Final view structure for view `customer_email`
 --
 
@@ -491,4 +520,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-16 13:07:39
+-- Dump completed on 2026-04-19  6:14:28
