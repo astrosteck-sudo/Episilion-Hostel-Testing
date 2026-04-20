@@ -69,10 +69,13 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
 
                 </Link>
                 <nav className={`navigation-links ${navlink ? 'active' : ''}`}>
-                    <NavLink className="link about-us-link" to="/">Home</NavLink>
-                    <NavLink className="link about-us-link" to="/aboutus">About Us</NavLink>
-                    <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
-                    <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
+                    <div className='navigation-links-pages'>
+                        <NavLink className="link about-us-link" to="/">Home</NavLink>
+                        <NavLink className="link about-us-link" to="/aboutus">About Us</NavLink>
+                        <NavLink className="link ask-episilion" to="/askepisilion">Ask Episilion</NavLink>
+                        <NavLink className="link more-from-us" to="/morefromus">More From Us</NavLink>
+                    </div>
+
                     {isLoggedIn ?
                         <div>
                             <div className="user-button-pill-container" onClick={handleDisplayUserPopUpMenu}>
