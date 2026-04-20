@@ -110,13 +110,15 @@
 .navigation-links-pages{
   width: 70%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 50px;
   align-items: center;
 }
 @media only screen and (max-width: 992px) {
   .navigation-links-pages{
     width: 80%;
     flex-direction: column;
+    gap: 20px;
   }
   
 }
