@@ -590,6 +590,9 @@ input[type=number] {
 .filter-horizontal-bar::-webkit-scrollbar {
   display: none;
 }
+.filter-horizontal-bar.inactive {
+  display: none;
+}
 
 .filter-button-image {
   width: 20px;

@@ -459,7 +459,7 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
                 <p className="loading-hostels-text">Loading Hostels...</p>
             </div>
 
-            <div className="filter-horizontal-bar">
+            <div className={`filter-horizontal-bar js-filters-container ${loading ? 'inactive' : ''}`}>
                 <div className={`filter-buttons main-filter`} onClick={openFilterMenu}>
                     <div className="filter-button " >
                         <img src={filterImage} alt="" className="filter-button-image" />
