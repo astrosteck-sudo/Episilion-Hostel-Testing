@@ -14,6 +14,13 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
     //const [userCautionText, setUserCautionText] = useState(true)
     const navigate = useNavigate();
 
+    useEffect(() => {
+        document.body.classList.add("episilion-bg");
+        return () => {
+            document.body.classList.remove("episilion-bg");
+        };
+    }, []);
+
 
     //This hook scrolls to the bottom whenever chatMessages updates.
     useEffect(() => {
@@ -99,7 +106,7 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
                 <div className="episilion-message-and-bot-conatainer">
                     <img src={robotImage} className="ask-episilion-robot-image" />
                     <div className="episilion-message">
-                        <p className="ask-episilion-message-first-Paragraph">Hi {!isLoggedIn ? 'student' : user.name} How can I help you today?</p>
+                        <p className="ask-episilion-message-first-Paragraph">Hi {!isLoggedIn ? 'student' : user.name}! 👋 How can I help you today?</p>
                         <p className="ask-episilion-message-second-Paragraph">I'm your Epislion AI assistant - ask me anything about hostels, prices, amenities, or locations near your campus. I'll find the best options for you.</p>
                         <p className="ask-episilion-message-third-Paragraph"><img src={lightBulbImage} className="ask-episilion-light-bulb" />Tip: Keep questions short and direct for the most accurate answers</p>
                     </div>

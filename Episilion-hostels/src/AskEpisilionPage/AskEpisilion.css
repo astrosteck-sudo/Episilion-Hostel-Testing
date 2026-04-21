@@ -1,3 +1,9 @@
+body.episilion-bg{
+  background-color: rgb(231, 221, 221);
+}
+
+
+
 .ask-episilion-search-conatainer {
   position: fixed;
   /* keeps it anchored relative to the viewport */
@@ -22,6 +28,7 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  background-color: white;
 }
 
 @media only screen and (min-width: 1200px) {
@@ -120,7 +127,9 @@
 .user-message {
   align-self: flex-end;
   /* pushes bubble to far right */
-  background: #e0f7fa;
+  background: black;
+  color: white;
+  font-family: cursive;
   padding: 10px 15px;
   border-radius: 8px;
   max-width: 70%;
