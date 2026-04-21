@@ -167,6 +167,7 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
                     </div>
                     <div className="ask-episilion-search-conatainer">
                         <div className="ask-episilion-search-bar">
+                            
                             <textarea
                                 type="text"
                                 className="ask-episilion-input-box"
@@ -179,7 +180,7 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
                                 <img src={sendImage} className="send-image-epislion" />
                             </button>
                         </div>
-                        <div className="ask-epislion-warning-message">Episilion AI can make mistakes. Always verify hostels ditails before booking</div>
+                        <div className="ask-epislion-warning-message">Episilion AI can make mistakes. Always verify hostels details before booking</div>
                     </div>
                 </div>
             </div>
