@@ -107,6 +107,18 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
                         <p>Ask Episilion</p>
                         <p>AI powerd hostel assistant</p>
                     </div>
+
+                    <p className="your-usage-text">YOUR USAGE</p>
+                    <div className="user-AI-usage-container">
+                        <p className="free-request-text">Free Request <span className="user-number-request-left">2/2 left</span></p>
+                        <p className="upgrade-text">Upgrade for 15 request/day</p>
+                    </div>
+
+                    <div className="premuim-access-container">
+                        <p>Unlock Full Access</p>
+                        <p>Get 15 AI request per day for just GHS 10/month</p>
+                        <button className="upgrade-now-button">Upgrade Now</button>
+                    </div>
                 </div>
 
 

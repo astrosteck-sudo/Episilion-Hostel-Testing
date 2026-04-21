@@ -10,7 +10,7 @@ body.episilion-bg{
   padding-top: 5px;
   padding-bottom: 5px;
   background-color: white;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 .ask-episilion-page-header-robot-image{
   width: 40px;
@@ -26,11 +26,13 @@ body.episilion-bg{
 }
 
 .ask-episilion-page-header-AI-description p:last-of-type {
+  font-size: clamp(12px, 2vw, 15px);
   color: grey;   /* example styling */
 }
 .ask-episilion-page-header-AI-description.sidebar{
   height: 50px;
   border-bottom: 2px solid grey;
+  margin-bottom: 15px;
 }
 
 .main-epsilion-container{
@@ -42,8 +44,66 @@ body.episilion-bg{
   padding: 10px;
   background-color: white;
 }
+.user-AI-usage-container{
+  padding: 10px;
+  background: rgba(252, 215, 8, 0.128);
+  color: rgb(255, 217, 0);
+  border-radius: 10px;
+}
+.free-request-text{
+  color: gold;
+  font-family: AntipastoPro;
+  margin-bottom: 10px;
+}
+.user-number-request-left{
+  margin-left: 80px;
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.upgrade-text{
+  color: grey;
+}
+.premuim-access-container{
+  color: white;
+  border-radius: 30px;
+  background-color: black;
+  padding: 30px;
+  width: 200px;
+  
+  text-align: center;
+  margin: auto;
+  margin-top: 250px;
+}
+.premuim-access-container p:first-of-type {
+  font-weight: bold;
+  margin-bottom: 3px;
+  font-size: 12px;
+  font-family: Playfair Display;
+}
+.premuim-access-container p:last-of-type {
+  font-size: 12px;
+  margin: 8px;
+  color: grey;
+}
+
+.upgrade-now-button{
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 10px;
+  background-color: gold;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 .epsilion-wrapper-two{
   width: 80%;
+}
+.your-usage-text{
+  color: grey;
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .ask-episilion-search-conatainer {
@@ -136,7 +196,7 @@ body.episilion-bg{
   transform: translateX(-50%); */
   width: 100%;
   /* max-width: 600px; */
-  max-height: 300px;
+  max-height: 410px;
   /* height: 55%; */
 
   display: flex;
@@ -260,9 +320,12 @@ body.episilion-bg{
   border-radius: 5px;
 }
 
-@media only screen and (max-width: 600px ){
+@media only screen and (max-width: 992px ){
   .epsilion-wrapper-one{
     display: none;
+  }
+  .epsilion-wrapper-two{
+    width: 100%;
   }
   .ask-episilion-search-conatainer{
     bottom: 70px;
