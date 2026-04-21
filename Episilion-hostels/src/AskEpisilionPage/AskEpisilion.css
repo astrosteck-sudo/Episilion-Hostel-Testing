@@ -1,7 +1,7 @@
-.ask-episilion-search {
+.ask-episilion-search-conatainer {
   position: fixed;
   /* keeps it anchored relative to the viewport */
-  bottom: 70px;
+  bottom: 40px;
   /* adjust this so it sits right above your footer */
   left: 50%;
   /* center horizontally */
@@ -10,7 +10,7 @@
   width: 100vw;
   /*max-width: 600px;       optional: prevent it from stretching too wide */
   /*background: #b4d10c;       style as needed */
-  background-color: #d3c84d;
+  /* background-color: #dfded3; */
   padding: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
@@ -18,6 +18,7 @@
   /* ensures it stays above footer */
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -30,23 +31,53 @@
 }
 
 
+
+.ask-episilion-search-bar{
+  background-color: rgb(231, 221, 221);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 90%;
+  border-radius: 20px;
+  gap: 30px;
+}
+
 .ask-episilion-input-box {
   padding: 10px;
   width: min(700px, 60%);
   border-radius: 12px;
+  border: none;
+  background-color: inherit;
+  width: 100%;
+  font-size: clamp(14px, 2vw, 15px);
+  resize: none;
+}
+.ask-episilion-input-box:placeholder-shown {
+  font-size: clamp(14px, 2vw, 15px);
+  font-family: AntipastoPro;
 }
 
 .ask-episilion-search-button {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
   border-radius: 10px;
-  background-color: green;
-  font-weight: bold;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  letter-spacing: 5px;
-  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: #d3c84d;
+  width: 4%;
+  height: 40px;
+}
+
+.send-image-epislion{
+  width: 50%;
+  height: 50%;
+}
+.ask-epislion-warning-message{
+  text-align: center;
+  font-size: clamp(9px, 2vw, 14px);
+  color: grey;
+  font-family: cursive;
 }
 
 .messages {
@@ -98,12 +129,55 @@
   /* Flattens corner where tail meets */
 }
 
+.episilion-message-and-bot-conatainer{
+  display: flex;
+  gap: 10px;
+}
+
+
+.ask-episilion-robot-image{
+  width: min(30px, 20%);
+  /* height: min(40px, 20%); */
+  height: 40px;
+  padding: 5px;
+  background-color: #d3c84d;
+  border-radius: 20px;
+}
+.ask-episilion-message-first-Paragraph{
+  font-size: clamp(10px, 2vw, 15px);
+  font-weight: bold;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.ask-episilion-message-second-Paragraph{
+  color: grey;
+  font-size: clamp(12px, 2vw, 15px);
+  margin-top: 10px;
+  line-height: 25px;
+}
+.ask-episilion-light-bulb{
+  width: 10%;
+  height: 15px;
+}
+.ask-episilion-message-third-Paragraph{
+  display: flex;
+  align-items: center;
+  border: solid gold;
+  padding: 5px;
+  font-size: clamp(10px, 2vw, 15px);
+  border-radius: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: rgb(255, 217, 0);
+  background-color:  rgba(232, 230, 220, 0.217);
+}
+
 /* Epsilon message aligned left */
 .episilion-message {
+
   align-self: flex-start;
   /* pushes bubble to far left */
   background: #f1f1f1;
-  padding: 10px 2px;
+  padding: 20px;
   margin: 5px;
   border-radius: 8px;
   max-width: 70%;
@@ -124,6 +198,7 @@
   display: flex;
   margin: 5px;
   width: 100%;
+  border: solid red;
 }
 
 .episilion-response-hostel-name {
@@ -153,10 +228,22 @@
 }
 
 @media only screen and (max-width: 600px ){
+  .ask-episilion-search-conatainer{
+    bottom: 70px;
+  }
   .episilion-response-hostel-price{
     margin-left: 1px;
   }
   .episilion-response-hostel-link{
     margin-left: 3px;
+  }
+  .ask-episilion-search-button{
+    width: 20%;
+  }
+  .ask-episilion-search-bar{
+    gap: 10px;
+  }
+  .ask-episilion-message-second-Paragraph{
+    line-height: 20px;
   }
 }

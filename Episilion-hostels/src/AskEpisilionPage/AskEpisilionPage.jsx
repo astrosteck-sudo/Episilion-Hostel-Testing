@@ -4,11 +4,14 @@ import { SiteFooter } from "../SiteFooter/SiteFooter";
 import { useNavigate } from "react-router-dom";
 import './AskEpisilion.css'
 import { useState, useEffect } from "react";
+import sendImage from '../assets/icons/send.png';
+import robotImage from '../assets/icons/robot.png';
+import lightBulbImage from '../assets/icons/light-bulb.png'
 
 export function AskEpisilionPage({ originalHostelCardData }) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [chatMessages, setChatMessages] = useState([]);  //Initialize as array
-    const [userCautionText, setUserCautionText] = useState(true)
+    //const [userCautionText, setUserCautionText] = useState(true)
     const navigate = useNavigate();
 
 
@@ -24,7 +27,7 @@ export function AskEpisilionPage({ originalHostelCardData }) {
     useEffect(() => {
         const savedMessages = localStorage.getItem("episilionChat");
         if (savedMessages) {
-            setUserCautionText(false)
+            //setUserCautionText(false)
             setChatMessages(JSON.parse(savedMessages));
         }
     }, []);
@@ -43,7 +46,7 @@ export function AskEpisilionPage({ originalHostelCardData }) {
 
     function sendMessage() {
         if (!userSearchInput.trim()) return;  //Prevent empty messages
-        setUserCautionText(false)
+        //setUserCautionText(false)
         const updatedMessages = [
             ...chatMessages,
             {
@@ -89,20 +92,27 @@ export function AskEpisilionPage({ originalHostelCardData }) {
     return (
         <>
             <title>Ask Episilion | Episilion Hostels</title>
+            <div>fre</div>
             {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
             <div className="messages">
-                <div className="episilion-message">How can I be of help?</div>
-
-                <div className={`user-caution-message ${userCautionText ? 'open': 'close'}`}>
-                    <p>This is a testing of Episilion AI, questions asked should be short and direct for more accurate responses !!</p>
+                <div className="episilion-message-and-bot-conatainer">
+                    <img src={robotImage} className="ask-episilion-robot-image" />
+                    <div className="episilion-message">
+                        <p className="ask-episilion-message-first-Paragraph">Hi Felix👋 How can I help you today?</p>
+                        <p className="ask-episilion-message-second-Paragraph">I'm your Epislion AI assistant - ask me anything about hostels, prices, amenities, or locations near your campus. I'll find the best options for you.</p>
+                        <p className="ask-episilion-message-third-Paragraph"><img src={lightBulbImage} className="ask-episilion-light-bulb" />Tip: Keep questions short and direct for the most accurate answers</p>
+                    </div>
                 </div>
+                {/* <div className={`user-caution-message ${userCautionText ? 'open' : 'close'}`}>
+                    <p>This is a testing of Episilion AI, questions asked should be short and direct for more accurate responses !!</p>
+                </div> */}
 
                 {/*Map over chatMessages array to render each bubble */}
                 {chatMessages.map((chat, index) => (
                     <div key={index} className={chat.sender === 'user' ? 'user-message' : 'episilion-message'}>
                         {chat.type === 'episilionResults' ?
                             (
-                                <div>
+                                <div className="episilion-response">
                                     <p className="episilion-response-header">Try these hostels</p>
                                     {chat.message.map((hostel) => {
                                         return (
@@ -121,17 +131,23 @@ export function AskEpisilionPage({ originalHostelCardData }) {
                     </div>
                 ))}
             </div>
-            <div className="ask-episilion-search">
-                <input
-                    type="text"
-                    className="ask-episilion-input-box"
-                    onChange={searchInput}
-                    onKeyDown={handleKeyDown}
-                    value={userSearchInput}
-                    placeholder="Type here and press Enter..."
-                />
-                <button className="ask-episilion-search-button" onClick={sendMessage}>Send</button>
+            <div className="ask-episilion-search-conatainer">
+                <div className="ask-episilion-search-bar">
+                    <textarea
+                        type="text"
+                        className="ask-episilion-input-box"
+                        onChange={searchInput}
+                        onKeyDown={handleKeyDown}
+                        value={userSearchInput}
+                        placeholder="Ask about hostels, pricing, and amenities.."
+                    />
+                    <button className="ask-episilion-search-button" onClick={sendMessage}>
+                        <img src={sendImage} className="send-image-epislion" />
+                    </button>
+                </div>
+                <div className="ask-epislion-warning-message">Episilion AI can make mistakes. Always verify hostels ditails before booking</div>
             </div>
+
             <SiteFooter />
         </>
     );
