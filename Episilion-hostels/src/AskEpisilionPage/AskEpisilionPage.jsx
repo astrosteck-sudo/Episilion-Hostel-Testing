@@ -8,7 +8,7 @@ import sendImage from '../assets/icons/send.png';
 import robotImage from '../assets/icons/robot.png';
 import lightBulbImage from '../assets/icons/light-bulb.png'
 
-export function AskEpisilionPage({ originalHostelCardData }) {
+export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
     const [userSearchInput, setUserSearchInput] = useState('');
     const [chatMessages, setChatMessages] = useState([]);  //Initialize as array
     //const [userCautionText, setUserCautionText] = useState(true)
@@ -84,7 +84,9 @@ export function AskEpisilionPage({ originalHostelCardData }) {
     function handleKeyDown(event) {
         if (event.key === 'Enter') sendMessage();
     }
-
+    //THIS IS TO EXTRACT THE USER IMFORMATION FROM THE TOKEN
+    const user = JSON.parse(localStorage.getItem("user"));
+    //console.log(user)
     // function clearLocalstorage(){
     //     localStorage.clear()
     // }
@@ -92,13 +94,12 @@ export function AskEpisilionPage({ originalHostelCardData }) {
     return (
         <>
             <title>Ask Episilion | Episilion Hostels</title>
-            <div>fre</div>
             {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
             <div className="messages">
                 <div className="episilion-message-and-bot-conatainer">
                     <img src={robotImage} className="ask-episilion-robot-image" />
                     <div className="episilion-message">
-                        <p className="ask-episilion-message-first-Paragraph">Hi Felix👋 How can I help you today?</p>
+                        <p className="ask-episilion-message-first-Paragraph">Hi {!isLoggedIn ? 'student' : user.name} How can I help you today?</p>
                         <p className="ask-episilion-message-second-Paragraph">I'm your Epislion AI assistant - ask me anything about hostels, prices, amenities, or locations near your campus. I'll find the best options for you.</p>
                         <p className="ask-episilion-message-third-Paragraph"><img src={lightBulbImage} className="ask-episilion-light-bulb" />Tip: Keep questions short and direct for the most accurate answers</p>
                     </div>
