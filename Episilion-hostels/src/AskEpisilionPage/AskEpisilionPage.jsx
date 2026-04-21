@@ -101,60 +101,77 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
     return (
         <>
             <title>Ask Episilion | Episilion Hostels</title>
-            {/* <PageHeader navlink={navlink} setNavLink={setNavLink} /> */}
-            <div className="messages">
-                <div className="episilion-message-and-bot-conatainer">
-                    <img src={robotImage} className="ask-episilion-robot-image" />
-                    <div className="episilion-message">
-                        <p className="ask-episilion-message-first-Paragraph">Hi {!isLoggedIn ? 'student' : user.name}! 👋 How can I help you today?</p>
-                        <p className="ask-episilion-message-second-Paragraph">I'm your Epislion AI assistant - ask me anything about hostels, prices, amenities, or locations near your campus. I'll find the best options for you.</p>
-                        <p className="ask-episilion-message-third-Paragraph"><img src={lightBulbImage} className="ask-episilion-light-bulb" />Tip: Keep questions short and direct for the most accurate answers</p>
+            <div className="main-epsilion-container">
+                <div className="epsilion-wrapper-one">
+                    <div className="ask-episilion-page-header-AI-description sidebar">
+                        <p>Ask Episilion</p>
+                        <p>AI powerd hostel assistant</p>
                     </div>
                 </div>
-                {/* <div className={`user-caution-message ${userCautionText ? 'open' : 'close'}`}>
-                    <p>This is a testing of Episilion AI, questions asked should be short and direct for more accurate responses !!</p>
-                </div> */}
 
-                {/*Map over chatMessages array to render each bubble */}
-                {chatMessages.map((chat, index) => (
-                    <div key={index} className={chat.sender === 'user' ? 'user-message' : 'episilion-message'}>
-                        {chat.type === 'episilionResults' ?
-                            (
-                                <div className="episilion-response">
-                                    <p className="episilion-response-header">Try these hostels</p>
-                                    {chat.message.map((hostel) => {
-                                        return (
-                                            <div key={hostel.id} className="episilion-hostel-card">
-                                                <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" />
-                                                <p className="episilion-response">
-                                                    <p className="episilion-response-hostel-name">{hostel.name}</p>
-                                                    <p className="episilion-response-hostel-price">$({hostel.pricing.priceMax})</p>
-                                                    <p className="episilion-response-hostel-link" onClick={() => goToHostelPage(hostel.id)}>CLICK HERE</p>
-                                                </p>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            ) : chat.message}
+
+
+
+                <div className="epsilion-wrapper-two">
+                    <div className="ask-episilion-page-header">
+                        <img src={robotImage} className="ask-episilion-page-header-robot-image" />
+                        <div className="ask-episilion-page-header-AI-description">
+                            <p>Episilion AI</p>
+                            <p>Online • Powered By Open AI • Hostel Specialist</p>
+                        </div>
                     </div>
-                ))}
-            </div>
-            <div className="ask-episilion-search-conatainer">
-                <div className="ask-episilion-search-bar">
-                    <textarea
-                        type="text"
-                        className="ask-episilion-input-box"
-                        onChange={searchInput}
-                        onKeyDown={handleKeyDown}
-                        value={userSearchInput}
-                        placeholder="Ask about hostels, pricing, and amenities.."
-                    />
-                    <button className="ask-episilion-search-button" onClick={sendMessage}>
-                        <img src={sendImage} className="send-image-epislion" />
-                    </button>
+                    <div className="messages">
+                        <div className="episilion-message-and-bot-conatainer">
+                            <img src={robotImage} className="ask-episilion-robot-image" />
+                            <div className="episilion-message">
+                                <p className="ask-episilion-message-first-Paragraph">Hi {!isLoggedIn ? 'student' : user.name}! 👋 How can I help you today?</p>
+                                <p className="ask-episilion-message-second-Paragraph">I'm your Epislion AI assistant - ask me anything about hostels, prices, amenities, or locations near your campus. I'll find the best options for you.</p>
+                                <p className="ask-episilion-message-third-Paragraph"><img src={lightBulbImage} className="ask-episilion-light-bulb" />Tip: Keep questions short and direct for the most accurate answers</p>
+                            </div>
+                        </div>
+                        {/*Map over chatMessages array to render each bubble */}
+                        {chatMessages.map((chat, index) => (
+                            <div key={index} className={chat.sender === 'user' ? 'user-message' : 'episilion-message'}>
+                                {chat.type === 'episilionResults' ?
+                                    (
+                                        <div className="episilion-response">
+                                            <p className="episilion-response-header">Try these hostels</p>
+                                            {chat.message.map((hostel) => {
+                                                return (
+                                                    <div key={hostel.id} className="episilion-hostel-card">
+                                                        <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" />
+                                                        <p className="episilion-response">
+                                                            <p className="episilion-response-hostel-name">{hostel.name}</p>
+                                                            <p className="episilion-response-hostel-price">$({hostel.pricing.priceMax})</p>
+                                                            <p className="episilion-response-hostel-link" onClick={() => goToHostelPage(hostel.id)}>CLICK HERE</p>
+                                                        </p>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    ) : chat.message}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="ask-episilion-search-conatainer">
+                        <div className="ask-episilion-search-bar">
+                            <textarea
+                                type="text"
+                                className="ask-episilion-input-box"
+                                onChange={searchInput}
+                                onKeyDown={handleKeyDown}
+                                value={userSearchInput}
+                                placeholder="Ask about hostels, pricing, and amenities.."
+                            />
+                            <button className="ask-episilion-search-button" onClick={sendMessage}>
+                                <img src={sendImage} className="send-image-epislion" />
+                            </button>
+                        </div>
+                        <div className="ask-epislion-warning-message">Episilion AI can make mistakes. Always verify hostels ditails before booking</div>
+                    </div>
                 </div>
-                <div className="ask-epislion-warning-message">Episilion AI can make mistakes. Always verify hostels ditails before booking</div>
             </div>
+
 
             <SiteFooter />
         </>

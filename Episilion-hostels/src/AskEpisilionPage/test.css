@@ -1,0 +1,111 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* APP LAYOUT */
+.app {
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  height: 100vh;
+  background: #111;
+  color: white;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+
+  z-index: 1000;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+/* Sidebar content */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sidebar-content {
+  margin-top: 20px;
+}
+
+/* CLOSE BUTTON */
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* MAIN CONTENT */
+.main {
+  flex: 1;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+/* PUSH EFFECT */
+.main.shift {
+  transform: translateX(260px);
+}
+
+/* TOPBAR */
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: #f5f5f5;
+}
+
+/* MENU BUTTON */
+.menu-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* PAGE CONTENT */
+.content {
+  padding: 20px;
+}
+
+/* DESKTOP VIEW */
+@media (min-width: 768px) {
+  .sidebar {
+    transform: translateX(0);
+    position: relative;
+    width: 20%;
+  }
+
+  .main {
+    margin-left: 20%;
+    transform: none !important;
+  }
+
+  .menu-btn,
+  .close-btn {
+    display: none;
+  }
+}

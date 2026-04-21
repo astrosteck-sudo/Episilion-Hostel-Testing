@@ -1,19 +1,61 @@
 body.episilion-bg{
   background-color: rgb(231, 221, 221);
+  overflow: hidden;
+}
+.ask-episilion-page-header{
+  height: 60px;
+  gap: 30px;
+  display: flex;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: white;
+  margin-bottom: 40px;
+}
+.ask-episilion-page-header-robot-image{
+  width: 40px;
+  padding: 5px;
+  background-color: #d3c84d;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
+.ask-episilion-page-header-AI-description p:first-of-type {
+  font-weight: bold;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 
+.ask-episilion-page-header-AI-description p:last-of-type {
+  color: grey;   /* example styling */
+}
+.ask-episilion-page-header-AI-description.sidebar{
+  height: 50px;
+  border-bottom: 2px solid grey;
+}
+
+.main-epsilion-container{
+  display: flex;
+  height: 100vh;
+}
+.epsilion-wrapper-one{
+  width: 20%;
+  padding: 10px;
+  background-color: white;
+}
+.epsilion-wrapper-two{
+  width: 80%;
+}
 
 .ask-episilion-search-conatainer {
   position: fixed;
-  /* keeps it anchored relative to the viewport */
   bottom: 40px;
-  /* adjust this so it sits right above your footer */
+  width: 80%;
+  /* left: 50%; */
+  /* position: fixed;
+  bottom: 40px;
   left: 50%;
-  /* center horizontally */
   transform: translateX(-50%);
-  /* width: 80%;         */
-  width: 100vw;
+  width: 100vw; */
   /*max-width: 600px;       optional: prevent it from stretching too wide */
   /*background: #b4d10c;       style as needed */
   /* background-color: #dfded3; */
@@ -25,7 +67,6 @@ body.episilion-bg{
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 10px;
   background-color: white;
@@ -88,39 +129,23 @@ body.episilion-bg{
 }
 
 .messages {
-  position: fixed;
+  /* position: fixed;
   top: 120px;
-  bottom: 130px; /* keeps space for search bar + footer */
+  bottom: 130px; 
   left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 600px;
+  transform: translateX(-50%); */
+  width: 100%;
+  /* max-width: 600px; */
+  max-height: 300px;
+  /* height: 55%; */
 
   display: flex;
   flex-direction: column;
   gap: 30px;
 
-  overflow-y: auto;   /* allow scrolling */
+  overflow-y: auto;   
   padding: 10px;
   scroll-behavior: smooth;
-}
-
-.user-caution-message{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-  text-align: center;
-  margin-top: 100px;
-  font-size: clamp(23px, 2vw, 30px);
-  background-color: rgb(247, 244, 244);
-  border-radius: 20px;
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); */
-  font-family: AntipastoPro;
-  color: black;
-}
-.user-caution-message.close{
-  display: none;
 }
 
 /* User message aligned right */
@@ -164,7 +189,7 @@ body.episilion-bg{
   line-height: 25px;
 }
 .ask-episilion-light-bulb{
-  width: 10%;
+  width: 3%;
   height: 15px;
 }
 .ask-episilion-message-third-Paragraph{
@@ -207,7 +232,6 @@ body.episilion-bg{
   display: flex;
   margin: 5px;
   width: 100%;
-  border: solid red;
 }
 
 .episilion-response-hostel-name {
@@ -237,8 +261,12 @@ body.episilion-bg{
 }
 
 @media only screen and (max-width: 600px ){
+  .epsilion-wrapper-one{
+    display: none;
+  }
   .ask-episilion-search-conatainer{
     bottom: 70px;
+    width: 100vw;
   }
   .episilion-response-hostel-price{
     margin-left: 1px;
