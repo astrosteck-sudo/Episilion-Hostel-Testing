@@ -53,7 +53,7 @@ export function LoginPage({ setIsLoggedIn }) {
         setErrorMessage('');
 
         try {
-            const res = await axios.post(`http://localhost:3000/api/login`, {
+            const res = await axios.post(`https://episilion-backend-2lt0.onrender.com/api/login`, {
                 email,
                 password
             });

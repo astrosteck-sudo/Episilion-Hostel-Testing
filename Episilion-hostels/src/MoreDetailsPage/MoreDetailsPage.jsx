@@ -21,17 +21,18 @@ import { Reviews } from './ReviewsData.jsx';
 
 
 
-export function MoreDetailsPage({originalHostelCardData }) {
+export function MoreDetailsPage({ originalHostelCardData }) {
     const [close, setClose] = useState(true);//THIS CONTROLS THE THE IFRAME, OPENING AND CLOSING IT
     const [activate, setActivate] = useState(false);//THIS CONTROLS THE DARK BACKGROUND WHEN THE LOCATIONS BUTTONS ARE CLICKED
     const [reviewTextValue, setReviewTextValue] = useState('')//THIS CONTROLS WHAT THE USER TYPOES IN THE TEXT AREA
     const [isSubmitting, setIsSubmitting] = useState(false)// THIS CONTROLLS SUBMIT BUTTON SO FREEZE WHEN SUBMITTING
     //const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
     const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
+    const [loading, setLoading] = useState(true);//THIS CONTROLS THE LOADING ANIMATION WHEN THE HOSTELS ARE BEING LOADED
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
-    const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
-    //const url = "https://episilion-backend-2lt0.onrender.com";//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
-    
+    //const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+    const url = "https://episilion-backend-2lt0.onrender.com";//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
     let hostelName = 'Annex'
@@ -58,6 +59,12 @@ export function MoreDetailsPage({originalHostelCardData }) {
         navigate(`/comparehostels?hostelId=${parameter}`);
     }
 
+    //THIS USEEFFECT WILL CHECK IF THE HOSTEL DATA HAS BEEN LOADED, IF IT HAS THEN IT WILL CLOSE THE LOADING ANIMATION
+    useEffect(() => {
+        if (originalHostelCardData.length > 0) {
+            setLoading(false)
+        }
+    }, [originalHostelCardData])
 
 
 
@@ -92,12 +99,12 @@ export function MoreDetailsPage({originalHostelCardData }) {
 
         setIsSubmitting(true)
         try {
-            await axios.post("http://localhost:3000/api/reviews", {
+            await axios.post("https://episilion-backend-2lt0.onrender.com/api/reviews", {
                 hostel_id: hostelId,
                 rating: rating,
                 review_text: reviewTextValue
-            },{
-                headers:{
+            }, {
+                headers: {
                     Authorization: localStorage.getItem("token")
                 }
             });
@@ -127,7 +134,7 @@ export function MoreDetailsPage({originalHostelCardData }) {
 
     async function loadingReviews() {
         try {
-            const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
+            const response = await axios.get(`https://episilion-backend-2lt0.onrender.com/api/reviews/${hostelId}`)
             if (response.data.length === 0) {
                 setReviewsResonse(["no reviews"])
                 return;
@@ -308,7 +315,7 @@ export function MoreDetailsPage({originalHostelCardData }) {
                                             return (
                                                 <div class="hostel-room-type-image">
                                                     <a href={url + image.url}>
-                                                        <img class="hostel-room" src={url +image.url} alt={image.type}></img>
+                                                        <img class="hostel-room" src={url + image.url} alt={image.type}></img>
                                                     </a>
                                                     <div class="hostel-room-type-overlay">
                                                         <span class="hostel-room-type-overlay-text">{image.type}</span>
@@ -324,6 +331,14 @@ export function MoreDetailsPage({originalHostelCardData }) {
                     })}
                 </div>
             </section>
+
+            <div className={`loader-container ${loading ? 'open' : 'close'}`}>
+                <div className="loading-animation-conatainer">
+                    <div className="loader"></div>
+                </div>
+
+                <p className="loading-hostels-text">Loading Hostel Details...</p>
+            </div>
 
             <div className='ratings-and-reviews-section'>
                 <h2 className='ratings-and-reviews-header' >Leave a Review</h2>
