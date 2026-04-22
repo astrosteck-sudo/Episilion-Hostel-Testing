@@ -1,18 +1,20 @@
-body.episilion-bg{
+body.episilion-bg {
   background-color: rgb(231, 221, 221);
   /* overflow: hidden; */
 }
-.ask-episilion-page-header{
+
+.ask-episilion-page-header {
   height: 60px;
   gap: 30px;
   display: flex;
   padding-left: 30px;
   padding-top: 5px;
   padding-bottom: 5px;
-  background-color: white;
+  background-color: inherit;
   margin-bottom: 10px;
 }
-.ask-episilion-page-header-robot-image{
+
+.ask-episilion-page-header-robot-image {
   width: 40px;
   padding: 5px;
   background-color: #d3c84d;
@@ -21,77 +23,147 @@ body.episilion-bg{
 }
 
 .ask-episilion-page-header-AI-description p:first-of-type {
+  font-size: clamp(10px, 2vw, 15px);
   font-weight: bold;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .ask-episilion-page-header-AI-description p:last-of-type {
   font-size: clamp(12px, 2vw, 15px);
-  color: grey;   /* example styling */
+  color: grey;
+  /* example styling */
 }
-.ask-episilion-page-header-AI-description.sidebar{
+
+.ask-episilion-page-header-AI-description.sidebar {
   height: 50px;
   border-bottom: 2px solid grey;
   margin-bottom: 15px;
 }
 
-.main-epsilion-container{
+.main-epsilion-container {
   display: flex;
   height: 84vh;
   overflow: hidden;
-  /* border: solid red; */
 }
-.epsilion-wrapper-one{
-  width: 20%;
+
+.epsilion-wrapper-one {
+  width: 226px;
   padding: 10px;
   background-color: white;
   border-right: .5px solid grey;
   height: 100vh;
   overflow: hidden;
+
+
+  width: 260px;
+  /* was unset on mobile */
+  z-index: 1000;
+  /* sit on top */
+  /* transform: translateX(-100%); */
+  /* transition: transform 0.3s ease; */
+  /* position: fixed; */
+  /* top: 0;
+  left: 0;
+  height: 100vh; */
+  /* background-color: white; */
+  min-width: 250px;
+
+
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  overflow: scroll;
+
 }
-.user-AI-usage-container{
+
+.epsilion-wrapper-one.open {
+  transform: translateX(0);
+}
+
+
+.menu-btn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.close-btn {
+  background: none;
+  border: none;
+  color: black;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: #f5f5f5;
+}
+
+
+
+
+
+
+
+
+
+.user-AI-usage-container {
   padding: 10px;
   background: rgba(252, 215, 8, 0.128);
   color: rgb(255, 217, 0);
   border-radius: 10px;
 }
-.free-request-text{
+
+.free-request-text {
   color: gold;
   font-family: AntipastoPro;
   margin-bottom: 10px;
 }
-.user-number-request-left{
+
+.user-number-request-left {
   margin-left: 80px;
   font-weight: bold;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
-.upgrade-text{
+
+.upgrade-text {
   color: grey;
 }
-.premuim-access-container{
+
+.premuim-access-container {
   color: white;
   border-radius: 30px;
   background-color: black;
   padding: 30px;
   width: 200px;
-  
+
   text-align: center;
   margin: auto;
   margin-top: 250px;
 }
+
 .premuim-access-container p:first-of-type {
   font-weight: bold;
   margin-bottom: 3px;
   font-size: 12px;
   font-family: Playfair Display;
 }
+
 .premuim-access-container p:last-of-type {
   font-size: 12px;
   margin: 8px;
   color: grey;
 }
 
-.upgrade-now-button{
+.upgrade-now-button {
   padding-left: 20px;
   padding-right: 20px;
   border: none;
@@ -102,10 +174,24 @@ body.episilion-bg{
   font-weight: bold;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.epsilion-wrapper-two{
+
+.epsilion-wrapper-two {
   width: 80%;
+
+
+
+
+  flex: 1;
+  width: 100%;
+  transition: transform 0.3s ease;
+  
 }
-.your-usage-text{
+
+.epsilion-wrapper-two.shift {
+  transform: translateX(260px);
+}
+
+.your-usage-text {
   color: grey;
   font-weight: bold;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -143,7 +229,7 @@ body.episilion-bg{
 
 
 
-.ask-episilion-search-bar{
+.ask-episilion-search-bar {
   background-color: rgb(231, 221, 221);
   display: flex;
   justify-content: center;
@@ -164,6 +250,7 @@ body.episilion-bg{
   font-size: clamp(14px, 2vw, 15px);
   resize: none;
 }
+
 .ask-episilion-input-box:placeholder-shown {
   font-size: clamp(14px, 2vw, 15px);
   font-family: AntipastoPro;
@@ -181,11 +268,12 @@ body.episilion-bg{
   max-width: 50px;
 }
 
-.send-image-epislion{
+.send-image-epislion {
   width: 50%;
   height: 50%;
 }
-.ask-epislion-warning-message{
+
+.ask-epislion-warning-message {
   text-align: center;
   font-size: clamp(9px, 2vw, 14px);
   color: grey;
@@ -207,7 +295,7 @@ body.episilion-bg{
   flex-direction: column;
   gap: 30px;
 
-  overflow-y: auto;   
+  overflow-y: auto;
   padding: 10px;
   scroll-behavior: smooth;
 }
@@ -227,13 +315,13 @@ body.episilion-bg{
   /* Flattens corner where tail meets */
 }
 
-.episilion-message-and-bot-conatainer{
+.episilion-message-and-bot-conatainer {
   display: flex;
   gap: 10px;
 }
 
 
-.ask-episilion-robot-image{
+.ask-episilion-robot-image {
   width: min(30px, 20%);
   /* height: min(40px, 20%); */
   height: 40px;
@@ -241,22 +329,26 @@ body.episilion-bg{
   background-color: #d3c84d;
   border-radius: 20px;
 }
-.ask-episilion-message-first-Paragraph{
+
+.ask-episilion-message-first-Paragraph {
   font-size: clamp(10px, 2vw, 15px);
   font-weight: bold;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.ask-episilion-message-second-Paragraph{
+
+.ask-episilion-message-second-Paragraph {
   color: grey;
   font-size: clamp(12px, 2vw, 15px);
   margin-top: 10px;
   line-height: 25px;
 }
-.ask-episilion-light-bulb{
+
+.ask-episilion-light-bulb {
   width: 3%;
   height: 15px;
 }
-.ask-episilion-message-third-Paragraph{
+
+.ask-episilion-message-third-Paragraph {
   display: flex;
   align-items: center;
   border: solid gold;
@@ -266,7 +358,7 @@ body.episilion-bg{
   margin-top: 10px;
   font-weight: bold;
   color: rgb(255, 217, 0);
-  background-color:  rgba(232, 230, 220, 0.217);
+  background-color: rgba(232, 230, 220, 0.217);
 }
 
 /* Epsilon message aligned left */
@@ -311,43 +403,71 @@ body.episilion-bg{
   font-size: clamp(10px, 2vw, 13px);
   margin-left: 5px;
 }
-.episilion-response-hostel-link{
+
+.episilion-response-hostel-link {
   margin-left: 5px;
   color: blue;
   font-size: clamp(10px, 2vw, 15px);
   cursor: pointer;
 }
 
-.episilion-response-image{
+.episilion-response-image {
   width: 100px;
   display: block;
   border-radius: 5px;
 }
 
-@media only screen and (max-width: 992px ){
-  .epsilion-wrapper-one{
+@media only screen and (max-width: 992px) {
+
+  /* .epsilion-wrapper-one{
     display: none;
-  }
-  .epsilion-wrapper-two{
+  } */
+  .epsilion-wrapper-two {
     width: 100%;
+    /* border: solid green; */
   }
-  .ask-episilion-search-conatainer{
+
+  .ask-episilion-search-conatainer {
     bottom: 70px;
     width: 100vw;
   }
-  .episilion-response-hostel-price{
+
+  .episilion-response-hostel-price {
     margin-left: 1px;
   }
-  .episilion-response-hostel-link{
+
+  .episilion-response-hostel-link {
     margin-left: 3px;
   }
-  .ask-episilion-search-button{
+
+  .ask-episilion-search-button {
     width: 20%;
   }
-  .ask-episilion-search-bar{
+
+  .ask-episilion-search-bar {
     gap: 10px;
   }
-  .ask-episilion-message-second-Paragraph{
+
+  .ask-episilion-message-second-Paragraph {
     line-height: 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  .epsilion-wrapper-one {
+    transform: translateX(0);
+    position: relative;
+    width: 20%;
+  }
+
+  .epsilion-wrapper-two {
+    /* margin-left: 20%; */
+    transform: none !important;
+
+  }
+
+  .menu-btn,
+  .close-btn {
+    display: none;
   }
 }

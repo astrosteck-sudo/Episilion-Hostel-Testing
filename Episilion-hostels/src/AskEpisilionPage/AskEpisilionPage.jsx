@@ -98,14 +98,22 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
     //     localStorage.clear()
     // }
 
+
+    const [open, setOpen] = useState(false);
+
     return (
         <>
             <title>Ask Episilion | Episilion Hostels</title>
             <div className="main-epsilion-container">
-                <div className="epsilion-wrapper-one">
+                <div className={`epsilion-wrapper-one ${open ? "open" : ""}`}>
+                    <div className="sidebar-header">
+                        <button className="close-btn" onClick={() => setOpen(false)}>
+                            ✕
+                        </button>
+                    </div>
                     <div className="ask-episilion-page-header-AI-description sidebar">
                         <p>Ask Episilion</p>
-                        <p>AI powerd hostel assistant</p>
+                        <p>AI powered hostel assistant</p>
                     </div>
 
                     <p className="your-usage-text">YOUR USAGE</p>
@@ -124,14 +132,20 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
 
 
 
-                <div className="epsilion-wrapper-two">
-                    <div className="ask-episilion-page-header">
-                        <img src={robotImage} className="ask-episilion-page-header-robot-image" />
-                        <div className="ask-episilion-page-header-AI-description">
-                            <p>Episilion AI</p>
-                            <p>Online • Powered By Open AI • Hostel Specialist</p>
+                <div className={`epsilion-wrapper-two ${open ? "shift" : ""}`}>
+                    <div className="topbar">
+                        <button className="menu-btn" onClick={() => setOpen(true)}>
+                            ☰
+                        </button>
+                        <div className="ask-episilion-page-header">
+                            <img src={robotImage} className="ask-episilion-page-header-robot-image" />
+                            <div className="ask-episilion-page-header-AI-description">
+                                <p>Episilion AI</p>
+                                <p>Online • Powered By Open AI • Hostel Specialist</p>
+                            </div>
                         </div>
                     </div>
+
                     <div className="messages">
                         <div className="episilion-message-and-bot-conatainer">
                             <img src={robotImage} className="ask-episilion-robot-image" />
@@ -167,7 +181,7 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
                     </div>
                     <div className="ask-episilion-search-conatainer">
                         <div className="ask-episilion-search-bar">
-                            
+
                             <textarea
                                 type="text"
                                 className="ask-episilion-input-box"

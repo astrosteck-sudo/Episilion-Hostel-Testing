@@ -13,7 +13,7 @@
 }
 
 /* SIDEBAR */
-.sidebar {
+/* .sidebar {
   width: 260px;
   height: 100vh;
   background: #111;
@@ -31,18 +31,18 @@
 
   display: flex;
   flex-direction: column;
-}
+} */
 
 .sidebar.open {
   transform: translateX(0);
 }
 
 /* Sidebar content */
-.sidebar-header {
+/* .sidebar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 
 .sidebar-content {
   margin-top: 20px;
