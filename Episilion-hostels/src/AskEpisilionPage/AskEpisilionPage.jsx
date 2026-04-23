@@ -52,6 +52,10 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
     }
 
     function sendMessage() {
+        if (!isLoggedIn) {
+            navigate('/login')
+        }
+
         if (!userSearchInput.trim()) return;  //Prevent empty messages
         //setUserCautionText(false)
         const updatedMessages = [
@@ -89,7 +93,14 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
 
     //Allow sending with Enter key
     function handleKeyDown(event) {
-        if (event.key === 'Enter') sendMessage();
+        //THIS RETURNS THE USER WHEN THE USER IS NOT LOGGED IN
+        if (event.key === 'Enter') {
+            if (!isLoggedIn) {
+                navigate('/login')
+            }else{
+                sendMessage();
+            }   
+        }
     }
     //THIS IS TO EXTRACT THE USER IMFORMATION FROM THE TOKEN
     const user = JSON.parse(localStorage.getItem("user"));

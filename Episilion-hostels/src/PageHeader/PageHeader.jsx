@@ -1,5 +1,5 @@
 import './PageHeader.css';
-import HamburgerButton from '../assets/icons/hamburger_button_2.png';
+import HamburgerButton from '../assets/icons/hamburger-menu.png';
 import { Link } from 'react-router-dom';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
