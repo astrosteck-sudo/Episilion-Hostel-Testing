@@ -31,8 +31,6 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
     const [girlsActive, setGirlsActive] = useState(false)
     const [mixedActive, setMixedActive] = useState(false)
     const [underActive, setUnderActive] = useState(false)
-    
-    //const url = 'http://localhost:3000'    
 
     //console.log(hostelsCardData)
     useEffect(() => {

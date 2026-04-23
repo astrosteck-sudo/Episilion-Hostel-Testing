@@ -30,7 +30,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
     const [loading, setLoading] = useState(true);//THIS CONTROLS THE LOADING ANIMATION WHEN THE HOSTELS ARE BEING LOADED
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
-    const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+    const url = 'https://episilion-backend-2lt0.onrender.com'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
     //const url = "https://episilion-backend-2lt0.onrender.com";//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
 
     const params = new URLSearchParams(window.location.search);
