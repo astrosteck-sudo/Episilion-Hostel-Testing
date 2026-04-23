@@ -52,6 +52,7 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
     }
 
     function sendMessage() {
+        localStorage.clear("episilionChat");
         if (!isLoggedIn) {
             navigate('/login')
         }
