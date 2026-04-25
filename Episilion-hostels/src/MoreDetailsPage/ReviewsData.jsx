@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import profilePicture from '../assets/icons/user.png';
 
 export function Reviews({ item }) {
+    console.log("Review item:", item); // Debugging log to check the structure of the review item
 
 
     if (item === 'no reviews') {

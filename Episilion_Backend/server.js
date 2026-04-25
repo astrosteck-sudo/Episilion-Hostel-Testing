@@ -60,195 +60,123 @@ app.post("/api/hostels", (req, res) => {
   );
 });
 
-app.get("/api/hostels", async (req, res) => {
+// app.get("/api/hostels", async (req, res) => {
 
-  const query = (sql, values = []) => {
-    return new Promise((resolve, reject) => {
-      db.query(sql, values, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-  };
+//   const query = (sql, values = []) => {
+//     return new Promise((resolve, reject) => {
+//       db.query(sql, values, (err, result) => {
+//         if (err) {
+//           reject(err);
+//         } else {
+//           resolve(result);
+//         }
+//       });
+//     });
+//   };
 
 
 
-  try {
-    const hostels = await query("SELECT * FROM hostels");
-    const pricing = await query("SELECT * FROM pricing");
-    const locations = await query("SELECT * FROM locations");
-    const rooms = await query("SELECT * FROM rooms");
-    const rules = await query("SELECT * FROM rules");
-    const amenities = await query("SELECT * FROM amenities");
-    const furnishing = await query("SELECT * FROM furnishing");
-    const contacts = await query("SELECT * FROM contact");
-    const media = await query("SELECT * FROM media");
+//   try {
+//     const hostels = await query("SELECT * FROM hostels");
+//     const pricing = await query("SELECT * FROM pricing");
+//     const locations = await query("SELECT * FROM locations");
+//     const rooms = await query("SELECT * FROM rooms");
+//     const rules = await query("SELECT * FROM rules");
+//     const amenities = await query("SELECT * FROM amenities");
+//     const furnishing = await query("SELECT * FROM furnishing");
+//     const contacts = await query("SELECT * FROM contact");
+//     const media = await query("SELECT * FROM media");
 
-    const fullData = hostels.map(h => {
-      const loc = locations.find(l => l.hostel_id === h.hostel_id);
-      const price = pricing.find(p => p.hostel_id === h.hostel_id);
+//     const fullData = hostels.map(h => {
+//       const loc = locations.find(l => l.hostel_id === h.hostel_id);
+//       const price = pricing.find(p => p.hostel_id === h.hostel_id);
 
-      return {
-        id: h.hostel_id,
-        name: h.name,
-        type: h.type,
-        image: h.main_image,
-        hostelPerks: h.hostel_perks,
+//       return {
+//         id: h.hostel_id,
+//         name: h.name,
+//         type: h.type,
+//         image: h.main_image,
+//         hostelPerks: h.hostel_perks,
 
-        location: loc && {
-          distanceToCampusMinutes: loc.distance_to_campus_in_minutes,
-          distanceToCampusMeters: loc.distance_to_campus_in_meters,
-          latitude: loc.latitude,
-          longitude: loc.longitude,
-          directions: loc.directions
-        },
+//         location: loc && {
+//           distanceToCampusMinutes: loc.distance_to_campus_in_minutes,
+//           distanceToCampusMeters: loc.distance_to_campus_in_meters,
+//           latitude: loc.latitude,
+//           longitude: loc.longitude,
+//           directions: loc.directions
+//         },
 
-        pricing: price && {
-          priceMin: price.price_min,
-          priceMax: price.price_max,
-          billingPeriod: price.billing_period,
-          additionalFees: {
-            utilities: price.utilities_fee,
-            maintenance: price.maintenance_fee,
-            cautionDeposit: price.caution_deposit
-          },
-          refundPolicy: price.refund_policy
-        },
+//         pricing: price && {
+//           priceMin: price.price_min,
+//           priceMax: price.price_max,
+//           billingPeriod: price.billing_period,
+//           additionalFees: {
+//             utilities: price.utilities_fee,
+//             maintenance: price.maintenance_fee,
+//             cautionDeposit: price.caution_deposit
+//           },
+//           refundPolicy: price.refund_policy
+//         },
 
-        rooms: {
-          //THIS FILTERS THE ROOMS TO ONLY SHOW THE ROOMS THAT BELONG TO THE HOSTEL AND THEN MAPS THEM TO THE CORRECT FORMAT
-          types: rooms.filter(r => r.hostel_id === h.hostel_id).map(r => ({
-            type: r.room_type,
-            price: r.price,
-            availableRooms: r.available_rooms
-          }))
-        },
-        amenities: amenities.filter(a => a.hostel_id === h.hostel_id).map(a => a.amenity),
-        furnishing: furnishing.filter(f => f.hostel_id === h.hostel_id).map(f => f.furnishing),
-        rules: rules.filter(r => r.hostel_id === h.hostel_id).map(r => r.rule),
+//         rooms: {
+//           //THIS FILTERS THE ROOMS TO ONLY SHOW THE ROOMS THAT BELONG TO THE HOSTEL AND THEN MAPS THEM TO THE CORRECT FORMAT
+//           types: rooms.filter(r => r.hostel_id === h.hostel_id).map(r => ({
+//             type: r.room_type,
+//             price: r.price,
+//             availableRooms: r.available_rooms
+//           }))
+//         },
+//         amenities: amenities.filter(a => a.hostel_id === h.hostel_id).map(a => a.amenity),
+//         furnishing: furnishing.filter(f => f.hostel_id === h.hostel_id).map(f => f.furnishing),
+//         rules: rules.filter(r => r.hostel_id === h.hostel_id).map(r => r.rule),
 
-        contact: (() => {
-          const c = contacts.find(x => x.hostel_id === h.hostel_id);
+//         contact: (() => {
+//           const c = contacts.find(x => x.hostel_id === h.hostel_id);
 
-          return c && {
-            managerName: c.manager_name,
-            phone: c.phone,
-            whatsapp: c.whatsapp,
-            email: c.email,
-            officeHours: c.office_hours,
-            website: c.website
-          };
-        })(),
+//           return c && {
+//             managerName: c.manager_name,
+//             phone: c.phone,
+//             whatsapp: c.whatsapp,
+//             email: c.email,
+//             officeHours: c.office_hours,
+//             website: c.website
+//           };
+//         })(),
 
-        reviews: {
-          averageRating: h.average_rating,
-          totalReviews: h.total_reviews
-        },
+//         reviews: {
+//           averageRating: h.average_rating,
+//           totalReviews: h.total_reviews
+//         },
 
-        media: {
-          images: media.filter(m => m.hostel_id === h.hostel_id).map(m => ({
-            url: m.url,
-            type: m.type
-          })),
+//         media: {
+//           images: media.filter(m => m.hostel_id === h.hostel_id).map(m => ({
+//             url: m.url,
+//             type: m.type
+//           })),
 
-          //video: videos.find(v => v.hostel_id === h.hostel_id)?.url || null
-        }
-      };
-    });
+//           //video: videos.find(v => v.hostel_id === h.hostel_id)?.url || null
+//         }
+//       };
+//     });
 
-    res.json(fullData);
+//     res.json(fullData);
 
-  } catch (err) {
-    console.log(err);
-    res.status(500).send("Error");
-  }
-});
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send("Error");
+//   }
+// });
 
 //THIS IS FOR ADDING REVIEWS TO THE DATABASE
-app.post("/api/reviews", authMiddleware, (req, res) => {
-  const userId = req.user.user_id; // Extracted from token by authMiddleware
-  console.log("Authenticated user ID:", userId);
-  const { hostel_id, rating, review_text } = req.body;
-  console.log("User Name from token:", req.user.username);
+app.use("/api/hostels", require("./routes/hostels"));
+app.use("/api/reviews", require("./routes/reviews"));
+app.use("/api/auth", require("./routes/auth"));
 
-  // 1. Validate input
-  if (!hostel_id || !rating) {
-    return res.status(400).json({ error: "hostel_id and rating are required" });
-  }
-  if (rating < 1 || rating > 5) {
-    return res.status(400).json({ error: "Rating must be between 1 and 5" });
-  }
 
-  // 2. SQL queries
-  const insertSql = `
-    INSERT INTO reviews (hostel_id, user_id, rating, review_text)
-    VALUES (?, ?, ?, ?)
-  `;
-  const updateSql = `
-    UPDATE hostels
-    SET 
-      total_reviews = (SELECT COUNT(*) FROM reviews WHERE hostel_id = ?),
-      average_rating = (SELECT IFNULL(AVG(rating), 0) FROM reviews WHERE hostel_id = ?)
-    WHERE hostel_id = ?
-  `;
-
-  // 3. Execute insert
-  db.query(insertSql, [hostel_id, userId, rating, review_text], (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(500).json({ error: "Database error while inserting review" });
-    }
-
-    // 4. Update hostel summary AFTER insert
-    db.query(updateSql, [hostel_id, hostel_id, hostel_id], (updateErr) => {
-      if (updateErr) {
-        console.error(updateErr);
-        return res.status(500).json({ error: "Database error while updating hostel summary" });
-      }
-
-      // 5. Single success response (with latency simulation)
-      setTimeout(() => {
-        res.json({
-          message: "Review added successfully ✅",
-          reviewId: result.insertId
-        });
-      }, 1000);
-    });
-  });
-});
-
-app.get("/api/reviews/:hostelId", (req, res) => {
-  let { hostelId } = req.params;
-  hostelId = hostelId.replace(":", ""); // Remove the colon if it exists
-  const sql = `
-    SELECT 
-      r.review_id,
-      r.rating,
-      r.review_text AS reviewText,
-      u.name
-    FROM reviews r
-    JOIN users u ON r.user_id = u.user_id
-    WHERE r.hostel_id = ?
-    ORDER BY r.created_at DESC
-  `;
-
-  db.query(sql, [hostelId], (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        error: "Error fetching reviews"
-      });
-    }
-
-    res.json(result);
-  });
-});
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 // GET /api/teamMembers  → return only the teamMembers array
+
 app.get("/api/teamMembers", (req, res) => {
   try {
     const teamMembers = readData("team_Members_data.json");
@@ -273,81 +201,10 @@ app.get("/api/moreProjects", (req, res) => {
 //THIS IS FOR SIGNING UP USERS AND STORING THEM IN THE DATABASE
 // If you also want form data:
 //app.use(express.urlencoded({ extended: true }));
-app.post("/api/signup", async (req, res) => {
-  const { name, email, password } = req.body;
-
-  try {
-    // 1. Check if user already exists
-    const checkSql = "SELECT * FROM users WHERE email = ?";
-    db.query(checkSql, [email], async (err, result) => {
-      if (result.length > 0) {
-        return res.status(400).send("User already exists");
-      }
-
-      // 2. Hash password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // 3. Insert user
-      const insertSql =
-        "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-
-      db.query(insertSql, [name, email, hashedPassword], (err, result) => {
-        if (err) return res.status(500).send("Error creating user");
-
-        res.send("Signup successful");
-      });
-    });
-
-  } catch (err) {
-    res.status(500).send("Server error");
-  }
-});
 
 
 
-app.post("/api/login", (req, res) => {
-  const { email, password } = req.body;
 
-  const sql = "SELECT * FROM users WHERE email = ?";
-
-  db.query(sql, [email], async (err, result) => {
-    if (result.length === 0) {
-      return res.status(400).send("User not found");
-    }
-
-    const user = result[0];
-
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-      return res.status(400).send("Wrong password");
-    }
-
-    const token = jwt.sign(
-      {
-        user_id: user.user_id,
-        name: user.name,   // use 'name' instead of 'username'
-        email: user.email
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
-
-    console.log("Generated JWT token for user:", user.name);
-
-    res.json({
-      token,
-      user: {
-        id: user.user_id,
-        name: user.name,
-        email: user.email
-      }
-    });
-  });
-});
-
-
-// 404 catch-all
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found." });
 });

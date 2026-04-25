@@ -27,11 +27,11 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     const [reviewTextValue, setReviewTextValue] = useState('')//THIS CONTROLS WHAT THE USER TYPOES IN THE TEXT AREA
     const [isSubmitting, setIsSubmitting] = useState(false)// THIS CONTROLLS SUBMIT BUTTON SO FREEZE WHEN SUBMITTING
     //const [toggleReview, setToggleReview] = useState('close');//THIS CONTROLLS THE SHOWING AND HIDING OF THE SUBMITTED REVIEWS
-    const [reviewsResponse, setReviewsResonse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
+    const [reviewsResponse, setReviewsResponse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
     const [loading, setLoading] = useState(true);//THIS CONTROLS THE LOADING ANIMATION WHEN THE HOSTELS ARE BEING LOADED
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
-    const url = 'https://episilion-backend-2lt0.onrender.com'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
-    //const url = "https://episilion-backend-2lt0.onrender.com";//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+    
+    const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
 
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
@@ -42,10 +42,10 @@ export function MoreDetailsPage({ originalHostelCardData }) {
         }
     })
 
+
     const [googleMapSrc, setGoogleMapSrc] = useState('')
 
     function closeMap() {
-        console.log('Close has bee clciked')
         if (!close) {
             setActivate(false)
             setClose(true)
@@ -99,7 +99,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
 
         setIsSubmitting(true)
         try {
-            await axios.post("https://episilion-backend-2lt0.onrender.com/api/reviews", {
+            await axios.post("http://localhost:3000/api/reviews", {
                 hostel_id: hostelId,
                 rating: rating,
                 review_text: reviewTextValue
@@ -108,8 +108,6 @@ export function MoreDetailsPage({ originalHostelCardData }) {
                     Authorization: localStorage.getItem("token")
                 }
             });
-
-            //console.log("Server response:", response.data, response.status);
             setRating(0)
             setReviewTextValue('')
             setIsSubmitting(false)
@@ -122,25 +120,17 @@ export function MoreDetailsPage({ originalHostelCardData }) {
             console.log("Error submitting review:", error.response?.data || error.message);
         }
     }
-
-    // function toggleReviewsDisplay() {
-    //     if (toggleReview === 'open') {
-    //         setToggleReview('close')
-    //         return;
-    //     }
-    //     setToggleReview('open')
-    // }
-
-
     async function loadingReviews() {
         try {
-            const response = await axios.get(`https://episilion-backend-2lt0.onrender.com/api/reviews/${hostelId}`)
+            console.log("Loading reviews for hostel ID:", hostelId); // Debugging log to check the hostel ID being used
+            const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
+            console.log("Response from reviews API:", response.data); // Debugging log to check the response from the API
             if (response.data.length === 0) {
-                setReviewsResonse(["no reviews"])
+                setReviewsResponse(["no reviews"])
                 return;
             }
             console.log("Reviews retrieved successfully:", response.data);
-            setReviewsResonse(response.data)
+            setReviewsResponse(response.data)
 
         } catch (error) {
             console.log("Error Retrieving review:", error.response?.data || error.message);
@@ -150,6 +140,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     useEffect(() => {
         loadingReviews()
     }, [])
+
 
     return (
         <>

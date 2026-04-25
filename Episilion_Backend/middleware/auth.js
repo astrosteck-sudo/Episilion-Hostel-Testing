@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 function authMiddleware(req, res, next) {
     const token = req.headers.authorization;
-    console.log("Auth Middleware - Token received:", token);
+    //console.log("Auth Middleware - Token received:", token);
 
     // 1. Check if token exists
     if (!token) {

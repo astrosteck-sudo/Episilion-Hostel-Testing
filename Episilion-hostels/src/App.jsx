@@ -54,7 +54,7 @@ function App() {
         <Route index element={<HomePage hostelsCardData={hostelsCardData} sethostelsCardData={sethostelsCardData}
           navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} setOriginalHostelCardData={setOriginalHostelCardData} />} />
 
-        <Route path="moreDetails" element={<MoreDetailsPage hostelsCardData={hostelsCardData} navlink={navlink} setNavLink={setNavLink} originalHostelCardData={originalHostelCardData} />} />
+        <Route path="moreDetails" element={<MoreDetailsPage originalHostelCardData={originalHostelCardData} />} />
         <Route path="aboutus" element={<AboutUsPage />} />
         <Route path="signup" element={<SignUpPage  />} />
         <Route path="askepisilion" element={<AskEpisilionPage  originalHostelCardData={originalHostelCardData} isLoggedIn={isLoggedIn} />} />
