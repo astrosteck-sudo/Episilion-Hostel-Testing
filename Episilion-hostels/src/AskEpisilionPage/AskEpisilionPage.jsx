@@ -70,7 +70,7 @@ export function AskEpisilionPage({ originalHostelCardData, isLoggedIn }) {
         //const response = episilionAnswers[Math.floor(Math.random() * episilionAnswers.length)];
         //let responseName = '';
         const filteredHostels = originalHostelCardData.filter(
-            (hostel) => hostel.featured
+            (hostel) => hostel.type === "Boys"
         )
         console.log(filteredHostels)
 

@@ -171,7 +171,7 @@ app.post("/api/hostels", (req, res) => {
 app.use("/api/hostels", require("./routes/hostels"));
 app.use("/api/reviews", require("./routes/reviews"));
 app.use("/api/auth", require("./routes/auth"));
-
+app.use("/api/intent", require("./routes/intent"));
 
 
 // ── Routes ────────────────────────────────────────────────────────────────────
