@@ -225,15 +225,18 @@ export function AskEpisilionPage({ isLoggedIn }) {
                             <p className="episilion-response-hostel-name">
                               {hostel.name}
                             </p>
-                            <p className="episilion-response-hostel-price">
-                              $({hostel.price})
-                            </p>
-                            <p
-                              className="episilion-response-hostel-link"
-                              onClick={() => goToHostelPage(hostel.id)}
-                            >
-                              CLICK HERE
-                            </p>
+                            <div className="episilion-response-price-view-details">
+                              <p className="episilion-response-hostel-price">
+                                $({hostel.price})
+                              </p>
+
+                              <p
+                                className="episilion-response-hostel-link"
+                                onClick={() => goToHostelPage(hostel.id)}
+                              >
+                                View
+                              </p>
+                            </div>
                           </p>
                         </div>
                       );

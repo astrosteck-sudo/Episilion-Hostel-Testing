@@ -313,6 +313,7 @@ body.episilion-bg {
   max-width: 70%;
   word-wrap: break-word;
   border-top-right-radius: 0;
+  font-size: clamp(12px, 2vw, 16px);
   /* Flattens corner where tail meets */
 }
 
@@ -377,11 +378,16 @@ body.episilion-bg {
   /* Flattens corner where tail meets */
 }
 
+.episilion-response-price-view-details{
+  display: flex;
+  gap: 10px;
+}
+
 
 .episilion-response-header {
   text-align: center;
-  font-size: clamp(13px, 2vw, 20px);
-  font-weight: bolder;
+  font-size: clamp(10px, 2vw, 20px);
+  font-weight: lighter;
   font-family: Playfair Display;
 }
 
@@ -403,7 +409,7 @@ body.episilion-bg {
 .episilion-response-hostel-name {
   font-family: Sancreek;
   font-weight: lighter;
-  font-size: clamp(13px, 2vw, 15px);
+  font-size: clamp(10px, 2vw, 15px);
 }
 
 .episilion-response-hostel-price {
