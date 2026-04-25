@@ -46,7 +46,6 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
 
     //THIS IS FOR THE FILTER MENU
     function openFilterMenu() {
-        console.log("Filter Menu Is opened")
         setFilterMenu(true)
     }
     function closeFilterMenu() {

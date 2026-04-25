@@ -122,14 +122,14 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     }
     async function loadingReviews() {
         try {
-            console.log("Loading reviews for hostel ID:", hostelId); // Debugging log to check the hostel ID being used
+            //console.log("Loading reviews for hostel ID:", hostelId); // Debugging log to check the hostel ID being used
             const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
-            console.log("Response from reviews API:", response.data); // Debugging log to check the response from the API
+            //console.log("Response from reviews API:", response.data); // Debugging log to check the response from the API
             if (response.data.length === 0) {
                 setReviewsResponse(["no reviews"])
                 return;
             }
-            console.log("Reviews retrieved successfully:", response.data);
+            //console.log("Reviews retrieved successfully:", response.data);
             setReviewsResponse(response.data)
 
         } catch (error) {

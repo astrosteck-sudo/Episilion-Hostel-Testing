@@ -15,21 +15,31 @@ const queryDB = (sql) =>
     });
   });
 
-// Check if query is hostel-related
+// Classify query
 function classifyQuery(query) {
-  const hostelKeywords = [
-    "hostel", "room", "boys", "girls", "male", "female", "men", "women",
-    "price", "cheap", "affordable", "expensive", "budget",
-    "wifi", "laundry", "parking", "gym", "kitchen", "amenities",
-    "campus", "location", "near", "close", "distance",
-    "available", "book", "find", "show", "list", "give", "recommend",
+  const keywords = [
+    "hostel",
+    "room",
+    "boys",
+    "girls",
+    "male",
+    "female",
+    "price",
+    "cheap",
+    "wifi",
+    "laundry",
+    "campus",
+    "near",
+    "close",
+    "find",
+    "show",
+    "list",
+    "recommend",
   ];
-
-  const lower = query.toLowerCase();
-  return hostelKeywords.some((word) => lower.includes(word));
+  return keywords.some((k) => query.toLowerCase().includes(k));
 }
 
-// Format hostel data for AI
+// Format DB data for AI
 function formatHostels(hostels, pricing, locations, amenities) {
   return hostels.map((h) => {
     const price = pricing.find((p) => p.hostel_id === h.hostel_id);
@@ -38,8 +48,8 @@ function formatHostels(hostels, pricing, locations, amenities) {
       id: h.hostel_id,
       name: h.name,
       type: h.type,
-      price: price?.price_min || null,
-      location: loc?.distance_to_campus_in_minutes || null,
+      price: price?.price_min || 0,
+      location: loc?.distance_to_campus_in_minutes || 999,
       amenities: amenities
         .filter((a) => a.hostel_id === h.hostel_id)
         .map((a) => a.amenity),
@@ -47,64 +57,94 @@ function formatHostels(hostels, pricing, locations, amenities) {
   });
 }
 
-// Parse AI response — captures id (string), name, price, reason
+// Smart filtering
+function applySmartFilter(data, query) {
+  const q = query.toLowerCase();
+  let filtered = [...data];
+
+  if (q.includes("close") || q.includes("near")) {
+    filtered = filtered.sort((a, b) => a.location - b.location);
+  }
+  if (q.includes("cheap") || q.includes("budget")) {
+    filtered = filtered.sort((a, b) => a.price - b.price);
+  }
+
+  return filtered;
+}
+
+// Extract limit
+function extractLimit(query) {
+  const match = query.match(/\b(\d+)\b/);
+  return match ? parseInt(match[1]) : 5;
+}
+
+// Parse AI response — handles both [ID: xxx] and bare UUID formats
 function parseAI(text) {
   const cleaned = text.replace(/<think>[\s\S]*?<\/think>/g, "").trim();
+
+  // Extract overall reason
+  const reasonMatch = cleaned.match(/^Reason:\s*(.+)$/m);
+  const overallReason = reasonMatch ? reasonMatch[1].trim() : null;
+
+  // Extract no match message
+  const noMatchMatch = cleaned.match(/^No match:\s*(.+)$/m);
+  const noMatch = noMatchMatch ? noMatchMatch[1].trim() : null;
+
   const lines = cleaned.split("\n").filter((l) => l.trim());
   const results = [];
 
   for (const line of lines) {
-    // Format: 1. [ID: abc-123] Hostel Name - 500 - reason text here
-    const match = line.match(/\[ID:\s*([^\]]+)\]\s*(.+?)\s*-\s*(\d+)\s*-\s*(.+)/);
+    // Try both formats the AI might return
+    const match =
+      line.match(/^\d+\.\s*\[ID:\s*([^\]]+)\]\s*(.+?)\s*-\s*(\d+)/) || // [ID: xxx] format
+      line.match(/^\d+\.\s*([a-f0-9-]{36})\s+(.+?)\s*-\s*(\d+)/i); // bare UUID format
+
     if (match) {
       results.push({
         id: match[1].trim(),
         name: match[2].trim(),
         price: parseInt(match[3].trim()),
-        reason: match[4].trim(),
       });
     }
   }
 
-  return results;
+  return { results, overallReason, noMatch };
 }
 
-// Extract number limit from query
-function extractLimit(query) {
-  const match = query.match(/\b(only\s+)?(\d+)\b/i);
-  return match ? parseInt(match[2]) : null;
-}
-
+// Main controller
 exports.searchHostelsAI = async (req, res) => {
   const { query } = req.body;
 
-  // 1. VALIDATE INPUT
+  // 1. VALIDATE
   if (!query || typeof query !== "string" || query.trim() === "") {
     return res.status(400).json({ error: "Query is required" });
   }
 
-  // 2. CHECK IF QUERY IS HOSTEL-RELATED
+  // 2. CLASSIFY
   if (!classifyQuery(query)) {
     return res.status(400).json({
       error: "out_of_scope",
       message:
-        "I can only help you find hostels. Try asking something like 'show me cheap boys hostels near campus with wifi'.",
+        "I can only help you find hostels. Try asking something like 'show me cheap girls hostels near campus with wifi'.",
     });
   }
 
   try {
-    // 3. GET DATA FROM DB
+    // 3. FETCH DATA
     const hostels = await queryDB("SELECT * FROM hostels");
     const pricing = await queryDB("SELECT * FROM pricing");
     const locations = await queryDB("SELECT * FROM locations");
     const amenities = await queryDB("SELECT * FROM amenities");
 
-    const aiData = formatHostels(hostels, pricing, locations, amenities);
+    let aiData = formatHostels(hostels, pricing, locations, amenities);
 
-    // 4. EXTRACT LIMIT FROM QUERY
+    // 4. SMART FILTER
+    aiData = applySmartFilter(aiData, query);
+
+    // 5. EXTRACT LIMIT
     const limit = extractLimit(query);
 
-    // 5. CALL AI
+    // 6. CALL AI
     const completion = await client.chat.completions.create({
       model: "meta/llama-3.1-8b-instruct",
       temperature: 0,
@@ -114,21 +154,26 @@ exports.searchHostelsAI = async (req, res) => {
           content: `
 You are a hostel recommendation engine.
 
-STRICT RULES:
-- Use ONLY the hostel data provided
+RULES:
+- Use ONLY the provided hostel data
 - DO NOT invent hostels
-- DO NOT explain anything
+- DO NOT use JSON
+- DO NOT use <think>
 - DO NOT introduce yourself
-- DO NOT output JSON
-- Only return hostels that match the user's request
+- The Reason must describe what the user asked for and what was found, NOT the data or how many hostels exist in the database
 
-Return results ONLY in this exact format, one per line:
-1. [ID: abc-uuid-string] Hostel Name - price - reason
-2. [ID: abc-uuid-string] Hostel Name - price - reason
+IF hostels match, return ONLY in this exact format:
 
-Where price is the numeric value only (no currency symbol).
-Where reason is a short 1 sentence explanation of why this hostel matches the user's request.
-          `,
+Reason: [one sentence telling the user what was found based on their request. Example: "Here are 3 affordable girls hostels near campus with wifi for you."]
+1. [ID: uuid] Hostel Name - price
+2. [ID: uuid] Hostel Name - price
+
+IF no hostels match, return ONLY:
+
+No match: [one sentence explaining why and what the user could try instead]
+
+Where price is a number only, no currency symbol.
+`,
         },
         {
           role: "user",
@@ -136,36 +181,45 @@ Where reason is a short 1 sentence explanation of why this hostel matches the us
 User request:
 ${query}
 
-Available hostels:
+Hostels:
 ${JSON.stringify(aiData)}
 
 Return best matches only.
           `,
         },
       ],
-      max_tokens: 400,
+      max_tokens: 300,
     });
 
     const raw = completion.choices[0].message.content;
     console.log("RAW AI:", raw);
 
-    // 6. PARSE RESULT
-    let result = parseAI(raw);
+    // 7. PARSE
+    const { results, overallReason, noMatch } = parseAI(raw);
 
-    // 7. ENFORCE LIMIT IN CODE
-    if (limit !== null) {
-      result = result.slice(0, limit);
-    }
-
-    // 8. FALLBACK IF AI FAILS
-    if (!result.length) {
-      return res.status(500).json({
-        error: "AI returned unusable format",
-        raw,
+    // 8. HANDLE NO MATCH
+    if (noMatch || results.length === 0) {
+      return res.status(404).json({
+        error: "no_match",
+        message:
+          noMatch ||
+          "No hostels found matching your request. Try adjusting your search.",
       });
     }
 
-    res.json({ result });
+    // 9. ENFORCE LIMIT
+    const finalResults = results.slice(0, limit);
+
+    // 10. RESPOND
+    res.json({
+      reason: overallReason,
+      total: finalResults.length,
+      result: finalResults.map((h) => ({
+        id: h.id,
+        name: h.name,
+        price: h.price,
+      })),
+    });
   } catch (err) {
     console.error("searchHostelsAI error:", err);
     res.status(500).json({ error: "AI search failed" });
