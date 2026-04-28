@@ -13,16 +13,15 @@ export function AskEpisilionPage({ isLoggedIn }) {
   const [userSearchInput, setUserSearchInput] = useState("");
   const [chatMessages, setChatMessages] = useState([]); //Initialize as array
   const [open, setOpen] = useState(false);
-  const [aiResponse, setAiResponse] = useState("");
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
 
-  useEffect(() => {
-    document.body.classList.add("episilion-bg");
-    return () => {
-      document.body.classList.remove("episilion-bg");
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.body.classList.add("episilion-bg");
+  //   return () => {
+  //     document.body.classList.remove("episilion-bg");
+  //   };
+  // }, []);
 
   //This hook scrolls to the bottom whenever chatMessages updates.
   useEffect(() => {
@@ -80,7 +79,6 @@ export function AskEpisilionPage({ isLoggedIn }) {
 
       const result = res.data.result;
       console.log(res.data);
-      setAiResponse(res.data);
 
       // 3. ADD RESULT TO CHAT
       setChatMessages((prev) => [
@@ -89,6 +87,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
           message: result,
           type: "episilionResults",
           sender: "episilion",
+          header: res.data.reason || "Episilion Results",
         },
       ]);
     } catch (error) {
@@ -131,11 +130,15 @@ export function AskEpisilionPage({ isLoggedIn }) {
     }
   }
   //THIS IS TO EXTRACT THE USER IMFORMATION FROM THE TOKEN
-  const user = JSON.parse(localStorage.getItem("user"));
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
+  useEffect(() => {
+    document.title = "Ask Episilion | Episilion Hostels";
+  }, []);
 
   return (
     <>
-      <title>Ask Episilion | Episilion Hostels</title>
       <div className="main-epsilion-container">
         <div className={`epsilion-wrapper-one ${open ? "open" : ""}`}>
           <div className="sidebar-header">
@@ -186,7 +189,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
               <img src={robotImage} className="ask-episilion-robot-image" />
               <div className="episilion-message">
                 <p className="ask-episilion-message-first-Paragraph">
-                  Hi {!isLoggedIn ? "student" : user.name}! 👋 How can I help
+                  Hi {!isLoggedIn ? "student" : user?.name || "student"}! 👋 How can I help
                   you today?
                 </p>
                 <p className="ask-episilion-message-second-Paragraph">
@@ -214,14 +217,15 @@ export function AskEpisilionPage({ isLoggedIn }) {
               >
                 {chat.type === "episilionResults" ? (
                   <div className="episilion-response">
+                    <div className="ask-episilion-loader"></div>
                     <p className="episilion-response-header">
-                      {aiResponse.reason}
+                      {chat.header}
                     </p>
-                    {chat.message.map((hostel) => {
-                      return (
-                        <div key={hostel.id} className="episilion-hostel-card">
+                    {Array.isArray(chat.message) ? (
+                      chat.message.map((hostel) => (
+                        <div key={hostel.id}>
                           {/* <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" /> */}
-                          <p className="episilion-response-card-details">
+                          <div className="episilion-response-card-details">
                             <p className="episilion-response-hostel-name">
                               {hostel.name}
                             </p>
@@ -237,10 +241,12 @@ export function AskEpisilionPage({ isLoggedIn }) {
                                 View
                               </p>
                             </div>
-                          </p>
+                          </div>
                         </div>
-                      );
-                    })}
+                      ))
+                    ) : (
+                      <p>{chat.message}</p>
+                    )}
                   </div>
                 ) : (
                   chat.message

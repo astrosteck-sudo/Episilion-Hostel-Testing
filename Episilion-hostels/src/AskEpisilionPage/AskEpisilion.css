@@ -375,6 +375,7 @@ body.episilion-bg {
   max-width: 70%;
   word-wrap: break-word;
   border-top-left-radius: 0;
+  border: solid red;
   /* Flattens corner where tail meets */
 }
 
@@ -494,7 +495,7 @@ body.episilion-bg {
 
 
 
-.ask-episilion-loader.loading {
+.ask-episilion-loader {
   color: black;
   font-size: 10px;
   width: 1em;
