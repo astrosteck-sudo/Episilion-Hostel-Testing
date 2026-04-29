@@ -7,13 +7,14 @@ const client = new OpenAI({
 });
 
 // DB helper
-const queryDB = (sql) =>
+const queryDB = (sql, values = []) =>
   new Promise((resolve, reject) => {
-    db.query(sql, (err, result) => {
+    db.query(sql, values, (err, result) => {
       if (err) reject(err);
       else resolve(result);
     });
   });
+
 
 // Classify query
 function classifyQuery(query) {
@@ -114,6 +115,7 @@ function parseAI(text) {
 // Main controller
 exports.searchHostelsAI = async (req, res) => {
   const { query } = req.body;
+  console.log("Starting")
 
   // 1. VALIDATE
   if (!query || typeof query !== "string" || query.trim() === "") {
@@ -130,6 +132,7 @@ exports.searchHostelsAI = async (req, res) => {
   }
 
   try {
+    console.log("continuing")
     // 3. FETCH DATA
     const hostels = await queryDB("SELECT * FROM hostels");
     const pricing = await queryDB("SELECT * FROM pricing");
@@ -208,12 +211,30 @@ Return best matches only.
     }
 
     // 9. ENFORCE LIMIT
+    // 9. LIMIT RESULTS
     const finalResults = results.slice(0, limit);
+    console.log(req.user.user_id)
 
-    // 10. RESPOND
+    // 10. INCREMENT AI USAGE
+    await queryDB(
+      `
+  UPDATE ai_usage
+  SET requests_used = requests_used + 1
+  WHERE user_id = ?
+  `,
+      [req.user.user_id],
+    );
+
+    // 11. CALCULATE REMAINING REQUESTS
+    const remaining =
+      req.aiUsage.requests_limit - (req.aiUsage.requests_used + 1);
+
+    // 12. FINAL RESPONSE
     res.json({
       reason: overallReason,
       total: finalResults.length,
+      remainingRequests: remaining,
+
       result: finalResults.map((h) => ({
         id: h.id,
         name: h.name,

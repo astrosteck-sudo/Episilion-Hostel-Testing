@@ -13,33 +13,50 @@ const query = (sql, values = []) =>
 /**
  * SIGNUP
  */
+
 exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    const existing = await query(
-      "SELECT * FROM users WHERE email = ?",
-      [email]
-    );
-
+    // 1. Check if user already exists
+    const existing = await query("SELECT * FROM users WHERE email = ?", [email]);
     if (existing.length > 0) {
       return res.status(400).send("User already exists");
     }
 
+    // 2. Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await query(
+    // 3. Insert user and capture result
+    const result = await query(
       "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
       [name, email, hashedPassword]
     );
 
-    res.send("Signup successful");
+    // 4. Get the auto-generated user_id
+    const userId = result.insertId;
+    //console.log(userId)
 
+    // 5. Create AI usage row linked to that user
+    await query(
+      `
+      INSERT INTO ai_usage (
+          user_id,
+          requests_used,
+          requests_limit
+        )
+        VALUES (?, 0, 3)
+      `,
+      [userId]
+    );
+
+    res.send("Signup successful");
   } catch (err) {
     console.log(err);
     res.status(500).send("Server error");
   }
 };
+
 
 /**
  * LOGIN
@@ -65,11 +82,11 @@ exports.login = (req, res) => {
     const token = jwt.sign(
       {
         user_id: user.user_id,
-        name: user.name,   // use 'name' instead of 'username'
-        email: user.email
+        name: user.name, // use 'name' instead of 'username'
+        email: user.email,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "7d" }
+      { expiresIn: "7d" },
     );
 
     console.log("Generated JWT token for user:", user.name);
@@ -79,8 +96,8 @@ exports.login = (req, res) => {
       user: {
         id: user.user_id,
         name: user.name,
-        email: user.email
-      }
+        email: user.email,
+      },
     });
   });
 };

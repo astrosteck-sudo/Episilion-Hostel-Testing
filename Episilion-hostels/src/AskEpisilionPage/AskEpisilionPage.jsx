@@ -13,8 +13,10 @@ export function AskEpisilionPage({ isLoggedIn }) {
   const [userSearchInput, setUserSearchInput] = useState("");
   const [chatMessages, setChatMessages] = useState([]); //Initialize as array
   const [open, setOpen] = useState(false);
+  const [aiResponse, setAiResponse] = useState();
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
+  console.log(isLoggedIn);
 
   // useEffect(() => {
   //   document.body.classList.add("episilion-bg");
@@ -52,10 +54,10 @@ export function AskEpisilionPage({ isLoggedIn }) {
   }
 
   async function sendMessage() {
-    if (!isLoggedIn) {
-      navigate("/login");
-      return;
-    }
+    // if (isLoggedIn != true) {
+    //   navigate("/login");
+    //   return;
+    // }
 
     if (!userSearchInput.trim()) return;
 
@@ -72,15 +74,20 @@ export function AskEpisilionPage({ isLoggedIn }) {
     ]);
 
     try {
-      // 2. CALL AI
-      const res = await axios.post("http://localhost:3000/api/intent/search", {
-        query: userMessage,
-      });
+      const res = await axios.post(
+        "http://localhost:3000/api/intent/search",
+        { query: userMessage },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
 
       const result = res.data.result;
-      console.log(res.data);
 
-      // 3. ADD RESULT TO CHAT
+      setAiResponse(res.data);
+
       setChatMessages((prev) => [
         ...prev,
         {
@@ -91,17 +98,11 @@ export function AskEpisilionPage({ isLoggedIn }) {
         },
       ]);
     } catch (error) {
-      if (error.response?.status === 401) {
-        navigate("/login");
-        return;
-      }
-
       const errorMessage =
         error.response?.data?.message ||
         error.response?.data?.error ||
         "Something went wrong. Please try again.";
 
-      // 4. ADD ERROR TO CHAT
       setChatMessages((prev) => [
         ...prev,
         {
@@ -189,8 +190,8 @@ export function AskEpisilionPage({ isLoggedIn }) {
               <img src={robotImage} className="ask-episilion-robot-image" />
               <div className="episilion-message">
                 <p className="ask-episilion-message-first-Paragraph">
-                  Hi {!isLoggedIn ? "student" : user?.name || "student"}! 👋 How can I help
-                  you today?
+                  Hi {!isLoggedIn ? "student" : user?.name || "student"}! 👋 How
+                  can I help you today?
                 </p>
                 <p className="ask-episilion-message-second-Paragraph">
                   I'm your Epislion AI assistant - ask me anything about
@@ -217,9 +218,8 @@ export function AskEpisilionPage({ isLoggedIn }) {
               >
                 {chat.type === "episilionResults" ? (
                   <div className="episilion-response">
-                    <div className="ask-episilion-loader"></div>
                     <p className="episilion-response-header">
-                      {chat.header}
+                      {aiResponse.reason}
                     </p>
                     {Array.isArray(chat.message) ? (
                       chat.message.map((hostel) => (
