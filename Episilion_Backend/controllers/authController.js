@@ -89,8 +89,6 @@ exports.login = (req, res) => {
       { expiresIn: "7d" },
     );
 
-    console.log("Generated JWT token for user:", user.name);
-
     res.json({
       token,
       user: {

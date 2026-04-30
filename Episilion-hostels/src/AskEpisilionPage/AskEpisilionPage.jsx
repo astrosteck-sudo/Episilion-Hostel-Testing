@@ -1,4 +1,3 @@
-import { PageHeader } from "../PageHeader/PageHeader";
 import { Link } from "react-router-dom";
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import { useNavigate } from "react-router-dom";
@@ -8,12 +7,13 @@ import sendImage from "../assets/icons/send.png";
 import robotImage from "../assets/icons/robot.png";
 import lightBulbImage from "../assets/icons/light-bulb.png";
 import axios from "axios";
+import { getDeviceId } from "../utils/deviceId";
 
 export function AskEpisilionPage({ isLoggedIn }) {
   const [userSearchInput, setUserSearchInput] = useState("");
   const [chatMessages, setChatMessages] = useState([]); //Initialize as array
   const [open, setOpen] = useState(false);
-  const [aiResponse, setAiResponse] = useState();
+  const [remainingRequests, setRemainingRequest] = useState(0)
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
   console.log(isLoggedIn);
@@ -54,10 +54,10 @@ export function AskEpisilionPage({ isLoggedIn }) {
   }
 
   async function sendMessage() {
-    // if (isLoggedIn != true) {
-    //   navigate("/login");
-    //   return;
-    // }
+    if (!isLoggedIn) {
+      navigate("/login");
+      return;
+    }
 
     if (!userSearchInput.trim()) return;
 
@@ -80,13 +80,14 @@ export function AskEpisilionPage({ isLoggedIn }) {
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "x-device-id": getDeviceId(),
           },
         },
       );
 
       const result = res.data.result;
-
-      setAiResponse(res.data);
+      console.log(res.data)
+      setRemainingRequest(res.data.remainingRequests)
 
       setChatMessages((prev) => [
         ...prev,
@@ -156,7 +157,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
           <div className="user-AI-usage-container">
             <p className="free-request-text">
               Free Request{" "}
-              <span className="user-number-request-left">2/2 left</span>
+              <span className="user-number-request-left">{remainingRequests}/3 left</span>
             </p>
             <p className="upgrade-text">Upgrade for 15 request/day</p>
           </div>
@@ -219,7 +220,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
                 {chat.type === "episilionResults" ? (
                   <div className="episilion-response">
                     <p className="episilion-response-header">
-                      {aiResponse.reason}
+                      {chat.header || "Episilion Results"}
                     </p>
                     {Array.isArray(chat.message) ? (
                       chat.message.map((hostel) => (
@@ -257,7 +258,6 @@ export function AskEpisilionPage({ isLoggedIn }) {
           <div className="ask-episilion-search-conatainer">
             <div className="ask-episilion-search-bar">
               <textarea
-                type="text"
                 className="ask-episilion-input-box"
                 onChange={searchInput}
                 onKeyDown={handleKeyDown}

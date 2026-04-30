@@ -15,7 +15,6 @@ const queryDB = (sql, values = []) =>
     });
   });
 
-
 // Classify query
 function classifyQuery(query) {
   const keywords = [
@@ -115,7 +114,6 @@ function parseAI(text) {
 // Main controller
 exports.searchHostelsAI = async (req, res) => {
   const { query } = req.body;
-  console.log("Starting")
 
   // 1. VALIDATE
   if (!query || typeof query !== "string" || query.trim() === "") {
@@ -132,7 +130,6 @@ exports.searchHostelsAI = async (req, res) => {
   }
 
   try {
-    console.log("continuing")
     // 3. FETCH DATA
     const hostels = await queryDB("SELECT * FROM hostels");
     const pricing = await queryDB("SELECT * FROM pricing");
@@ -195,7 +192,7 @@ Return best matches only.
     });
 
     const raw = completion.choices[0].message.content;
-    console.log("RAW AI:", raw);
+    // console.log("RAW AI:", raw);
 
     // 7. PARSE
     const { results, overallReason, noMatch } = parseAI(raw);
@@ -213,7 +210,6 @@ Return best matches only.
     // 9. ENFORCE LIMIT
     // 9. LIMIT RESULTS
     const finalResults = results.slice(0, limit);
-    console.log(req.user.user_id)
 
     // 10. INCREMENT AI USAGE
     await queryDB(
@@ -223,6 +219,16 @@ Return best matches only.
   WHERE user_id = ?
   `,
       [req.user.user_id],
+    );
+
+    await queryDB(
+      `
+  UPDATE device_ai_usage
+  SET requests_used =
+      requests_used + 1
+  WHERE device_id = ?
+  `,
+      [req.headers["x-device-id"]],
     );
 
     // 11. CALCULATE REMAINING REQUESTS
