@@ -7,7 +7,7 @@ import sendImage from "../assets/icons/send.png";
 import robotImage from "../assets/icons/robot.png";
 import lightBulbImage from "../assets/icons/light-bulb.png";
 import axios from "axios";
-import { getDeviceId } from "../utils/deviceId";
+import { getDeviceId } from "../UTILS/deviceId.js";
 
 export function AskEpisilionPage({ isLoggedIn }) {
   const [userSearchInput, setUserSearchInput] = useState("");
