@@ -31,7 +31,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     const [loading, setLoading] = useState(true);//THIS CONTROLS THE LOADING ANIMATION WHEN THE HOSTELS ARE BEING LOADED
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
     
-    const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
+    const url = 'https://episilion-backend-2lt0.onrender.com'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
 
     const params = new URLSearchParams(window.location.search);
     const hostelId = params.get("hostelId")
@@ -99,7 +99,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
 
         setIsSubmitting(true)
         try {
-            await axios.post("http://localhost:3000/api/reviews", {
+            await axios.post("https://episilion-backend-2lt0.onrender.com/api/reviews", {
                 hostel_id: hostelId,
                 rating: rating,
                 review_text: reviewTextValue
@@ -123,7 +123,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     async function loadingReviews() {
         try {
             //console.log("Loading reviews for hostel ID:", hostelId); // Debugging log to check the hostel ID being used
-            const response = await axios.get(`http://localhost:3000/api/reviews/${hostelId}`)
+            const response = await axios.get(`https://episilion-backend-2lt0.onrender.com/api/reviews/${hostelId}`)
             //console.log("Response from reviews API:", response.data); // Debugging log to check the response from the API
             if (response.data.length === 0) {
                 setReviewsResponse(["no reviews"])
