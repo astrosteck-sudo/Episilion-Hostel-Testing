@@ -195,8 +195,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   border: 1px solid grey;
+}
+.external-sign-up-button-span{
+  font-weight: lighter;
 }
 
 .external-sign-up-image {

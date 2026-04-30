@@ -215,9 +215,9 @@ export function HomePage({ hostelsCardData, sethostelsCardData, originalHostelCa
     //THIS IS FOR THE CHANGING HOSTEL TEXTS
     // All sentences to cycle through
     const SENTENCES = [
+        "ALWAYS UP-TO-DATE LISTINGS",
         "OVER 100 HOSTELS LISTED",
         "FIND YOUR PERFECT STAY",
-        "ALWAYS UP-TO-DATE LISTINGS",
         "COMPARE HOSTELS INSTANTLY",
         "BROWSE HOSTELS FROM HOME",
         "BOOK WITH CONFIDENCE",

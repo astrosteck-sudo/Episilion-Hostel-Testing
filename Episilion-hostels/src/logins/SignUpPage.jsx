@@ -2,7 +2,6 @@ import { PageHeader } from "../PageHeader/PageHeader";
 import './logins.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import googleImage from '../assets/icons/google.png';
-import facebookImage from '../assets/icons/contact-us-facebook.png';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -100,8 +99,7 @@ export function SignUpPage() {
                     </div>
 
                     <div className="external-sign-up-buttons">
-                        <button className="external-sign-up-button"><img src={googleImage} className="external-sign-up-image"></img> Google</button>
-                        <button className="external-sign-up-button"><img src={facebookImage} className="external-sign-up-image"></img> FaceBook</button>
+                        <button className="external-sign-up-button"><img src={googleImage} className="external-sign-up-image"></img><span className="external-sign-up-button-span">Sign up with</span>Google</button>
                     </div>
 
                     <div className="divider">

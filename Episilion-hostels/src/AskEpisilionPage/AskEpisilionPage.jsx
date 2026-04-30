@@ -13,7 +13,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
   const [userSearchInput, setUserSearchInput] = useState("");
   const [chatMessages, setChatMessages] = useState([]); //Initialize as array
   const [open, setOpen] = useState(false);
-  const [remainingRequests, setRemainingRequest] = useState(0)
+  const [remainingRequests, setRemainingRequest] = useState(3)
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
   console.log(isLoggedIn);

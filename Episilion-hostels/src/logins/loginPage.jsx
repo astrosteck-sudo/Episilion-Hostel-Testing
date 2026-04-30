@@ -2,7 +2,6 @@ import { PageHeader } from "../PageHeader/PageHeader";
 import './logins.css';
 import { SiteFooter } from "../SiteFooter/SiteFooter";
 import googleImage from '../assets/icons/google.png';
-import facebookImage from '../assets/icons/contact-us-facebook.png';
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -118,16 +117,15 @@ export function LoginPage({ setIsLoggedIn }) {
                     <div className="wrapper login">
                         <p className="join-us-text login"><span className="join-us-span">WELCOME BACK</span></p>
                         <h4 className="create-account-text login"><span className="create-account-span">LOGIN</span></h4>
-                        <p className="start-journey-text">Good to see you again - let's let you in</p>
+                        <p className="start-journey-text">Good to see you again - let's get you in</p>
                     </div>
 
                     <div className="external-sign-up-buttons">
-                        <button className="external-sign-up-button"><img src={googleImage} className="external-sign-up-image"></img> Google</button>
-                        <button className="external-sign-up-button"><img src={facebookImage} className="external-sign-up-image"></img> FaceBook</button>
+                        <button className="external-sign-up-button"><img src={googleImage} className="external-sign-up-image"></img><span className="external-sign-up-button-span">Log in with</span>Google</button>
                     </div>
 
                     <div className="divider">
-                        <span>or sign up with email</span>
+                        <span>or log in with email</span>
                     </div>
 
                     <form method="POST" id="myForm" onSubmit={handleLogin}>
