@@ -99,7 +99,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
 
         setIsSubmitting(true)
         try {
-            await axios.post("https://episilion-backend-2lt0.onrender.com/api/reviews", {
+            await axios.post("http://localhost:3000/api/reviews", {
                 hostel_id: hostelId,
                 rating: rating,
                 review_text: reviewTextValue

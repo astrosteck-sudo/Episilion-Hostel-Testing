@@ -84,6 +84,7 @@ exports.login = (req, res) => {
         user_id: user.user_id,
         name: user.name, // use 'name' instead of 'username'
         email: user.email,
+        created_at: user.created_at
       },
       process.env.JWT_SECRET,
       { expiresIn: "7d" },
@@ -95,6 +96,7 @@ exports.login = (req, res) => {
         id: user.user_id,
         name: user.name,
         email: user.email,
+        createdAt: user.created_at
       },
     });
   });

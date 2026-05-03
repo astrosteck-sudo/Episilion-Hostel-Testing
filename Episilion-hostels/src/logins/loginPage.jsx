@@ -55,6 +55,7 @@ export function LoginPage({ setIsLoggedIn }) {
             const res = await axios.post(`http://localhost:3000/api/auth/login`, {
                 email,
                 password
+
             });
 
             // const token = res.data.token;
@@ -62,6 +63,7 @@ export function LoginPage({ setIsLoggedIn }) {
             // ✅ STORE TOKEN
             localStorage.setItem("token", res.data.token);// 1. store login proof
             localStorage.setItem("user", JSON.stringify(res.data.user));// 2. store user info
+            
             
 
             setEmail('');

@@ -62,7 +62,7 @@ function App() {
         <Route path="login" element={<LoginPage  setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='morefromus' element={<MoreFromUsPage  />} />
         <Route path='comparehostels' element={<CompareHostels  originalHostelCardData={originalHostelCardData} />} />
-        <Route path='userProfilePage' element={<UserProfilePage></UserProfilePage>} />
+        <Route path='userProfilePage' element={<UserProfilePage isLoggedIn={isLoggedIn}></UserProfilePage>} />
       </Routes>
     </>
   )
