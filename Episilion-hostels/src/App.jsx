@@ -11,6 +11,7 @@ import { MoreFromUsPage } from './MoreFromUs/MoreFromUsPage.jsx';
 import './App.css'
 import { CompareHostels } from './CompareHostelsPage/CompareHostels.jsx';
 import { PageHeader } from './PageHeader/PageHeader.jsx';
+import { UserProfilePage } from './UserProfilPage/UserProfile.jsx';
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
 
 
   const loadHostelsCard = async () => {
-    const response = await axios.get('https://episilion-backend-2lt0.onrender.com/api/hostels')
-    //const response = await axios.get('http://localhost:3000/api/hostels')
+    //const response = await axios.get('https://episilion-backend-2lt0.onrender.com/api/hostels')
+    const response = await axios.get('http://localhost:3000/api/hostels')
     //console.log("testing code", response.data)
     sethostelsCardData(response.data)//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
     setOriginalHostelCardData(response.data)//THIS DATA WILL CHANGE BASED ON THE FILTER OPTIONS
@@ -61,6 +62,7 @@ function App() {
         <Route path="login" element={<LoginPage  setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='morefromus' element={<MoreFromUsPage  />} />
         <Route path='comparehostels' element={<CompareHostels  originalHostelCardData={originalHostelCardData} />} />
+        <Route path='userProfilePage' element={<UserProfilePage></UserProfilePage>} />
       </Routes>
     </>
   )

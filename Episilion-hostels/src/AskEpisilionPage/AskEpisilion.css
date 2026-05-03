@@ -299,6 +299,7 @@ body.episilion-bg {
   overflow-y: auto;
   padding: 10px;
   scroll-behavior: smooth;
+  background-color: rgb(231, 221, 221);
 }
 
 /* User message aligned right */

@@ -16,7 +16,6 @@ export function AskEpisilionPage({ isLoggedIn }) {
   const [remainingRequests, setRemainingRequest] = useState(3)
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
-  console.log(isLoggedIn);
 
   // useEffect(() => {
   //   document.body.classList.add("episilion-bg");
@@ -75,7 +74,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
 
     try {
       const res = await axios.post(
-        "https://episilion-backend-2lt0.onrender.com/api/intent/search",
+        "http://localhost:3000/api/intent/search",
         { query: userMessage },
         {
           headers: {

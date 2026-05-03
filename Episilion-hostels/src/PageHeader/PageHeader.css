@@ -262,6 +262,11 @@
   margin-bottom: 10px;
   cursor: pointer;
 }
+.user-profile-page-link{
+  text-decoration: none;
+  color: black;
+}
+
 
 .user-option-pop-up-images{
   width: 15px;

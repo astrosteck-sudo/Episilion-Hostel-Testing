@@ -1,0 +1,42 @@
+.user-profile-container{
+    border: solid red;
+    height: 10%;
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    margin: auto;
+}
+.user-profile-name-abrv{
+    margin: 5px;
+    min-width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #d3c84d;
+    background-color: black;
+    font-weight: bolder;
+}
+
+.user-profile-calender-image{
+    width: 2%;
+}
+
+.user-profile-name{
+    font-size: clamp(15px, 2vw, 20px);
+    font-weight: bolder;
+}
+.user-profile-email{
+    font-size: clamp(13px, 2vw, 15px);
+    margin-bottom: 5px;
+    color: grey;
+}
+
+.user-profile-joined{
+    display: flex;
+    gap: 5px;
+}
+.user-joined-date-span{
+    font-weight: bolder;
+
+}

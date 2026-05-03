@@ -93,7 +93,7 @@ export function PageHeader({ navlink, setNavLink, originalHostelCardData, sethos
                                 </div>
                                 <div className='user-option-pop-up-profile-container'>
                                     <img src={userPopImage} className='user-option-pop-up-images' />
-                                    <p>My profile</p>
+                                    <Link className='user-profile-page-link' to='userProfilePage'><p>My Profile</p></Link>
                                 </div>
                                 <div className='user-option-pop-up-favorite-container'>
                                     <img src={userPopFavoriteImage} className='user-option-pop-up-images' />
