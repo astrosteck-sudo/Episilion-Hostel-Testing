@@ -30,7 +30,8 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     const [reviewsResponse, setReviewsResponse] = useState([])//THIS STATE VARIABLE STORES THE RESPONSE FROM THE BACKEND WHEN WE RETRIEVE THE REVIEWS FOR A PARTICULAR HOSTEL
     const [loading, setLoading] = useState(true);//THIS CONTROLS THE LOADING ANIMATION WHEN THE HOSTELS ARE BEING LOADED
     const [rating, setRating] = useState(0);//THIS CONTROLS HOW THE STARS SELECTED BEHAVE
-    
+    const [maxReview, setMaxReview] = useState(5) //THIS CONTROLLS THE NUMBER OF REVIEWS SHOWN
+
     const url = 'http://localhost:3000'//THIS IS THE URL FOR THE BACKEND, THIS IS USED TO ACCESS THE IMAGES IN THE PUBLIC FOLDER OF THE BACKEND
 
     const params = new URLSearchParams(window.location.search);
@@ -130,6 +131,7 @@ export function MoreDetailsPage({ originalHostelCardData }) {
                 return;
             }
             //console.log("Reviews retrieved successfully:", response.data);
+            console.log(response.data.length)
             setReviewsResponse(response.data)
 
         } catch (error) {
@@ -140,6 +142,16 @@ export function MoreDetailsPage({ originalHostelCardData }) {
     useEffect(() => {
         loadingReviews()
     }, [])
+
+
+    function showAllReviews(){
+        setMaxReview(reviewsResponse.length)
+        if(maxReview > 5){
+            setMaxReview(5)
+        }else{
+            setMaxReview(reviewsResponse.length)
+        }
+    }
 
 
     return (
@@ -359,9 +371,13 @@ export function MoreDetailsPage({ originalHostelCardData }) {
 
             {/* <div className='show-reviews-button' onClick={toggleReviewsDisplay}><button>{toggleReview === 'close' ? 'Show Reviews' : 'Hide Reviews'}</button></div> */}
             <div className={`reviews-and-ratings-display `}>
-                {reviewsResponse.slice(0, 5).map((item) => (
+                {reviewsResponse.slice(0, maxReview).map((item) => (
                     <Reviews key={item.reviewId} item={item}></Reviews>
                 ))}
+            </div>
+
+            <div className='see-more-reviews-text' onClick={showAllReviews}>
+                <p>{maxReview > 5 ? 'Show less reviews':'See all reviews'}</p>
             </div>
             <SiteFooter />
         </>

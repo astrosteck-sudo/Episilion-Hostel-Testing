@@ -602,6 +602,18 @@ p.font-paragraph {
   font-weight: bold;
   color: grey;
 }
+.see-more-reviews-text{
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+}
+.see-more-reviews-text p{
+  padding: 10px;
+  border: solid black .5px;
+  border-radius: 10px;
+}
 
 .review-source{
   /* border: solid pink; */
