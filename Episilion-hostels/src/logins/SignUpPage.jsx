@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import isValidEmail from "../UTILS/emailValidator.js";
 
 export function SignUpPage() {
     const navigate = useNavigate();
@@ -48,9 +49,9 @@ export function SignUpPage() {
         } else {
             setType('password')
         }
-        console.log(parameter)
-
     }
+
+    console.log(isValidEmail("king@gmaolmmc.com"));
 
 
     async function handleSumbit(event) {
@@ -59,6 +60,12 @@ export function SignUpPage() {
             setErrorMessage("Passwords do not match");
             return;
         }
+        event.preventDefault();
+        if (!isValidEmail(email)) {
+            setErrorMessage("Please enter a valid email address");
+            return;
+        }
+
         setErrorMessage('');
         try {
             console.log("Submitting data:")
@@ -78,7 +85,7 @@ export function SignUpPage() {
 
         } catch (error) {
             setErrorMessage(error.response?.data || "An error occurred during signup");
-            console.log("Error submitting review:", error.response?.data || error.message);
+            console.log("Error submitting users:", error.response?.data || error.message);
         }
     }
 
