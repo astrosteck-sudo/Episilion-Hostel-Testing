@@ -222,6 +222,8 @@ body.episilion-bg {
   background-color: white;
 }
 
+
+
 @media only screen and (min-width: 1200px) {
   .ask-episilion-search {
     bottom: 40px;
@@ -300,6 +302,13 @@ body.episilion-bg {
   padding: 10px;
   scroll-behavior: smooth;
   background-color: rgb(231, 221, 221);
+
+  /* border: solid red; */
+}
+@media only screen and (min-width: 800px) and (max-width: 1200px){
+  .messages {
+    max-height: 100%;
+  }
 }
 
 /* User message aligned right */
@@ -470,6 +479,10 @@ body.episilion-bg {
 
   .ask-episilion-message-second-Paragraph {
     line-height: 20px;
+  }
+
+  .messages{
+    max-height: 100%;
   }
 }
 
