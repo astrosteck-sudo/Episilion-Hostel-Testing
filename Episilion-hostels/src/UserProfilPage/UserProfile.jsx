@@ -4,6 +4,7 @@ import "./UserProfile.css";
 import CalenderImage from "../assets/icons/calendar.png";
 import { getInitials } from "../UTILS/initials";
 import dayjs from "dayjs";
+import { SiteFooter } from "../SiteFooter/SiteFooter";
 
 export function UserProfilePage({ isLoggedIn }) {
   //THIS IS TO EXTRACT THE USER IMFORMATION FROM THE TOKEN
@@ -37,6 +38,9 @@ export function UserProfilePage({ isLoggedIn }) {
           </div>
         </div>
       </div>
+
+
+      <SiteFooter></SiteFooter>
     </>
   );
 }

@@ -17,7 +17,7 @@ export function SiteFooter() {
                     <nav className="footer-links">
                         <Link to="/aboutus">About Us</Link>
                         <Link to="/morefromus">More From Us</Link>
-                        <Link to="/">Join Us</Link>
+                        <Link to="/askepisilion">Ask Epsilion</Link>
                     </nav>
                 </div>
             </footer>

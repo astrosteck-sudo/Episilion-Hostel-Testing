@@ -254,6 +254,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
               </div>
             ))}
           </div>
+          
           <div className="ask-episilion-search-conatainer">
             <div className="ask-episilion-search-bar">
               <textarea

@@ -264,10 +264,15 @@
   padding-bottom: 15px;
   margin-bottom: 10px;
   cursor: pointer;
+
+  /* border: solid red; */
 }
 .user-profile-page-link{
   text-decoration: none;
   color: black;
+  /* border: solid red; */
+  padding: 0;
+  margin: 0;
 }
 
 
@@ -317,12 +322,16 @@
   }
 
   /* Style links inside sidebar */
-  .navigation-links a {
+  .navigation-links-pages > a {
     padding: 1rem;
     text-decoration: none;
     width: 100%;
     text-align: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  }
+  .user-profile-page-link a{
+    border: solid blue;
   }
 
   .login-systems {
@@ -389,7 +398,8 @@
     justify-content: space-between;
   }
   .user-option-pop-up-container{
-    width: 60%;
+    margin: auto;
+    margin-top: 10px;
   }
 }
 
