@@ -14,7 +14,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
   const [chatMessages, setChatMessages] = useState([]); //Initialize as array
   const [open, setOpen] = useState(false);
   const [remainingRequests, setRemainingRequest] = useState(3);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
 
@@ -54,7 +54,6 @@ export function AskEpisilionPage({ isLoggedIn }) {
   }
 
   async function sendMessage() {
-    setIsLoading(true);
     if (!isLoggedIn) {
       navigate("/login");
       return;
@@ -62,6 +61,7 @@ export function AskEpisilionPage({ isLoggedIn }) {
 
     if (!userSearchInput.trim()) return;
 
+    setIsLoading(true);
     const userMessage = userSearchInput;
     setUserSearchInput("");
 
@@ -99,7 +99,6 @@ export function AskEpisilionPage({ isLoggedIn }) {
           header: res.data.reason || "Episilion Results",
         },
       ]);
-      
     } catch (error) {
       const errorMessage =
         error.response?.data?.message ||
@@ -114,6 +113,8 @@ export function AskEpisilionPage({ isLoggedIn }) {
           sender: "episilion",
         },
       ]);
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -213,63 +214,60 @@ export function AskEpisilionPage({ isLoggedIn }) {
                 </p>
               </div>
             </div>
+            {isLoading && (
+              <div className="ask-episilion-loader-container">
+                <div className="ask-episilion-loader active"></div>
+              </div>
+            )}
             {/*Map over chatMessages array to render each bubble */}
             {chatMessages.map((chat, index) => (
-              <>
-
-                
-                <div key={index} className={chat.sender === "user"? "user-message": "episilion-message"}>
-                  <div
-                    className={
-                      chat.type === "episilionResults"
-                        ? "ask-episilion-loader"
-                        : ""
-                    }
-                  ></div>
-
-
-                  {/* <div className={`ask-episilion-loader-container ${isLoading ? "" : "hide"}`}>
-                    <div className={`ask-episilion-loader ${isLoading ? "active" : ""}`}></div>
-                  </div> */}
-
-                  {chat.type === "episilionResults" ? (
-                    <div className="episilion-response">
-                      <p className="episilion-response-header">
-                        {chat.header || "Episilion Results"}
-                      </p>
-                      {Array.isArray(chat.message) ? (
-                        chat.message.map((hostel) => (
-                          <div key={hostel.id}>
-                            {/* <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" /> */}
-                            <div className="episilion-response-card-details">
-                              <p className="episilion-response-hostel-name">
-                                {hostel.name}
+              <div
+                key={index}
+                className={chat.sender === "user" ? "user-message" : "episilion-message"}
+              >
+                {chat.type === "episilionResults" ? (
+                  <div className="episilion-response">
+                    <p className="episilion-response-header">
+                      {chat.header || "Episilion Results"}
+                    </p>
+                    {Array.isArray(chat.message) ? (
+                      chat.message.map((hostel) => (
+                        <div key={hostel.id}>
+                          {/* <img src={hostel.image} alt={`${hostel.name} image`} className="episilion-response-image" /> */}
+                          <div className="episilion-response-card-details">
+                            <p className="episilion-response-hostel-name">
+                              {hostel.name}
+                            </p>
+                            <div className="episilion-response-price-view-details">
+                              <p className="episilion-response-hostel-price">
+                                $({hostel.price})
                               </p>
-                              <div className="episilion-response-price-view-details">
-                                <p className="episilion-response-hostel-price">
-                                  $({hostel.price})
-                                </p>
 
-                                <p
-                                  className="episilion-response-hostel-link"
-                                  onClick={() => goToHostelPage(hostel.id)}
-                                >
-                                  View
-                                </p>
-                              </div>
+                              <p
+                                className="episilion-response-hostel-link"
+                                onClick={() => goToHostelPage(hostel.id)}
+                              >
+                                View
+                              </p>
                             </div>
                           </div>
-                        ))
-                      ) : (
-                        <p>{chat.message}</p>
-                      )}
-                    </div>
-                  ) : (
-                    chat.message
-                  )}
-                </div>
-              </>
+                        </div>
+                      ))
+                    ) : (
+                      <p>{chat.message}</p>
+                    )}
+                  </div>
+                ) : (
+                  chat.message
+                )}
+              </div>
             ))}
+
+            {isLoading && (
+              <div className="ask-episilion-loader-container">
+                <div className="ask-episilion-loader active"></div>
+              </div>
+            )}
           </div>
 
           <div className="ask-episilion-search-conatainer">
