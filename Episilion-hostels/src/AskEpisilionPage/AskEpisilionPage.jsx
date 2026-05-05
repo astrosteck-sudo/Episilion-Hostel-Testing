@@ -10,10 +10,16 @@ import axios from "axios";
 import { getDeviceId } from "../UTILS/deviceId.js";
 
 export function AskEpisilionPage({ isLoggedIn }) {
-  const [userSearchInput, setUserSearchInput] = useState("");
+  const [userSearchInput, setUserSearchInput] = useState(""); //THIS IS TO TRACK THE USER INPUT IN THE SEARCH BAR
   const [chatMessages, setChatMessages] = useState([]); //Initialize as array
   const [open, setOpen] = useState(false);
-  const [remainingRequests, setRemainingRequest] = useState(3);
+  //THIS IS TO TRACK THE NUMBER OF REQUESTS THE USER HAS LEFT
+  const [remainingRequests, setRemainingRequest] = useState(() => {
+    const saved = localStorage.getItem("episilionRemainingRequests");
+    return saved !== null ? parseInt(saved) : 3;
+  });
+
+  //THIS IS TO TRACK THE LOADING STATE OF THE AI RESPONSE
   const [isLoading, setIsLoading] = useState(false);
   //const [userCautionText, setUserCautionText] = useState(true)
   const navigate = useNavigate();
@@ -24,6 +30,11 @@ export function AskEpisilionPage({ isLoggedIn }) {
   //     document.body.classList.remove("episilion-bg");
   //   };
   // }, []);
+
+  //THIS HOOK UPDATES THE REMAINING REQUESTS IN LOCAL STORAGE WHENEVER IT CHANGES AND THE TEXT THAT SHOWS THE REMAINING REQUESTS IN THE SIDEBAR
+  useEffect(() => {
+    localStorage.setItem("episilionRemainingRequests", remainingRequests);
+  }, [remainingRequests]);
 
   //This hook scrolls to the bottom whenever chatMessages updates.
   useEffect(() => {
@@ -89,6 +100,11 @@ export function AskEpisilionPage({ isLoggedIn }) {
       const result = res.data.result;
       console.log(res.data);
       setRemainingRequest(res.data.remainingRequests);
+      localStorage.setItem(
+        "episilionRemainingRequests",
+        res.data.remainingRequests,
+      );
+      console.log(localStorage.getItem("episilionRemainingRequests"));
 
       setChatMessages((prev) => [
         ...prev,
@@ -223,7 +239,9 @@ export function AskEpisilionPage({ isLoggedIn }) {
             {chatMessages.map((chat, index) => (
               <div
                 key={index}
-                className={chat.sender === "user" ? "user-message" : "episilion-message"}
+                className={
+                  chat.sender === "user" ? "user-message" : "episilion-message"
+                }
               >
                 {chat.type === "episilionResults" ? (
                   <div className="episilion-response">

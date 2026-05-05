@@ -594,6 +594,7 @@ body.episilion-bg {
   align-items: center;
   padding: 10px;
   border-radius: 10px;
+  min-width: 50px;
 }
 .ask-episilion-loader-container.hide{
   display: none;
