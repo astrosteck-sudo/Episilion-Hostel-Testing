@@ -51,7 +51,6 @@ exports.addReview = async (req, res) => {
             message: "Review added successfully ✅",
             reviewId: result.insertId
         });
-        console.log("done")
 
     } catch (err) {
         console.error(err);

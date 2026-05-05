@@ -10,7 +10,6 @@ const db = require("./db"); // Import the MySQL connection
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
 //THIS FUNCTION READS THE JSON FILES IN THE DATA FOLDER AND RETURNS THE PARSED JSON OBJECT
 function readData(filename) {
   const filePath = path.join(__dirname, filename);
@@ -23,8 +22,8 @@ app.use("/images", express.static("public/images")); // Serve images from the pu
 console.log("Static Images served at /images");
 
 // ── Middleware ────────────────────────────────────────────────────────────────
-app.use(cors());          // Allow requests from any frontend origin
-app.use(express.json());  // Parse JSON request bodies
+app.use(cors()); // Allow requests from any frontend origin
+app.use(express.json()); // Parse JSON request bodies
 
 // ── Database Routes ────────────────────────────────────────────────────────────────
 //THIS IS FOR PUTTIN HOSTELS IN THE DATABASE
@@ -37,7 +36,7 @@ app.post("/api/hostels", (req, res) => {
     yearEstablished,
     distance,
     hostelPerks,
-    image
+    image,
   } = req.body;
 
   const sql = `
@@ -56,7 +55,7 @@ app.post("/api/hostels", (req, res) => {
       } else {
         res.send("Hostel added successfully ✅");
       }
-    }
+    },
   );
 });
 
@@ -73,8 +72,6 @@ app.post("/api/hostels", (req, res) => {
 //       });
 //     });
 //   };
-
-
 
 //   try {
 //     const hostels = await query("SELECT * FROM hostels");
@@ -172,7 +169,7 @@ app.use("/api/hostels", require("./routes/hostels"));
 app.use("/api/reviews", require("./routes/reviews"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/intent", require("./routes/intent"));
-
+app.use("/favorites", require("./routes/favoritesRoutes.js"));
 
 // ── Routes ────────────────────────────────────────────────────────────────────
 // GET /api/teamMembers  → return only the teamMembers array
@@ -183,7 +180,9 @@ app.get("/api/teamMembers", (req, res) => {
     //console.log("Team Members data sent:", teamMembers);
     res.json({ success: true, teamMembers });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to read team Members file." });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to read team Members file." });
   }
 });
 
@@ -193,17 +192,15 @@ app.get("/api/moreProjects", (req, res) => {
     const moreProjects = readData("More_From_Us.json");
     res.json({ success: true, moreProjects });
   } catch (err) {
-    res.status(500).json({ success: false, message: "Failed to read more Projects file." });
+    res
+      .status(500)
+      .json({ success: false, message: "Failed to read more Projects file." });
   }
 });
-
 
 //THIS IS FOR SIGNING UP USERS AND STORING THEM IN THE DATABASE
 // If you also want form data:
 //app.use(express.urlencoded({ extended: true }));
-
-
-
 
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Route not found." });
@@ -220,40 +217,6 @@ app.listen(PORT, () => {
   console.log(`   POST /api/signup`);
   console.log(`   POST /api/login`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // // GET /api/users  → return only the users array
 // app.get("/api/users", (req, res) => {
@@ -299,9 +262,6 @@ app.listen(PORT, () => {
 //   }
 // });
 
-
-
-
 //THIS ADDED THE RANDOM ID'S TO THE HOSTELS
 
 // //import fs from "fs";
@@ -317,7 +277,6 @@ app.listen(PORT, () => {
 //     hostel.id = crypto.randomUUID();
 //   }
 // });
-
 
 // Save back to JSON
 //fs.writeFileSync("hostel_data.json", JSON.stringify(hostels, null, 2));

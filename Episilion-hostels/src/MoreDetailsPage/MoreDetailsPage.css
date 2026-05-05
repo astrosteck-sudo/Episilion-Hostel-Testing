@@ -77,10 +77,9 @@
   margin: 5px;
 }
 
-.location-header-and-compare-hostel-button {
+.location-header-favorite-button-and-compare-hostel-button {
   padding-right: 10px;
   display: flex;
-  justify-content: space-between;
   padding-top: 5px;
 }
 
@@ -92,7 +91,12 @@
   /* text-decoration: underline 2px brown ; */
 }
 
-.compare-button {
+.favorite-and-compare-buttons-container{
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 10px;
+}
+.compare-button, .favorite-button {
   border: solid rgb(71, 67, 67) 2px;
   width: min(50px, 13%);
   height: 100%;
